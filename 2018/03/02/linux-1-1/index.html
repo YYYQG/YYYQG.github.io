@@ -5,7 +5,7 @@
   <meta name="viewport"content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
   
   
-  <title>  小莱湖 |   Brief</title>
+  <title>  关于Ubuntu无法使用rpm |   Brief</title>
 
  
   
@@ -92,38 +92,32 @@
 	<div class="post-header slideDownMin center">
 
 	<span class="post-title">	
-		小莱湖
+		关于ubuntu无法使用rpm
 	</span>
 
 	
 	<div class="post-info">
 
 		<time class="post-time"><span class="iconfont icon-date"></span>
-		2018/02/08 	
+		2018/03/02 	
 		</time>
 		
 					
 
 				<span class="post-meta">		
 				<span class="iconfont icon-category"></span>
-				<a class="category-link" href="/categories/Java/">Java</a>
+				<a class="category-link" href="/categories/Ubuntu/">Ubuntu</a>
 				</span>
 		
 			
 
-		
-				
-				<span class="post-meta">
-				<span class="iconfont icon-tag"></span>
-				<a class="tag-link" href="/tags/Java/">Java</a>
-				</span>			
 			
 
 
 		
 
 		<span class="post-words"><span class="iconfont icon-words"></span>
-		366
+		423
 		</span>		
 	
 	</div> 
@@ -138,15 +132,23 @@
 
 
 
-	  	<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+	  	<p>昨天想在Ubuntu只带的火狐上看一下视频，发现自己安装时没有安装第三方插件，放不了视频。自己安装插件有太麻烦，便选择安装一个谷歌浏览器（自带Adobe Flash Player），便从网上找了个rpm的安装包，发现Ubuntu并不支持rpm。</p>
+<p>#RPM软件包</p>
+<p>英文原义：Redhat Package Manager</p>
+<p>中文释义：红帽RPM软件包管理器</p>
+<p>RPM是RedHat专用的软件包。</p>
+<p>#Ubuntu安装rpm包怎么办？</p>
+<p>ubuntu需要先将其转换为deb包，然后安装。</p>
+<p>1.安装alien转换软件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ apt install alien</span><br></pre></td></tr></table></figure>
+<p>2.将RPM包转换为deb安装包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo alien --scripts ＊.rpm</span><br></pre></td></tr></table></figure>
+<p>同一级目录下会看见相同名字的deb包</p>
+<p>3.安装</p>
+<p>对于符合要求的版本的deb包，在ubuntu中可以像windows中一样双击打开软件管理器进行视图安装</p>
+<p>对于deb，也可以在终端下通过命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -i ＊.deb</span><br></pre></td></tr></table></figure>
+<p>进行安装</p>
   	
 
 	  </div>     
@@ -212,18 +214,17 @@
 
       
        
+    
+      
 
          
 
-      
-          <a href="/2018/02/08/ss/">          
+          <a href="/2018/02/08/ss/">         
 
-            <span class="hover-item" title="ss">  上一篇 </span>  
+           <span title="ss">下一篇 </span>  
 
           </a>
-    
-      
-    
+
       
 
   </nav>  
