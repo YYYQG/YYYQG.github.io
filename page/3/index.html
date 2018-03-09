@@ -1,0 +1,383 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport"content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+  <meta name="baidu-site-verification" content="5rJxG2T4b5"/>
+  
+  
+  <title>  Brief</title>
+
+ 
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">  
+  <!-- Jquery -->
+  <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script> 
+  <!-- Add fancyBox -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script> 
+  <script src="/js/gallery.js"></script>
+  <!-- javascript --> 
+  <script src="/js/mobile.js"></script>  
+  <script src="/js/utils.js"></script>    
+  <script src="/js/script.js"></script>  
+</head> 
+  <body> 
+    <header class="header">
+	
+  <nav class="header-nav">       
+	
+  	<span class="iconfont icon-menu mobile-toggle"></span>  
+
+    <a class="header-logo" href="/"><span>Brief</a>  
+
+    <div class="header-menu">          
+              
+            
+
+              <a class="header-menu-link" id="header-menu-home" href="/">首页</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">归档</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-categories" href="/categories">分类</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于</a>     
+
+            
+            
+            
+
+              <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+
+            
+                
+    </div>  
+    
+  </nav>
+</header>
+
+    <div class="container">         
+      
+        
+
+          <section id="main">  
+
+        
+
+        
+
+
+<div class="profile sildeUpMin">
+
+		<img class="avatar no-gallery" src="/img/header.jpg"  alt="Lose">
+					
+		<p class="author">YQG</p>
+
+		
+			<p class="location"><span class="iconfont icon-location"></span>ChengDu YQG</p>
+		
+	
+		<div class="social">
+   		    	
+		<a href="https://github.com/YYYQG/YYYQG.github.io" class="iconfont icon-github" target="_blank" title="github"></a>
+	        	
+		<a href="/" class="iconfont icon-zhihu" target="_blank" title="zhihu"></a>
+	        	
+		<a href="/" class="iconfont icon-weibo" target="_blank" title="weibo"></a>
+	        	
+		<a href="/" class="iconfont icon-segmentfault" target="_blank" title="segmentfault"></a>
+	        	
+		<a href="/" class="iconfont icon-facebook" target="_blank" title="facebook"></a>
+	        	
+		<a href="/" class="iconfont icon-twitter" target="_blank" title="twitter"></a>
+	        	
+		<a href="/" class="iconfont icon-instagram" target="_blank" title="instagram"></a>
+	        	
+		<a href="/" class="iconfont icon-linkedin" target="_blank" title="linkedin"></a>
+	        	
+		<a href="/" class="iconfont icon-others" target="_blank" title="others"></a>
+	    
+    	</div>		
+</div>
+
+      	  	
+
+  		
+    	<article class="article">		
+	   
+	<div class="article-header">
+	    
+	     <a class="article-title"  href="/2018/03/02/认识观察者模式/">观察者模式</a>  
+	       
+		 
+
+		 <time>2018-03-02 </time>    
+	</div>
+
+
+    <div class="post-content article-excerpt">	
+	
+  	
+
+	  
+
+	  	<h1 id="认识观察者模式"><a href="#认识观察者模式" class="headerlink" title="认识观察者模式"></a>认识观察者模式</h1><h3 id="我们看看报纸和杂志的订阅是怎么回事："><a href="#我们看看报纸和杂志的订阅是怎么回事：" class="headerlink" title="我们看看报纸和杂志的订阅是怎么回事："></a>我们看看报纸和杂志的订阅是怎么回事：</h3><p>1.报社的业务是出版报纸。</p>
+<p>2.向某家报订阅报纸，只要他有新报纸出版，就会给你送来。只要你是他们的用户，你就会一直收到新报纸。</p>
+<p>3.当你不想看报纸的时候，取消订阅，他们就不会再送新报纸来。</p>
+<p>4.只要报社还在运营，就会一直人（或单位）向他们订阅报纸或取消订阅报纸。</p>
+<h3 id="出版者-订阅者-观察者模式"><a href="#出版者-订阅者-观察者模式" class="headerlink" title="出版者+订阅者=观察者模式"></a>出版者+订阅者=观察者模式</h3><p>如果你了解报纸的订阅是怎么回事，其实就知道观察者模式是怎么回事，只是名称不太一样：出版者改称为“主题”（Subject),订阅者改称为“观察者”（Observer)。</p>
+<p>让我们来看得更仔细一点:</p>
+<p><img src="/img/观察者.png" alt="&quot;观察者模式&quot;">  </p>
+<h1 id="定义观察者模式"><a href="#定义观察者模式" class="headerlink" title="定义观察者模式"></a>定义观察者模式</h1><p>当你试图勾勒观察者模式时，可以利用报纸订阅服务，以及出版者和订阅者比拟这一切。</p>
+<p>在真实的世界中，你通常会看到观察者模式被定义成:</p>
+<p><strong>观察者模式</strong>定义了对象之间的一对多依赖，这样一来，当一个对象改变状态时，它的所有依赖者都会收到通知并自动更新。</p>
+<p><strong>难察者模式定义了一系列对象之间的一对多关系。</strong><br><strong>当一个对象改变状态，其他依赖者都会收到通知。</strong></p>
+<p>主题和观察者定义了一对多的关系。观察者依赖子此主题，只要主题状态一有变化，观察者就会被通知。根据通知的风格，观察者可能因此新值而更新。</p>
+<p>稍后你会右到，实现观察者模式的方法不只一种，但是以包含Subject与Observer接口的类设计的做法最常见。</p>
+<p><img src="/img/观察者模式类图.png" alt="&quot;观察者模式类图&quot;">  </p>
+<h1 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h1><h3 id="气象监测应用的概况"><a href="#气象监测应用的概况" class="headerlink" title="气象监测应用的概况"></a>气象监测应用的概况</h3><p>此系统中的三个部分是气象站（获取实际气象数据的物理装置），WeatherDate对象（追踪来自气象站的数据，并更新布告栏）和布告栏</p>
+<p>WeatherData对象知道如何跟物理气象站联系，以取得更新的数据。WeatherData对象会随即更新三个布告板的显示：目前状况（温度、湿度、气压）、气象统计和天气预报。</p>
+<p><strong>如果我们选择接受这个项目，我们的工作就是建立一个应用，利用WeatherData对象取得数据，并更新三个布告板：目前状况.气象统计和天气预报。</strong></p>
+<p>布告栏（观察者），WeatherData对象（主题）</p>
+<p>Observer.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface Observer &#123;</span><br><span class="line"></span><br><span class="line">	public void update(float temp, float humidity,float pressure);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>subject.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public interface subject &#123;</span><br><span class="line"></span><br><span class="line">	public void registerObserver(Observer o);</span><br><span class="line">	public void removeObserver(Observer o);</span><br><span class="line">	public void notifyObserver();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>DisplayElement.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface DisplayElement &#123;</span><br><span class="line"></span><br><span class="line">	public void display();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>CurrentConditionDisplay.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class CurrentConditionDisplay implements Observer,DisplayElement&#123;</span><br><span class="line"></span><br><span class="line">	private float temp;</span><br><span class="line">	private float humidity;</span><br><span class="line">	private float pressure;</span><br><span class="line">	private subject WeatherData;</span><br><span class="line">	</span><br><span class="line">	CurrentConditionDisplay(WeatherData a)&#123;</span><br><span class="line">		this.WeatherData=a;</span><br><span class="line">		a.registerObserver(this);</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public void display() &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		System.out.println(&quot;temp=&quot;+temp+&quot;\nhumidity=&quot;+humidity+&quot;\npressure=&quot;+pressure);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void update(float temp, float humidity, float pressure) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		this.pressure=pressure;</span><br><span class="line">		this.humidity=humidity;</span><br><span class="line">		this.temp=temp;</span><br><span class="line">		display();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Observer.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface Observer &#123;</span><br><span class="line"></span><br><span class="line">	public void update(float temp, float humidity,float pressure);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Test.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class Test &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line"></span><br><span class="line">		WeatherData w=new WeatherData();</span><br><span class="line">		CurrentConditionDisplay a=new CurrentConditionDisplay(w);</span><br><span class="line">		w.setMeasurements(80, 30, 4);</span><br><span class="line">		w.setMeasurements(8, 3, 4);</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+ 
+
+	    
+</div>
+
+<div class="center">
+			
+
+				<span class="post-meta">		
+				<span class="iconfont icon-category"></span>
+				<a class="category-link" href="/categories/设计模式/">设计模式</a>
+				</span>
+		
+			
+
+		
+				
+				<span class="post-meta">
+				<span class="iconfont icon-tag"></span>
+				<a class="tag-link" href="/tags/观察者模式/">观察者模式</a>
+				</span>			
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		2292
+		</span>		
+</div>		
+
+		
+    <a class="article-readmore" href="/2018/03/02/认识观察者模式/">阅读更多</a> 
+    	
+</article>     
+     	
+      	  	
+
+  		
+    	<article class="article">		
+	   
+	<div class="article-header">
+	    
+	     <a class="article-title"  href="/2018/03/02/linux-1-1/">关于ubuntu无法使用rpm</a>  
+	       
+		 
+
+		 <time>2018-03-02 </time>    
+	</div>
+
+
+    <div class="post-content article-excerpt">	
+	
+  	
+
+	  
+
+	  	<p>昨天想在Ubuntu只带的火狐上看一下视频，发现自己安装时没有安装第三方插件，放不了视频。自己安装插件有太麻烦，便选择安装一个谷歌浏览器（自带Adobe Flash Player），便从网上找了个rpm的安装包，发现Ubuntu并不支持rpm。</p>
+<h1 id="RPM软件包"><a href="#RPM软件包" class="headerlink" title="RPM软件包"></a>RPM软件包</h1><p>英文原义：Redhat Package Manager</p>
+<p>中文释义：红帽RPM软件包管理器</p>
+<p>RPM是RedHat专用的软件包。</p>
+<h1 id="Ubuntu安装rpm包怎么办？"><a href="#Ubuntu安装rpm包怎么办？" class="headerlink" title="Ubuntu安装rpm包怎么办？"></a>Ubuntu安装rpm包怎么办？</h1><p>ubuntu需要先将其转换为deb包，然后安装。</p>
+<p>1.安装alien转换软件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ apt install alien</span><br></pre></td></tr></table></figure>
+<p>2.将RPM包转换为deb安装包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo alien --scripts ＊.rpm</span><br></pre></td></tr></table></figure>
+<p>同一级目录下会看见相同名字的deb包</p>
+<p>3.安装</p>
+<p>对于符合要求的版本的deb包，在ubuntu中可以像windows中一样双击打开软件管理器进行视图安装</p>
+<p>对于deb，也可以在终端下通过命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -i ＊.deb</span><br></pre></td></tr></table></figure>
+<p>进行安装</p>
+ 
+
+	    
+</div>
+
+<div class="center">
+			
+
+				<span class="post-meta">		
+				<span class="iconfont icon-category"></span>
+				<a class="category-link" href="/categories/Ubuntu/">Ubuntu</a>
+				</span>
+		
+			
+
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		419
+		</span>		
+</div>		
+
+		
+    <a class="article-readmore" href="/2018/03/02/linux-1-1/">阅读更多</a> 
+    	
+</article>     
+     	
+  
+
+ 
+
+  <nav class="paginator">
+    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+  
+
+</section> 
+
+    </div>        
+
+    
+    <div class="mask"> </div>
+    <div class="back-to-top iconfont icon-backtotop fadeIn"></div> 
+
+    
+
+
+<script src="/js/search.js"></script>     
+          
+          <div class="search-container sildeUpMin">
+            <input type="text" placeholder="输入你想搜索的" id="search-input" class="search-input">  
+              <span class="search-cancel iconfont icon-cancel"></span>
+              <div id="search-result" class="search-result"></div>
+          </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+      <img class="mobile-menu-icon no-gallery" src= /img/favicon.png >   
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/categories">分类
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+</div>     
+    
+
+<footer id="footer">
+	   
+   	 
+
+	  	
+   	
+      	 
+	 <div>
+	 	&copy;
+		2018
+		YQG	 
+
+	 </div>
+
+
+   
+   	 <div>
+	
+	 <a href="http://hexo.io/" target="_blank">Hexo</a>
+
+	 Theme
+
+	 <a href="https://github.com/YYYQG/YYYQG.github.io" target="_blank">Brief</a> 
+
+	 </div>	
+
+
+	
+	
+</footer> 
+    
+
+
+ 
+  </body>   
+  <script src="/js/animation.js"></script>   
+</html>
