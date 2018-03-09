@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport"content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+  <meta name="baidu-site-verification" content="5rJxG2T4b5"/>
+  
+  
+  <title>  内置函数式接口 |   Brief</title>
+
+ 
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">  
+  <!-- Jquery -->
+  <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script> 
+  <!-- Add fancyBox -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script> 
+  <script src="/js/gallery.js"></script>
+  <!-- javascript --> 
+  <script src="/js/mobile.js"></script>  
+  <script src="/js/utils.js"></script>    
+  <script src="/js/script.js"></script>  
+</head> 
+  <body> 
+    <header class="header">
+	
+  <nav class="header-nav">       
+	
+  	<span class="iconfont icon-menu mobile-toggle"></span>  
+
+    <a class="header-logo" href="/"><span>Brief</a>  
+
+    <div class="header-menu">          
+              
+            
+
+              <a class="header-menu-link" id="header-menu-home" href="/">首页</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">归档</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-categories" href="/categories">分类</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于</a>     
+
+            
+            
+            
+
+              <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+
+            
+                
+    </div>  
+    
+  </nav>
+</header>
+
+    <div class="container">         
+      
+        
+
+          <section id="main">  
+
+        
+
+        <article class="post">
+
+	  
+	<div class="post-header slideDownMin center">
+
+	<span class="post-title">	
+		内置函数式接口
+	</span>
+
+	
+	<div class="post-info">
+
+		<time class="post-time"><span class="iconfont icon-date"></span>
+		2018/03/06 	
+		</time>
+		
+					
+
+				<span class="post-meta">		
+				<span class="iconfont icon-category"></span>
+				<a class="category-link" href="/categories/java/">java</a>
+				</span>
+		
+			
+
+		
+				
+				<span class="post-meta">
+				<span class="iconfont icon-tag"></span>
+				<a class="tag-link" href="/tags/java8/">java8</a>
+				</span>			
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		2001
+		</span>		
+	
+	</div> 
+
+</div> 
+
+
+	  <div class="post-content slideDownMin">
+
+		
+
+
+
+
+	  	<h2 id="Java8四大函数式接口"><a href="#Java8四大函数式接口" class="headerlink" title="Java8四大函数式接口"></a>Java8四大函数式接口</h2><p>什么是函数是接口？</p>
+<blockquote>
+<p>一个接口里面只有一个抽象方法,其它什么也没有（可以拥有default和static修饰的方法）。（@FunctionInterface注解用于标注函数式接口）</p>
+</blockquote>
+<p>例如下面这个接口：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@FunctionInterface</span><br><span class="line">public interface MyConsume&lt;T&gt;&#123;</span><br><span class="line">    void accept(T t);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Java8为了方便程序员使用函数式接口，已经封装好了一系列函数式接口，下面四个为主要的函数式接口。</p>
+<p>1.Consumer<t> : 消费型接口<br>　　void accept（T t）;<br>２．Supplier<t> : 供给型接口<br>　　T get（）;<br>３．Function<t,r> :函数型接口<br>　　R apply(T t);<br>４．Predicate<t> : 断言型接口<br> 　　Boolean test(T t);</t></t,r></t></t></p>
+<h3 id="消费型接口"><a href="#消费型接口" class="headerlink" title="消费型接口"></a>消费型接口</h3><p>带有一个参数，无返回值的函数型接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//Consumer&lt;T&gt; : 消费型接口</span><br><span class="line">	@Test</span><br><span class="line">	public void test1() &#123;</span><br><span class="line">		happy(1222, (m) -&gt; System.out.println(&quot;消费1222元！&quot;));</span><br><span class="line">	&#125;</span><br><span class="line">	public void happy(double money,Consumer&lt;Double&gt; con ) &#123;</span><br><span class="line">		con.accept(money);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="供给型接口"><a href="#供给型接口" class="headerlink" title="供给型接口"></a>供给型接口</h2><p>无参数，有返回值的函数型接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//Supplier&lt;T&gt; : 供给型接口</span><br><span class="line">//需求：生成随机数</span><br><span class="line">	@Test</span><br><span class="line">	public void test2() &#123;</span><br><span class="line">		List&lt;Integer&gt; L=getNumber(20, () -&gt;(int)(Math.random()*10));</span><br><span class="line">		for (Integer integer : L) &#123;</span><br><span class="line">			System.out.println(integer);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public List&lt;Integer&gt; getNumber(int num, Supplier&lt;Integer&gt; su) &#123;</span><br><span class="line">		List&lt;Integer&gt; list=new ArrayList&lt;Integer&gt;();</span><br><span class="line">		for(int i=1;i&lt;num;i++) &#123;</span><br><span class="line">			Integer n= su.get();</span><br><span class="line">			list.add(n);</span><br><span class="line">		&#125;</span><br><span class="line">		return list;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>##　函数型接口</p>
+<p>拥有一个参数，一个返回值的函数型接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//Function&lt;T,R&gt; :函数型接口</span><br><span class="line">//需求：删除字符串首尾空白</span><br><span class="line">@Test</span><br><span class="line">public void test3() &#123;</span><br><span class="line">	String string=strHandler(&quot;  上课脑壳&quot;,(x) -&gt; x.trim());</span><br><span class="line">	System.out.println(string);</span><br><span class="line">&#125;</span><br><span class="line">public String strHandler(String str,Function&lt;String,String&gt; s) &#123;</span><br><span class="line">	return s.apply(str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="断言型接口"><a href="#断言型接口" class="headerlink" title="断言型接口"></a>断言型接口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//Predicate&lt;T&gt; : 断言型接口</span><br><span class="line">	//需求将满足条件的字符串放入集合中</span><br><span class="line">	@Test</span><br><span class="line">	public void test4() &#123;</span><br><span class="line">		List&lt;String&gt; list = Arrays.asList(&quot;OK&quot;,&quot;Hello&quot;,&quot;AT&quot;);</span><br><span class="line">		List&lt;String&gt; filter=filterStr(list,(s) -&gt; s.length()&gt;3);</span><br><span class="line">		System.out.println(filter.size());</span><br><span class="line">		for (String L : filter) &#123;</span><br><span class="line">			System.out.println(L);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public List&lt;String&gt;  filterStr(List&lt;String&gt; L,Predicate&lt;String&gt; pre)&#123;</span><br><span class="line">		List &lt;String&gt; list=new ArrayList&lt;&gt;();</span><br><span class="line">		for (String str : L) &#123;</span><br><span class="line">			if(pre.test(str)) &#123;</span><br><span class="line">				list.add(str);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return list;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>  	
+
+	  </div>     
+	  
+
+	<div class="post-footer">    
+
+  
+
+
+
+
+<span class="donate-btn iconfont icon-donate "></span>
+
+
+<div id="donate-box" class="sildeUpMin">
+
+	<span class="donate-cancel iconfont icon-cancel"></span>
+
+	<div class="donate-img-box">
+		<img id="donate-qr-wechat" class="donate-img no-gallery" src="/img/donate1.png"  alt="Lost">	
+		<img id="donate-qr-alipay" class="donate-img no-gallery" src="/img/donate2.png"  alt="Lost">	
+	</div>
+
+	<span class="donate-word">世界美好 你也是</span>
+
+	<div class="donate-list">
+		<span class="iconfont icon-donate-wechat"></span>
+		<span class="iconfont icon-donate-alipay"></span>
+	</div>
+
+</div>
+
+ 
+  
+	
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+	
+	<span class="share-btn iconfont icon-share">
+	</span>
+
+
+	<div class="-mob-share sildeUpMin">
+		                  
+            <span class="iconfont  icon-share-qq -mob-share-qq" title="qq"></span>
+     	                  
+            <span class="iconfont  icon-share-weixin -mob-share-weixin" title="weixin"></span>
+     	                  
+            <span class="iconfont  icon-share-weibo -mob-share-weibo" title="weibo"></span>
+     	                  
+            <span class="iconfont  icon-share-facebook -mob-share-facebook" title="facebook"></span>
+     	                  
+            <span class="iconfont  icon-share-twitter -mob-share-twitter" title="twitter"></span>
+     	                  
+            <span class="iconfont  icon-share-google -mob-share-google" title="google"></span>
+     	   
+	</div>
+	
+
+
+
+   <nav class="post-nav">
+
+      
+       
+
+         
+
+      
+          <a href="/2018/03/06/Lambda表达式/">          
+
+            <span class="hover-item" title="Lambda表达式">  上一篇 </span>  
+
+          </a>
+    
+      
+    
+      
+
+         
+
+          <a href="/2018/03/06/装饰者模式/">         
+
+           <span title="装饰者模式">下一篇 </span>  
+
+          </a>
+
+      
+
+  </nav>  
+</div> 
+	
+
+
+    <div id="comment">   
+    </div>
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+
+    <script src='//unpkg.com/valine@v1.1.8-beta/dist/Valine.min.js'></script>
+
+    <script>
+        new Valine({
+        el: '#comment',
+        notify:false, 
+        verify:false, 
+        app_id: 'gMnC8EJDk8V8fNmt2Nj2sEgP-gzGzoHsz',
+        app_key: 'G5ajxDPkoDOjtN6WfSRtpme8',  
+        path:window.location.pathname, 
+        avatar:'mm' ,
+        guest_info:['nick','mail']
+        });
+    </script>
+
+
+    <script>
+    //set the placeholder
+    $(function(){    
+
+        $('.vnick').attr('placeholder','昵称');
+        $('.veditor').attr('placeholder','说点什么吧');
+        $('.vmail').attr('placeholder','邮箱');   
+        $('.vsubmit').html('回复');   
+       
+    })  
+    </script>
+
+	
+
+</article>
+
+
+
+<div id="toc" >		
+
+	<div class="toc-container">	
+
+	<span class="toc-contents iconfont icon-open"" onclick="change()"> 
+	<span>目录</span>
+	</span>
+
+	<ul class="toc-list"></ul>
+
+	</div>
+
+</div>
+
+
+<script src="/js/toc.js"></script>
+<script src="/js/post.js"></script></section> 
+
+    </div>        
+
+    
+    <div class="mask"> </div>
+    <div class="back-to-top iconfont icon-backtotop fadeIn"></div> 
+
+    
+
+
+<script src="/js/search.js"></script>     
+          
+          <div class="search-container sildeUpMin">
+            <input type="text" placeholder="输入你想搜索的" id="search-input" class="search-input">  
+              <span class="search-cancel iconfont icon-cancel"></span>
+              <div id="search-result" class="search-result"></div>
+          </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+      <img class="mobile-menu-icon no-gallery" src= /img/favicon.png >   
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/categories">分类
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+</div>     
+    
+
+<footer id="footer">
+	   
+   	 
+
+	  	
+   	
+      	 
+	 <div>
+	 	&copy;
+		2018
+		YQG	 
+
+	 </div>
+
+
+   
+   	 <div>
+	
+	 <a href="http://hexo.io/" target="_blank">Hexo</a>
+
+	 Theme
+
+	 <a href="https://github.com/YYYQG/YYYQG.github.io" target="_blank">Brief</a> 
+
+	 </div>	
+
+
+	
+	
+</footer> 
+    
+
+
+ 
+  </body>   
+  <script src="/js/animation.js"></script>   
+</html>
