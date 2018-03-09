@@ -1,0 +1,402 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport"content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+  <meta name="baidu-site-verification" content="5rJxG2T4b5"/>
+  
+  
+  <title>  方法引用与构造器引用 |   Brief</title>
+
+ 
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">  
+  <!-- Jquery -->
+  <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script> 
+  <!-- Add fancyBox -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script> 
+  <script src="/js/gallery.js"></script>
+  <!-- javascript --> 
+  <script src="/js/mobile.js"></script>  
+  <script src="/js/utils.js"></script>    
+  <script src="/js/script.js"></script>  
+</head> 
+  <body> 
+    <header class="header">
+	
+  <nav class="header-nav">       
+	
+  	<span class="iconfont icon-menu mobile-toggle"></span>  
+
+    <a class="header-logo" href="/"><span>Brief</a>  
+
+    <div class="header-menu">          
+              
+            
+
+              <a class="header-menu-link" id="header-menu-home" href="/">首页</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">归档</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-categories" href="/categories">分类</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于</a>     
+
+            
+            
+            
+
+              <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+
+            
+                
+    </div>  
+    
+  </nav>
+</header>
+
+    <div class="container">         
+      
+        
+
+          <section id="main">  
+
+        
+
+        <article class="post">
+
+	  
+	<div class="post-header slideDownMin center">
+
+	<span class="post-title">	
+		方法引用与构造器引用
+	</span>
+
+	
+	<div class="post-info">
+
+		<time class="post-time"><span class="iconfont icon-date"></span>
+		2018/03/06 	
+		</time>
+		
+					
+
+				<span class="post-meta">		
+				<span class="iconfont icon-category"></span>
+				<a class="category-link" href="/categories/Java/">Java</a>
+				</span>
+		
+			
+
+		
+				
+				<span class="post-meta">
+				<span class="iconfont icon-tag"></span>
+				<a class="tag-link" href="/tags/java8/">java8</a>
+				</span>			
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		2488
+		</span>		
+	
+	</div> 
+
+</div> 
+
+
+	  <div class="post-content slideDownMin">
+
+		
+
+
+
+
+	  	<h2 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h2><p>当传递给Lambda体的操作，已经有实现的方法了，就可以使用方法引用！</p>
+<p>方法引用：使用操作符“::”将方法名和对象或类的名字分隔开来。<br>只要使用情况：</p>
+<ul>
+<li>对象的引用 :: 实例方法名</li>
+<li>类名 :: 静态方法名</li>
+<li>类名 :: 实例方法名</li>
+</ul>
+<p>注意：<br> ①方法引用所引用的方法的参数列表与返回值类型，需要与函数式接口中抽象方法的参数列表和返回值类型保持一致！<br> ②若Lambda 的参数列表的第一个参数，是实例方法的调用者，第二个参数(或无参)是实例方法的参数时，格式： ClassName::MethodName</p>
+<p>###　对象的引用 :: 实例方法名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">      @Test</span><br><span class="line">public void test2()&#123;</span><br><span class="line">	Employee emp = new Employee(101, &quot;张三&quot;, 18, 9999.99);</span><br><span class="line">	//一般Lambda表达式</span><br><span class="line">	Supplier&lt;String&gt; sup = () -&gt; emp.getName();</span><br><span class="line">	System.out.println(sup.get());</span><br><span class="line">	</span><br><span class="line">	System.out.println(&quot;----------------------------------&quot;);</span><br><span class="line">	</span><br><span class="line">	//方法引用</span><br><span class="line">	Supplier&lt;String&gt; sup2 = emp::getName;</span><br><span class="line">	System.out.println(sup2.get());</span><br><span class="line">&#125;</span><br><span class="line">@Test</span><br><span class="line">public void test1()&#123;</span><br><span class="line">	PrintStream ps = System.out;</span><br><span class="line">	Consumer&lt;String&gt; con = (str) -&gt; ps.println(str);</span><br><span class="line">	con.accept(&quot;Hello World！&quot;);</span><br><span class="line">	</span><br><span class="line">	System.out.println(&quot;--------------------------------&quot;);</span><br><span class="line">	</span><br><span class="line">	Consumer&lt;String&gt; con2 = ps::println;</span><br><span class="line">	con2.accept(&quot;Hello Java8！&quot;);</span><br><span class="line">	Consumer&lt;String&gt; con3 = System.out::println;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="类名-静态方法名"><a href="#类名-静态方法名" class="headerlink" title="类名 :: 静态方法名"></a>类名 :: 静态方法名</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//类名 :: 静态方法名</span><br><span class="line">		@Test</span><br><span class="line">		public void test4()&#123;</span><br><span class="line">			Comparator&lt;Integer&gt; com = (x, y) -&gt; Integer.compare(x, y);</span><br><span class="line">			</span><br><span class="line">			System.out.println(&quot;-------------------------------------&quot;);</span><br><span class="line">			</span><br><span class="line">			Comparator&lt;Integer&gt; com2 = Integer::compare;</span><br><span class="line">		&#125;</span><br><span class="line">		@Test</span><br><span class="line">		public void test3()&#123;</span><br><span class="line">			BiFunction&lt;Double, Double, Double&gt; fun = (x, y) -&gt; Math.max(x, y);</span><br><span class="line">			System.out.println(fun.apply(1.5, 22.2));</span><br><span class="line">			</span><br><span class="line">			System.out.println(&quot;--------------------------------------------------&quot;);</span><br><span class="line">			</span><br><span class="line">			BiFunction&lt;Double, Double, Double&gt; fun2 = Math::max;</span><br><span class="line">			System.out.println(fun2.apply(1.2, 1.5));</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="类名-实例方法名"><a href="#类名-实例方法名" class="headerlink" title="类名 :: 实例方法名"></a>类名 :: 实例方法名</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//类名 :: 实例方法名</span><br><span class="line">//若Lambda 的参数列表的第一个参数，是实例方法的调用者，第二个参数(或无参)是实例方法的参数时，格式//： ClassName::MethodName</span><br><span class="line">		@Test</span><br><span class="line">		public void test5()&#123;</span><br><span class="line">			BiPredicate&lt;String, String&gt; bp = (x, y) -&gt; x.equals(y);</span><br><span class="line">			System.out.println(bp.test(&quot;abcde&quot;, &quot;abcde&quot;));</span><br><span class="line">			</span><br><span class="line">			System.out.println(&quot;-----------------------------------------&quot;);</span><br><span class="line">			</span><br><span class="line">			BiPredicate&lt;String, String&gt; bp2 = String::equals;</span><br><span class="line">			System.out.println(bp2.test(&quot;abc&quot;, &quot;abc&quot;));</span><br><span class="line">			</span><br><span class="line">			System.out.println(&quot;-----------------------------------------&quot;);</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			Function&lt;Employee, String&gt; fun = (e) -&gt; e.show();</span><br><span class="line">			System.out.println(fun.apply(new Employee()));</span><br><span class="line">			</span><br><span class="line">			System.out.println(&quot;-----------------------------------------&quot;);</span><br><span class="line">			</span><br><span class="line">			Function&lt;Employee, String&gt; fun2 = Employee::show;</span><br><span class="line">			System.out.println(fun2.apply(new Employee()));</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>  	
+
+	  </div>     
+	  
+
+	<div class="post-footer">    
+
+  
+
+
+
+
+<span class="donate-btn iconfont icon-donate "></span>
+
+
+<div id="donate-box" class="sildeUpMin">
+
+	<span class="donate-cancel iconfont icon-cancel"></span>
+
+	<div class="donate-img-box">
+		<img id="donate-qr-wechat" class="donate-img no-gallery" src="/img/donate1.png"  alt="Lost">	
+		<img id="donate-qr-alipay" class="donate-img no-gallery" src="/img/donate2.png"  alt="Lost">	
+	</div>
+
+	<span class="donate-word">世界美好 你也是</span>
+
+	<div class="donate-list">
+		<span class="iconfont icon-donate-wechat"></span>
+		<span class="iconfont icon-donate-alipay"></span>
+	</div>
+
+</div>
+
+ 
+  
+	
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+	
+	<span class="share-btn iconfont icon-share">
+	</span>
+
+
+	<div class="-mob-share sildeUpMin">
+		                  
+            <span class="iconfont  icon-share-qq -mob-share-qq" title="qq"></span>
+     	                  
+            <span class="iconfont  icon-share-weixin -mob-share-weixin" title="weixin"></span>
+     	                  
+            <span class="iconfont  icon-share-weibo -mob-share-weibo" title="weibo"></span>
+     	                  
+            <span class="iconfont  icon-share-facebook -mob-share-facebook" title="facebook"></span>
+     	                  
+            <span class="iconfont  icon-share-twitter -mob-share-twitter" title="twitter"></span>
+     	                  
+            <span class="iconfont  icon-share-google -mob-share-google" title="google"></span>
+     	   
+	</div>
+	
+
+
+
+   <nav class="post-nav">
+
+      
+       
+
+         
+
+      
+          <a href="/2018/03/06/Lambda表达式/">          
+
+            <span class="hover-item" title="Lambda表达式">  上一篇 </span>  
+
+          </a>
+    
+      
+    
+      
+
+         
+
+          <a href="/2018/03/06/装饰者模式/">         
+
+           <span title="装饰者模式">下一篇 </span>  
+
+          </a>
+
+      
+
+  </nav>  
+</div> 
+	
+
+
+    <div id="comment">   
+    </div>
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+
+    <script src='//unpkg.com/valine@v1.1.8-beta/dist/Valine.min.js'></script>
+
+    <script>
+        new Valine({
+        el: '#comment',
+        notify:false, 
+        verify:false, 
+        app_id: 'gMnC8EJDk8V8fNmt2Nj2sEgP-gzGzoHsz',
+        app_key: 'G5ajxDPkoDOjtN6WfSRtpme8',  
+        path:window.location.pathname, 
+        avatar:'mm' ,
+        guest_info:['nick','mail']
+        });
+    </script>
+
+
+    <script>
+    //set the placeholder
+    $(function(){    
+
+        $('.vnick').attr('placeholder','昵称');
+        $('.veditor').attr('placeholder','说点什么吧');
+        $('.vmail').attr('placeholder','邮箱');   
+        $('.vsubmit').html('回复');   
+       
+    })  
+    </script>
+
+	
+
+</article>
+
+
+
+<div id="toc" >		
+
+	<div class="toc-container">	
+
+	<span class="toc-contents iconfont icon-open"" onclick="change()"> 
+	<span>目录</span>
+	</span>
+
+	<ul class="toc-list"></ul>
+
+	</div>
+
+</div>
+
+
+<script src="/js/toc.js"></script>
+<script src="/js/post.js"></script></section> 
+
+    </div>        
+
+    
+    <div class="mask"> </div>
+    <div class="back-to-top iconfont icon-backtotop fadeIn"></div> 
+
+    
+
+
+<script src="/js/search.js"></script>     
+          
+          <div class="search-container sildeUpMin">
+            <input type="text" placeholder="输入你想搜索的" id="search-input" class="search-input">  
+              <span class="search-cancel iconfont icon-cancel"></span>
+              <div id="search-result" class="search-result"></div>
+          </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+      <img class="mobile-menu-icon no-gallery" src= /img/favicon.png >   
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/categories">分类
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+</div>     
+    
+
+<footer id="footer">
+	   
+   	 
+
+	  	
+   	
+      	 
+	 <div>
+	 	&copy;
+		2018
+		YQG	 
+
+	 </div>
+
+
+   
+   	 <div>
+	
+	 <a href="http://hexo.io/" target="_blank">Hexo</a>
+
+	 Theme
+
+	 <a href="https://github.com/YYYQG/YYYQG.github.io" target="_blank">Brief</a> 
+
+	 </div>	
+
+
+	
+	
+</footer> 
+    
+
+
+ 
+  </body>   
+  <script src="/js/animation.js"></script>   
+</html>
