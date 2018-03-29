@@ -130,6 +130,115 @@
 	   
 	<div class="article-header">
 	    
+	     <a class="article-title"  href="/2018/03/29/装饰者模式/">无标题</a>  
+	       
+		 
+
+		 <time>2018-03-29 </time>    
+	</div>
+
+
+    <div class="post-content article-excerpt">	
+	
+  	
+
+	  
+
+	  	<p>—+<br>title: 装饰者模式<br>date: 2018-03-06 13:23:23<br>tags: 装饰者模式<br>category: 设计模式</p>
+<hr>
+<h1 id="装饰者模式"><a href="#装饰者模式" class="headerlink" title="装饰者模式"></a>装饰者模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>给爱用继承的人一个全新的设计眼界。</p>
+<blockquote>
+<p>所谓装饰者就是动态的将责任附加到对象上，若要扩展功能，装饰者提供了比继承更有弹性的替代方法。</p>
+</blockquote>
+<p>虽然这说明了装饰者模式的“角色”，但是没说明怎么在我们的实现中实际“应用”它。我们来看看类图。</p>
+<p><img src="img/装饰者模式.png" alt=""></p>
+<p>现在我们通过一个实例来讲解现实中如何使用装饰者模式。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>现在有一个咖啡店，店内有各种各样的咖啡，购买咖啡时，也可以要求在其中加入各种调料，例如蒸奶（SteamedMilk）、豆浆（Soy）、摩卡（Mocha）或者覆盖奶泡。同时需要收不同的费用。<br>首先我们看看第一种方式，设计一个超类Beverage类，所有调料作为它的成员变量，所有种类咖啡必须继承它。</p>
+<p><img src="img/装饰者模式1.png" alt=""></p>
+<p>显然这种方法不是那么的好，为什么呢？因为如果调料的价钱改变，我们得更改现有代码。一旦出现新的调料，我们就需要加上新的方法，并改变超类中的cost()方法。万一顾客需要双倍摩卡怎么办。</p>
+<p>现在我们的目标是允许类容易扩展，在不修改现有代码的情况下，就可搭配新的行为。如能实现这样的目标，有什么好处？这样的设计具有弹性可以应对改变，可以接受新的功能来应对改变的需求。</p>
+<p>现在我们采用不一样的方法，我们以饮料为主体，然后运行时用调料来“装饰”(decorate)饮料。<br>比如说：</p>
+<ul>
+<li>拿一深焙咖啡(DarkRoast)对象</li>
+<li>以摩卡(Mocha)对象装饰它</li>
+<li>以奶泡(Whip)装饰它</li>
+<li>调用cost()方法，并依赖委托(delegate)将调料的价钱加上去</li>
+</ul>
+<p>有如何装饰一个对象，委托有如何实现呐？</p>
+ 
+
+	    
+</div>
+
+<div class="center">
+				
+
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		702
+		</span>		
+</div>		
+
+		
+    <a class="article-readmore" href="/2018/03/29/装饰者模式/">阅读更多</a> 
+    	
+</article>     
+     	
+      	  	
+
+  		
+    	<article class="article">		
+	   
+	<div class="article-header">
+	    
+	     <a class="article-title"  href="/2018/03/06/Lambda表达式/">Lambda表达式</a>  
+	       
+		 
+
+		 <time>2018-03-06 </time>    
+	</div>
+
+
+    <div class="post-content article-excerpt">	
+	
+  	
+
+	  
+
+	  	 
+
+	    
+</div>
+
+<div class="center">
+				
+
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		0
+		</span>		
+</div>		
+
+		
+    <a class="article-readmore" href="/2018/03/06/Lambda表达式/">阅读更多</a> 
+    	
+</article>     
+     	
+      	  	
+
+  		
+    	<article class="article">		
+	   
+	<div class="article-header">
+	    
 	     <a class="article-title"  href="/2018/03/06/Java8四大函数式接口/">内置函数式接口</a>  
 	       
 		 
@@ -188,50 +297,6 @@
 
 		
     <a class="article-readmore" href="/2018/03/06/Java8四大函数式接口/">阅读更多</a> 
-    	
-</article>     
-     	
-      	  	
-
-  		
-    	<article class="article">		
-	   
-	<div class="article-header">
-	    
-	     <a class="article-title"  href="/2018/03/06/Lambda表达式/">Lambda表达式</a>  
-	       
-		 
-
-		 <time>2018-03-06 </time>    
-	</div>
-
-
-    <div class="post-content article-excerpt">	
-	
-  	
-
-	  
-
-	  	 
-
-	    
-</div>
-
-<div class="center">
-				
-
-			
-
-
-		
-
-		<span class="post-words"><span class="iconfont icon-words"></span>
-		0
-		</span>		
-</div>		
-
-		
-    <a class="article-readmore" href="/2018/03/06/Lambda表达式/">阅读更多</a> 
     	
 </article>     
      	
@@ -302,50 +367,6 @@
 
 		
     <a class="article-readmore" href="/2018/03/06/方法引用/">阅读更多</a> 
-    	
-</article>     
-     	
-      	  	
-
-  		
-    	<article class="article">		
-	   
-	<div class="article-header">
-	    
-	     <a class="article-title"  href="/2018/03/06/装饰者模式/">装饰者模式</a>  
-	       
-		 
-
-		 <time>2018-03-06 </time>    
-	</div>
-
-
-    <div class="post-content article-excerpt">	
-	
-  	
-
-	  
-
-	  	 
-
-	    
-</div>
-
-<div class="center">
-				
-
-			
-
-
-		
-
-		<span class="post-words"><span class="iconfont icon-words"></span>
-		0
-		</span>		
-</div>		
-
-		
-    <a class="article-readmore" href="/2018/03/06/装饰者模式/">阅读更多</a> 
     	
 </article>     
      	
