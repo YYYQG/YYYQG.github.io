@@ -130,6 +130,50 @@
 	   
 	<div class="article-header">
 	    
+	     <a class="article-title"  href="/2018/03/06/Lambda表达式/">Lambda表达式</a>  
+	       
+		 
+
+		 <time>2018-03-06 </time>    
+	</div>
+
+
+    <div class="post-content article-excerpt">	
+	
+  	
+
+	  
+
+	  	 
+
+	    
+</div>
+
+<div class="center">
+				
+
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		0
+		</span>		
+</div>		
+
+		
+    <a class="article-readmore" href="/2018/03/06/Lambda表达式/">阅读更多</a> 
+    	
+</article>     
+     	
+      	  	
+
+  		
+    	<article class="article">		
+	   
+	<div class="article-header">
+	    
 	     <a class="article-title"  href="/2018/03/06/Java8四大函数式接口/">内置函数式接口</a>  
 	       
 		 
@@ -188,50 +232,6 @@
 
 		
     <a class="article-readmore" href="/2018/03/06/Java8四大函数式接口/">阅读更多</a> 
-    	
-</article>     
-     	
-      	  	
-
-  		
-    	<article class="article">		
-	   
-	<div class="article-header">
-	    
-	     <a class="article-title"  href="/2018/03/06/Lambda表达式/">Lambda表达式</a>  
-	       
-		 
-
-		 <time>2018-03-06 </time>    
-	</div>
-
-
-    <div class="post-content article-excerpt">	
-	
-  	
-
-	  
-
-	  	 
-
-	    
-</div>
-
-<div class="center">
-				
-
-			
-
-
-		
-
-		<span class="post-words"><span class="iconfont icon-words"></span>
-		0
-		</span>		
-</div>		
-
-		
-    <a class="article-readmore" href="/2018/03/06/Lambda表达式/">阅读更多</a> 
     	
 </article>     
      	
@@ -345,6 +345,15 @@
 <li>调用cost()方法，并依赖委托(delegate)将调料的价钱加上去</li>
 </ul>
 <p>有如何装饰一个对象，委托有如何实现呐？</p>
+<ul>
+<li>装饰者和被装饰者对象有相同的超类型。</li>
+<li>你可以用一个或多个装饰者包装一个对象。</li>
+<li>既然装饰者和被装饰者有相同的超类型，所以在任何需要原始对象（被包装的）的场合，可以用装饰过的对象代替它。</li>
+<li>装饰者可以在所委托被装饰者的行为之前或之后，加上自己的行为，以达到特定的目的。</li>
+<li>对象可以在任何时候被装饰，所以可以运行时动态地，不限量地用你喜欢的装饰者来装饰对象。<h2 id="装饰我们的饮料"><a href="#装饰我们的饮料" class="headerlink" title="装饰我们的饮料"></a>装饰我们的饮料</h2></li>
+</ul>
+<p><img src="img/装饰者模式2.png" alt=""></p>
+<p>下面我看看如何用代码实现</p>
  
 
 	    
@@ -372,7 +381,7 @@
 		
 
 		<span class="post-words"><span class="iconfont icon-words"></span>
-		641
+		839
 		</span>		
 </div>		
 
