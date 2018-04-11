@@ -130,6 +130,50 @@
 	   
 	<div class="article-header">
 	    
+	     <a class="article-title"  href="/2018/03/06/Lambda表达式/">Lambda表达式</a>  
+	       
+		 
+
+		 <time>2018-03-06 </time>    
+	</div>
+
+
+    <div class="post-content article-excerpt">	
+	
+  	
+
+	  
+
+	  	 
+
+	    
+</div>
+
+<div class="center">
+				
+
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		0
+		</span>		
+</div>		
+
+		
+    <a class="article-readmore" href="/2018/03/06/Lambda表达式/">阅读更多</a> 
+    	
+</article>     
+     	
+      	  	
+
+  		
+    	<article class="article">		
+	   
+	<div class="article-header">
+	    
 	     <a class="article-title"  href="/2018/03/06/Java8四大函数式接口/">内置函数式接口</a>  
 	       
 		 
@@ -188,50 +232,6 @@
 
 		
     <a class="article-readmore" href="/2018/03/06/Java8四大函数式接口/">阅读更多</a> 
-    	
-</article>     
-     	
-      	  	
-
-  		
-    	<article class="article">		
-	   
-	<div class="article-header">
-	    
-	     <a class="article-title"  href="/2018/03/06/Lambda表达式/">Lambda表达式</a>  
-	       
-		 
-
-		 <time>2018-03-06 </time>    
-	</div>
-
-
-    <div class="post-content article-excerpt">	
-	
-  	
-
-	  
-
-	  	 
-
-	    
-</div>
-
-<div class="center">
-				
-
-			
-
-
-		
-
-		<span class="post-words"><span class="iconfont icon-words"></span>
-		0
-		</span>		
-</div>		
-
-		
-    <a class="article-readmore" href="/2018/03/06/Lambda表达式/">阅读更多</a> 
     	
 </article>     
      	
@@ -353,7 +353,14 @@
 <li>对象可以在任何时候被装饰，所以可以运行时动态地，不限量地用你喜欢的装饰者来装饰对象。<h2 id="装饰我们的饮料"><a href="#装饰我们的饮料" class="headerlink" title="装饰我们的饮料"></a>装饰我们的饮料</h2></li>
 </ul>
 <p><img src="/img/装饰者模式2.png" alt=""></p>
-<p>下面我看看如何用代码实现</p>
+<p>下面我看看如何用代码实现<br>Beverage.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public abstract class Beverage &#123;</span><br><span class="line"></span><br><span class="line">	private String description = &quot;unknown&quot;;</span><br><span class="line">	</span><br><span class="line">	public String getDescription() &#123;</span><br><span class="line">		return description;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setDescription(String des) &#123;</span><br><span class="line">		this.description = des;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public abstract double cost();</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>CondimentDecorator.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> //调料的父类</span><br><span class="line">public abstract class CondimentDecorator extends Beverage&#123;</span><br><span class="line"></span><br><span class="line">	//所有调料必须重写getDescription()方法，返回调料和饮料的相关描述</span><br><span class="line">	public abstract String getDescription();</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Espresso.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//浓咖啡</span><br><span class="line">public class Espresso extends Beverage&#123;</span><br><span class="line"></span><br><span class="line">	public Espresso() &#123;</span><br><span class="line">		//设置描述</span><br><span class="line">		setDescription(&quot;Espresso&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Override</span><br><span class="line">	public double cost() &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		return 2;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Mocha.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//摩卡</span><br><span class="line">public class Mocha extends CondimentDecorator&#123;</span><br><span class="line"></span><br><span class="line">	//记录被装饰者</span><br><span class="line">	private Beverage beverage ;</span><br><span class="line">	</span><br><span class="line">	//创建实例是必须传入被装饰者</span><br><span class="line">	public Mocha(Beverage beverage) &#123;</span><br><span class="line">		this.beverage = beverage;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Override</span><br><span class="line">	public String getDescription() &#123;</span><br><span class="line">		// 返回调料以及饮料的描述</span><br><span class="line">		return beverage.getDescription()+&quot;,Mocha&quot;;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public double cost() &#123;</span><br><span class="line">		// 返回调料(被装饰者)以及饮料的价格</span><br><span class="line">		return 0.2 + beverage.cost();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Test.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class Test &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		Beverage beverage = new Espresso();</span><br><span class="line">		Mocha  m = new Mocha(beverage);</span><br><span class="line">		System.out.println(m.getDescription());</span><br><span class="line">		System.out.println(m.cost());</span><br><span class="line">		//输出</span><br><span class="line">		//Espresso,Mocha</span><br><span class="line">        //2.2</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Java中的装饰者模式"><a href="#Java中的装饰者模式" class="headerlink" title="Java中的装饰者模式"></a>Java中的装饰者模式</h2><p>Java I/O便是用了装饰者模式</p>
+<p><img src="/img/装饰者模式3.png" alt=""></p>
+<p>我们可以发现java.io和咖啡店的设计没多大的差别，我们缩小java.io API的范围，可以更容易地查看它的文件。但是java.io的设计方式也暴露了装饰者模式的一个缺点，会形成很多小类，可能造成用此API的程序员感到困扰。</p>
  
 
 	    
@@ -381,7 +388,7 @@
 		
 
 		<span class="post-words"><span class="iconfont icon-words"></span>
-		839
+		2432
 		</span>		
 </div>		
 
