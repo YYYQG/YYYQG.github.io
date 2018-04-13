@@ -1,0 +1,395 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport"content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+  <meta name="baidu-site-verification" content="5rJxG2T4b5"/>
+  
+  
+  <title>  单件模式 |   Brief</title>
+
+ 
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">  
+  <!-- Jquery -->
+  <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script> 
+  <!-- Add fancyBox -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script> 
+  <script src="/js/gallery.js"></script>
+  <!-- javascript --> 
+  <script src="/js/mobile.js"></script>  
+  <script src="/js/utils.js"></script>    
+  <script src="/js/script.js"></script>  
+</head> 
+  <body> 
+    <header class="header">
+	
+  <nav class="header-nav">       
+	
+  	<span class="iconfont icon-menu mobile-toggle"></span>  
+
+    <a class="header-logo" href="/"><span>Brief</a>  
+
+    <div class="header-menu">          
+              
+            
+
+              <a class="header-menu-link" id="header-menu-home" href="/">首页</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">归档</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-categories" href="/categories">分类</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于</a>     
+
+            
+            
+            
+
+              <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+
+            
+                
+    </div>  
+    
+  </nav>
+</header>
+
+    <div class="container">         
+      
+        
+
+          <section id="main">  
+
+        
+
+        <article class="post">
+
+	  
+	<div class="post-header slideDownMin center">
+
+	<span class="post-title">	
+		单件模式
+	</span>
+
+	
+	<div class="post-info">
+
+		<time class="post-time"><span class="iconfont icon-date"></span>
+		2018/04/11 	
+		</time>
+		
+					
+
+				<span class="post-meta">		
+				<span class="iconfont icon-category"></span>
+				<a class="category-link" href="/categories/设计模式/">设计模式</a>
+				</span>
+		
+			
+
+		
+				
+				<span class="post-meta">
+				<span class="iconfont icon-tag"></span>
+				<a class="tag-link" href="/tags/策略模式/">策略模式</a>
+				</span>			
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		2680
+		</span>		
+	
+	</div> 
+
+</div> 
+
+
+	  <div class="post-content slideDownMin">
+
+		
+
+
+
+
+	  	<h1 id="单件模式"><a href="#单件模式" class="headerlink" title="单件模式"></a>单件模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>用来创建独一无二的，只能有一个实例的对象入场券。确保一个类只有一个实例，并提供一个全局访问点，单件模式可以说是所有模式中最简单的。</p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>有一些对象我们只需要一个，比如说：线程池、缓存、对话框等的对象。事实上，这些对象只能有一个实例，如果制造出多个，将会导致许多问题。</p>
+<h2 id="经典单件模式实现"><a href="#经典单件模式实现" class="headerlink" title="经典单件模式实现"></a>经典单件模式实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton &#123;</span><br><span class="line">	</span><br><span class="line">	//利用静态变量记录Singleton的唯一实例</span><br><span class="line">	private static  Singleton uniqueInstance;</span><br><span class="line">	</span><br><span class="line">	//私有构造器，只有Singleton类内才能使用</span><br><span class="line">	private Singleton() &#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	//用getInstance方法实例化一个对象，并返回一个实例(延迟实例化)</span><br><span class="line">	public static Singleton getInstance() &#123;</span><br><span class="line">		//如果没创建实例，就通过new Singleton()创造一个实例</span><br><span class="line">		if(uniqueInstance==null)</span><br><span class="line">			uniqueInstance = new Singleton();</span><br><span class="line">			//如果实例存在则返回实例</span><br><span class="line">			return uniqueInstance;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	//其他有用方法</span><br><span class="line">	public void full() &#123;</span><br><span class="line">		System.out.println(&quot;full&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void pull() &#123;</span><br><span class="line">		System.out.println(&quot;pull&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们看看类图<br><img src="/img/单件模式.png" alt="">  </p>
+<p>但是，这样就真的安全了吗？我们看看下面的代码。<br>Singleton.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//将上面的getInstance()方法添加一句话System.out.println(&quot;Singleton被创建&quot;);</span><br><span class="line">public static Singleton getInstance() &#123;</span><br><span class="line">		// 如果没创建实例，就通过new Singleton()创造一个实例</span><br><span class="line">		if (uniqueInstance == null) &#123;</span><br><span class="line">			System.out.println(&quot;Singleton被创建&quot;);</span><br><span class="line">			uniqueInstance = new Singleton();</span><br><span class="line">		&#125; </span><br><span class="line">			// 如果实例存在则返回实例</span><br><span class="line">			return uniqueInstance;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Main.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line"></span><br><span class="line">        //Lambda表达式创建线程</span><br><span class="line">		Thread t = new Thread(() -&gt; &#123;</span><br><span class="line">			Singleton s = Singleton.getInstance();</span><br><span class="line">			&#125;);</span><br><span class="line">		t.start();</span><br><span class="line">		Singleton s = Singleton.getInstance();</span><br><span class="line">		//Singleton被创建</span><br><span class="line">        // Singleton被创建</span><br><span class="line">        </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在多线程中，有可能两个线程(几乎)同时进入创建Singleton的代码，导致产生两个Singleton实例。</p>
+<h2 id="处理多线程"><a href="#处理多线程" class="headerlink" title="处理多线程"></a>处理多线程</h2><p>只需要把getInstance()变成同步(sychronized)方法，几乎就可以轻易地解决了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 用getInstance方法实例化一个对象，并返回一个实例</span><br><span class="line">	public static synchronized Singleton getInstance() &#123;</span><br><span class="line">		</span><br><span class="line">		// 如果没创建实例，就通过new Singleton()创造一个实例</span><br><span class="line">		if (uniqueInstance == null) &#123;</span><br><span class="line">			System.out.println(&quot;Singleton被创建&quot;);</span><br><span class="line">			uniqueInstance = new Singleton();</span><br><span class="line">		&#125;</span><br><span class="line">		// 如果实例存在则返回实例</span><br><span class="line">		return uniqueInstance;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样问题是解决了，但是降低了性能。因为只有第一次执行此方法才需要真正的同步，一旦设置好了uniqueInstance变量，就不需要同步这个方法了。</p>
+<h2 id="如何改善多线程"><a href="#如何改善多线程" class="headerlink" title="如何改善多线程"></a>如何改善多线程</h2><p>方法一：如果getInstance()对应用程序不是很关键，就什么也别做。但是你必须知道同步一个方法可能造成程序执行效率下降100倍。</p>
+<p>方法二：使用急切创建实例，而不是用延迟实例化的做法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton &#123;</span><br><span class="line">	private static  Singleton uniqueInstance = new Singleton();</span><br><span class="line">	</span><br><span class="line">	private Singleton() &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	public static Singleton getInstance() &#123;</span><br><span class="line">		return uniqueInstance;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>利用这个方法，我们依赖JVM在加载这个类的时候马上创建此唯一实例。</p>
+<p>方法三：用“双重检查加锁”，在getInstance()中减少使用同步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton &#123;</span><br><span class="line">	private volatile static Singleton uniqueInstance;</span><br><span class="line">	</span><br><span class="line">	private Singleton() &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	public static Singleton getInstance() &#123;</span><br><span class="line">	if(uniqueInstance == null)&#123;</span><br><span class="line">	    synchronized (Singleton.class)&#123;</span><br><span class="line">	    if(uniqueInstance == null)</span><br><span class="line">	        uniqueInstance = new Singleton();</span><br><span class="line">	        &#125;</span><br><span class="line">	    &#125;</span><br><span class="line">	    return uniqueInstance;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>volatile关键词确保，当uniqueInstance变量被初始化成实例时，多线程正确的处理uniqueInstance变量。</p>
+  	
+
+	  </div>     
+	  
+
+	<div class="post-footer">    
+
+  
+
+
+
+
+<span class="donate-btn iconfont icon-donate "></span>
+
+
+<div id="donate-box" class="sildeUpMin">
+
+	<span class="donate-cancel iconfont icon-cancel"></span>
+
+	<div class="donate-img-box">
+		<img id="donate-qr-wechat" class="donate-img no-gallery" src="/img/donate1.png"  alt="Lost">	
+		<img id="donate-qr-alipay" class="donate-img no-gallery" src="/img/donate2.png"  alt="Lost">	
+	</div>
+
+	<span class="donate-word">世界美好 你也是</span>
+
+	<div class="donate-list">
+		<span class="iconfont icon-donate-wechat"></span>
+		<span class="iconfont icon-donate-alipay"></span>
+	</div>
+
+</div>
+
+ 
+  
+	
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+	
+	<span class="share-btn iconfont icon-share">
+	</span>
+
+
+	<div class="-mob-share sildeUpMin">
+		                  
+            <span class="iconfont  icon-share-qq -mob-share-qq" title="qq"></span>
+     	                  
+            <span class="iconfont  icon-share-weixin -mob-share-weixin" title="weixin"></span>
+     	                  
+            <span class="iconfont  icon-share-weibo -mob-share-weibo" title="weibo"></span>
+     	                  
+            <span class="iconfont  icon-share-facebook -mob-share-facebook" title="facebook"></span>
+     	                  
+            <span class="iconfont  icon-share-twitter -mob-share-twitter" title="twitter"></span>
+     	                  
+            <span class="iconfont  icon-share-google -mob-share-google" title="google"></span>
+     	   
+	</div>
+	
+
+
+
+   <nav class="post-nav">
+
+      
+       
+    
+      
+
+         
+
+          <a href="/2018/03/06/Lambda表达式/">         
+
+           <span title="Lambda表达式">下一篇 </span>  
+
+          </a>
+
+      
+
+  </nav>  
+</div> 
+	
+
+
+    <div id="comment">   
+    </div>
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+
+    <script src='//unpkg.com/valine@v1.1.8-beta/dist/Valine.min.js'></script>
+
+    <script>
+        new Valine({
+        el: '#comment',
+        notify:false, 
+        verify:false, 
+        app_id: 'gMnC8EJDk8V8fNmt2Nj2sEgP-gzGzoHsz',
+        app_key: 'G5ajxDPkoDOjtN6WfSRtpme8',  
+        path:window.location.pathname, 
+        avatar:'mm' ,
+        guest_info:['nick','mail']
+        });
+    </script>
+
+
+    <script>
+    //set the placeholder
+    $(function(){    
+
+        $('.vnick').attr('placeholder','昵称');
+        $('.veditor').attr('placeholder','说点什么吧');
+        $('.vmail').attr('placeholder','邮箱');   
+        $('.vsubmit').html('回复');   
+       
+    })  
+    </script>
+
+	
+
+</article>
+
+
+
+<div id="toc" >		
+
+	<div class="toc-container">	
+
+	<span class="toc-contents iconfont icon-open"" onclick="change()"> 
+	<span>目录</span>
+	</span>
+
+	<ul class="toc-list"></ul>
+
+	</div>
+
+</div>
+
+
+<script src="/js/toc.js"></script>
+<script src="/js/post.js"></script></section> 
+
+    </div>        
+
+    
+    <div class="mask"> </div>
+    <div class="back-to-top iconfont icon-backtotop fadeIn"></div> 
+
+    
+
+
+<script src="/js/search.js"></script>     
+          
+          <div class="search-container sildeUpMin">
+            <input type="text" placeholder="输入你想搜索的" id="search-input" class="search-input">  
+              <span class="search-cancel iconfont icon-cancel"></span>
+              <div id="search-result" class="search-result"></div>
+          </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+      <img class="mobile-menu-icon no-gallery" src= /img/favicon.png >   
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/categories">分类
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+</div>     
+    
+
+<footer id="footer">
+	   
+   	 
+
+	  	
+   	
+      	 
+	 <div>
+	 	&copy;
+		2018
+		YQG	 
+
+	 </div>
+
+
+   
+   	 <div>
+	
+	 <a href="http://hexo.io/" target="_blank">Hexo</a>
+
+	 Theme
+
+	 <a href="https://github.com/YYYQG/YYYQG.github.io" target="_blank">Brief</a> 
+
+	 </div>	
+
+
+	
+	
+</footer> 
+    
+
+
+ 
+  </body>   
+  <script src="/js/animation.js"></script>   
+</html>
