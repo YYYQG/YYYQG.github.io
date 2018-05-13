@@ -126,7 +126,7 @@
 		
 
 		<span class="post-words"><span class="iconfont icon-words"></span>
-		728
+		1231
 		</span>		
 	
 	</div> 
@@ -144,8 +144,9 @@
 	  	<h2 id="比萨店"><a href="#比萨店" class="headerlink" title="比萨店"></a>比萨店</h2><p>假设你有一个比萨店，点比萨的代码你可能是这样写的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Pizza orderPizza()&#123;</span><br><span class="line"></span><br><span class="line">    pizza pizza = new Pizza();</span><br><span class="line">    pizza.prepare();</span><br><span class="line">    pizza.bake();</span><br><span class="line">    pizza.cut();</span><br><span class="line">    pizza.box();</span><br><span class="line">    return pizza;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <p>但是如果你需要更多的比萨类型怎么办？<br>所以必须增加一些代码来决定适合的比萨类型，然后制造这个比萨：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Pizza orderPizza(String type)&#123;</span><br><span class="line"></span><br><span class="line">    pizza pizza;</span><br><span class="line">    if(type.equals(&quot;cheese&quot;))&#123;</span><br><span class="line">        pizza = new CheesePizza();</span><br><span class="line">    &#125; else if(type.equals(&quot;greek&quot;))&#123;</span><br><span class="line">        pizza = new GreekPizza():</span><br><span class="line">    &#125;</span><br><span class="line">    pizza.prepare();</span><br><span class="line">    pizza.bake();</span><br><span class="line">    pizza.cut();</span><br><span class="line">    pizza.box();</span><br><span class="line">    return pizza;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <p>通过传入的参数type来判定点的什么比萨，从而返回什么比萨类的实例，可是到了后来如果你的比萨店会有越来越多的比萨怎么办，只有修改你的orderPizza(String type)中的方法，如果某些比萨过时了，你同样需要修改该方法，这个方法就没有对修改封闭。</p>
-<h3 id="封装创建对象代码"><a href="#封装创建对象代码" class="headerlink" title="封装创建对象代码"></a>封装创建对象代码</h3><p>我们需要将orderPizza(String type)中创建对象的代码移到orderPizza(String type)外，并创建另一个对象专门创建比萨。</p>
-<h2 id="新对象“工厂”"><a href="#新对象“工厂”" class="headerlink" title="新对象“工厂”"></a>新对象“工厂”</h2><p>SimplePizzaFactory.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h3 id="封装创建对象代码"><a href="#封装创建对象代码" class="headerlink" title="封装创建对象代码"></a>封装创建对象代码</h3><p>我们需要将orderPizza(String type)方法中创建对象的代码移到orderPizza(String type)方法外，并创建另一个对象专门创建比萨。</p>
+<h2 id="新对象“工厂”"><a href="#新对象“工厂”" class="headerlink" title="新对象“工厂”"></a>新对象“工厂”</h2><p>工厂用来处理创建对象的细节，一旦有了工厂，orderPizza(String type)方法就成为工厂的客户，只要需要比萨就叫要比萨工厂做一个，新的orderPizza(String type)方法只需要关心从工厂得到一个比萨，并调用比萨的prepare()，bake()，cut()等方法。<br>还有一些细节，我会补充，比如原来的orderPizza(String type)方法中的创建代码，该怎么写？</p>
+<h2 id="创建一个简单比萨工厂"><a href="#创建一个简单比萨工厂" class="headerlink" title="创建一个简单比萨工厂"></a>创建一个简单比萨工厂</h2><p>首先我们创建一个工厂类，封装所有比萨的创建。<br>SimplePizzaFactory.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class SimplePizzaFactory&#123;</span><br><span class="line">    piblic Pizza createPizza(String type)&#123;</span><br><span class="line">        Pizza pizza = null;</span><br><span class="line">        if(type.equals(&quot;cheese&quot;))&#123;</span><br><span class="line">        pizza = new CheesePizza();</span><br><span class="line">        .&#125; else if(type.equals(&quot;greek&quot;))&#123;</span><br><span class="line">        pizza = new GreekPizza():</span><br><span class="line">        &#125;</span><br><span class="line">    return pizza;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
   	
 
 	  </div>     
@@ -215,9 +216,9 @@
          
 
       
-          <a href="/2018/04/18/比萨店/">          
+          <a href="/2018/05/05/回调/">          
 
-            <span class="hover-item" title="工厂模式">  上一篇 </span>  
+            <span class="hover-item" title="回调">  上一篇 </span>  
 
           </a>
     
