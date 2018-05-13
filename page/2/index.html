@@ -132,6 +132,188 @@
 	   
 	<div class="article-header">
 	    
+	     <a class="article-title"  href="/2018/03/06/Java8四大函数式接口/">内置函数式接口</a>  
+	       
+		 
+
+		 <time>2018-03-06 </time>    
+	</div>
+
+
+    <div class="post-content article-excerpt">	
+	
+  	
+
+	  
+
+	  	<h2 id="Java8四大函数式接口"><a href="#Java8四大函数式接口" class="headerlink" title="Java8四大函数式接口"></a>Java8四大函数式接口</h2><p>什么是函数是接口？</p>
+<blockquote>
+<p>一个接口里面只有一个抽象方法,其它什么也没有（可以拥有default和static修饰的方法）。（@FunctionInterface注解用于标注函数式接口）</p>
+</blockquote>
+<p>例如下面这个接口：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@FunctionInterface</span><br><span class="line">public interface MyConsume&lt;T&gt;&#123;</span><br><span class="line">    void accept(T t);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Java8为了方便程序员使用函数式接口，已经封装好了一系列函数式接口，下面四个为主要的函数式接口。</p>
+<p>1.Consumer<t> : 消费型接口<br>　　void accept（T t）;<br>２．Supplier<t> : 供给型接口<br>　　T get（）;<br>３．Function<t,r> :函数型接口<br>　　R apply(T t);<br>４．Predicate<t> : 断言型接口<br> 　　Boolean test(T t);</t></t,r></t></t></p>
+<h3 id="消费型接口"><a href="#消费型接口" class="headerlink" title="消费型接口"></a>消费型接口</h3><p>带有一个参数，无返回值的函数型接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//Consumer&lt;T&gt; : 消费型接口</span><br><span class="line">	@Test</span><br><span class="line">	public void test1() &#123;</span><br><span class="line">		happy(1222, (m) -&gt; System.out.println(&quot;消费1222元！&quot;));</span><br><span class="line">	&#125;</span><br><span class="line">	public void happy(double money,Consumer&lt;Double&gt; con ) &#123;</span><br><span class="line">		con.accept(money);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="供给型接口"><a href="#供给型接口" class="headerlink" title="供给型接口"></a>供给型接口</h2><p>无参数，有返回值的函数型接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//Supplier&lt;T&gt; : 供给型接口</span><br><span class="line">//需求：生成随机数</span><br><span class="line">	@Test</span><br><span class="line">	public void test2() &#123;</span><br><span class="line">		List&lt;Integer&gt; L=getNumber(20, () -&gt;(int)(Math.random()*10));</span><br><span class="line">		for (Integer integer : L) &#123;</span><br><span class="line">			System.out.println(integer);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public List&lt;Integer&gt; getNumber(int num, Supplier&lt;Integer&gt; su) &#123;</span><br><span class="line">		List&lt;Integer&gt; list=new ArrayList&lt;Integer&gt;();</span><br><span class="line">		for(int i=1;i&lt;num;i++) &#123;</span><br><span class="line">			Integer n= su.get();</span><br><span class="line">			list.add(n);</span><br><span class="line">		&#125;</span><br><span class="line">		return list;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>##　函数型接口</p>
+<p>拥有一个参数，一个返回值的函数型接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//Function&lt;T,R&gt; :函数型接口</span><br><span class="line">//需求：删除字符串首尾空白</span><br><span class="line">@Test</span><br><span class="line">public void test3() &#123;</span><br><span class="line">	String string=strHandler(&quot;  上课脑壳&quot;,(x) -&gt; x.trim());</span><br><span class="line">	System.out.println(string);</span><br><span class="line">&#125;</span><br><span class="line">public String strHandler(String str,Function&lt;String,String&gt; s) &#123;</span><br><span class="line">	return s.apply(str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="断言型接口"><a href="#断言型接口" class="headerlink" title="断言型接口"></a>断言型接口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//Predicate&lt;T&gt; : 断言型接口</span><br><span class="line">	//需求将满足条件的字符串放入集合中</span><br><span class="line">	@Test</span><br><span class="line">	public void test4() &#123;</span><br><span class="line">		List&lt;String&gt; list = Arrays.asList(&quot;OK&quot;,&quot;Hello&quot;,&quot;AT&quot;);</span><br><span class="line">		List&lt;String&gt; filter=filterStr(list,(s) -&gt; s.length()&gt;3);</span><br><span class="line">		System.out.println(filter.size());</span><br><span class="line">		for (String L : filter) &#123;</span><br><span class="line">			System.out.println(L);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public List&lt;String&gt;  filterStr(List&lt;String&gt; L,Predicate&lt;String&gt; pre)&#123;</span><br><span class="line">		List &lt;String&gt; list=new ArrayList&lt;&gt;();</span><br><span class="line">		for (String str : L) &#123;</span><br><span class="line">			if(pre.test(str)) &#123;</span><br><span class="line">				list.add(str);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return list;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure> 
+
+	    
+</div>
+
+<div class="center">
+			
+
+				<span class="post-meta">		
+				<span class="iconfont icon-category"></span>
+				<a class="category-link" href="/categories/java/">java</a>
+				</span>
+		
+			
+
+		
+				
+				<span class="post-meta">
+				<span class="iconfont icon-tag"></span>
+				<a class="tag-link" href="/tags/java8/">java8</a>
+				</span>			
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		2001
+		</span>		
+</div>		
+
+		
+    <a class="article-readmore" href="/2018/03/06/Java8四大函数式接口/">阅读更多</a> 
+    	
+</article>     
+     	
+      	  	
+
+  		
+    	<article class="article">		
+	   
+	<div class="article-header">
+	    
+	     <a class="article-title"  href="/2018/03/06/Lambda表达式/">Lambda表达式</a>  
+	       
+		 
+
+		 <time>2018-03-06 </time>    
+	</div>
+
+
+    <div class="post-content article-excerpt">	
+	
+  	
+
+	  
+
+	  	 
+
+	    
+</div>
+
+<div class="center">
+				
+
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		0
+		</span>		
+</div>		
+
+		
+    <a class="article-readmore" href="/2018/03/06/Lambda表达式/">阅读更多</a> 
+    	
+</article>     
+     	
+      	  	
+
+  		
+    	<article class="article">		
+	   
+	<div class="article-header">
+	    
+	     <a class="article-title"  href="/2018/03/06/方法引用/">方法引用与构造器引用</a>  
+	       
+		 
+
+		 <time>2018-03-06 </time>    
+	</div>
+
+
+    <div class="post-content article-excerpt">	
+	
+  	
+
+	  
+
+	  	<h2 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h2><p>当传递给Lambda体的操作，已经有实现的方法了，就可以使用方法引用！</p>
+<p>方法引用：使用操作符“::”将方法名和对象或类的名字分隔开来。<br>只要使用情况：</p>
+<ul>
+<li>对象的引用 :: 实例方法名</li>
+<li>类名 :: 静态方法名</li>
+<li>类名 :: 实例方法名</li>
+</ul>
+<p>注意：<br> ①方法引用所引用的方法的参数列表与返回值类型，需要与函数式接口中抽象方法的参数列表和返回值类型保持一致！<br> ②若Lambda 的参数列表的第一个参数，是实例方法的调用者，第二个参数(或无参)是实例方法的参数时，格式： ClassName::MethodName</p>
+<p>Employee.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line">public class Employee &#123;</span><br><span class="line"></span><br><span class="line">	private int id;</span><br><span class="line">	private String name;</span><br><span class="line">	private int age;</span><br><span class="line">	private double salary;</span><br><span class="line"></span><br><span class="line">	public Employee() &#123;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Employee(String name) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Employee(String name, int age) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">		this.age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Employee(int id, String name, int age, double salary) &#123;</span><br><span class="line">		this.id = id;</span><br><span class="line">		this.name = name;</span><br><span class="line">		this.age = age;</span><br><span class="line">		this.salary = salary;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public int getId() &#123;</span><br><span class="line">		return id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void setId(int id) &#123;</span><br><span class="line">		this.id = id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public String getName() &#123;</span><br><span class="line">		return name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void setName(String name) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public int getAge() &#123;</span><br><span class="line">		return age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void setAge(int age) &#123;</span><br><span class="line">		this.age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public double getSalary() &#123;</span><br><span class="line">		return salary;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void setSalary(double salary) &#123;</span><br><span class="line">		this.salary = salary;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public String show() &#123;</span><br><span class="line">		return &quot;this is a Employee&quot;;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public int hashCode() &#123;</span><br><span class="line">		final int prime = 31;</span><br><span class="line">		int result = 1;</span><br><span class="line">		result = prime * result + age;</span><br><span class="line">		result = prime * result + id;</span><br><span class="line">		result = prime * result + ((name == null) ? 0 : name.hashCode());</span><br><span class="line">		long temp;</span><br><span class="line">		temp = Double.doubleToLongBits(salary);</span><br><span class="line">		result = prime * result + (int) (temp ^ (temp &gt;&gt;&gt; 32));</span><br><span class="line">		return result;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public boolean equals(Object obj) &#123;</span><br><span class="line">		if (this == obj)</span><br><span class="line">			return true;</span><br><span class="line">		if (obj == null)</span><br><span class="line">			return false;</span><br><span class="line">		if (getClass() != obj.getClass())</span><br><span class="line">			return false;</span><br><span class="line">		Employee other = (Employee) obj;</span><br><span class="line">		if (age != other.age)</span><br><span class="line">			return false;</span><br><span class="line">		if (id != other.id)</span><br><span class="line">			return false;</span><br><span class="line">		if (name == null) &#123;</span><br><span class="line">			if (other.name != null)</span><br><span class="line">				return false;</span><br><span class="line">		&#125; else if (!name.equals(other.name))</span><br><span class="line">			return false;</span><br><span class="line">		if (Double.doubleToLongBits(salary) != Double.doubleToLongBits(other.salary))</span><br><span class="line">			return false;</span><br><span class="line">		return true;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public String toString() &#123;</span><br><span class="line">		return &quot;Employee [id=&quot; + id + &quot;, name=&quot; + name + &quot;, age=&quot; + age + &quot;, salary=&quot; + salary + &quot;]&quot;;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>###　对象的引用 :: 实例方法名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">      @Test</span><br><span class="line">public void test2()&#123;</span><br><span class="line">	Employee emp = new Employee(101, &quot;张三&quot;, 18, 9999.99);</span><br><span class="line">	//一般Lambda表达式</span><br><span class="line">	Supplier&lt;String&gt; sup = () -&gt; emp.getName();</span><br><span class="line">	System.out.println(sup.get());</span><br><span class="line">	</span><br><span class="line">	System.out.println(&quot;----------------------------------&quot;);</span><br><span class="line">	</span><br><span class="line">	//方法引用</span><br><span class="line">	Supplier&lt;String&gt; sup2 = emp::getName;</span><br><span class="line">	System.out.println(sup2.get());</span><br><span class="line">&#125;</span><br><span class="line">@Test</span><br><span class="line">public void test1()&#123;</span><br><span class="line">	PrintStream ps = System.out;</span><br><span class="line">	Consumer&lt;String&gt; con = (str) -&gt; ps.println(str);</span><br><span class="line">	con.accept(&quot;Hello World！&quot;);</span><br><span class="line">	</span><br><span class="line">	System.out.println(&quot;--------------------------------&quot;);</span><br><span class="line">	</span><br><span class="line">	Consumer&lt;String&gt; con2 = ps::println;</span><br><span class="line">	con2.accept(&quot;Hello Java8！&quot;);</span><br><span class="line">	Consumer&lt;String&gt; con3 = System.out::println;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="类名-静态方法名"><a href="#类名-静态方法名" class="headerlink" title="类名 :: 静态方法名"></a>类名 :: 静态方法名</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//类名 :: 静态方法名</span><br><span class="line">		@Test</span><br><span class="line">		public void test4()&#123;</span><br><span class="line">			Comparator&lt;Integer&gt; com = (x, y) -&gt; Integer.compare(x, y);</span><br><span class="line">			</span><br><span class="line">			System.out.println(&quot;-------------------------------------&quot;);</span><br><span class="line">			</span><br><span class="line">			Comparator&lt;Integer&gt; com2 = Integer::compare;</span><br><span class="line">		&#125;</span><br><span class="line">		@Test</span><br><span class="line">		public void test3()&#123;</span><br><span class="line">			BiFunction&lt;Double, Double, Double&gt; fun = (x, y) -&gt; Math.max(x, y);</span><br><span class="line">			System.out.println(fun.apply(1.5, 22.2));</span><br><span class="line">			</span><br><span class="line">			System.out.println(&quot;--------------------------------------------------&quot;);</span><br><span class="line">			</span><br><span class="line">			BiFunction&lt;Double, Double, Double&gt; fun2 = Math::max;</span><br><span class="line">			System.out.println(fun2.apply(1.2, 1.5));</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="类名-实例方法名"><a href="#类名-实例方法名" class="headerlink" title="类名 :: 实例方法名"></a>类名 :: 实例方法名</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//类名 :: 实例方法名</span><br><span class="line">//若Lambda 的参数列表的第一个参数，是实例方法的调用者，第二个参数(或无参)是实例方法的参数时，格式： ClassName::MethodName</span><br><span class="line">		@Test</span><br><span class="line">		public void test5()&#123;</span><br><span class="line">			BiPredicate&lt;String, String&gt; bp = (x, y) -&gt; x.equals(y);</span><br><span class="line">			System.out.println(bp.test(&quot;abcde&quot;, &quot;abcde&quot;));</span><br><span class="line">			</span><br><span class="line">			System.out.println(&quot;-----------------------------------------&quot;);</span><br><span class="line">			</span><br><span class="line">			BiPredicate&lt;String, String&gt; bp2 = String::equals;</span><br><span class="line">			System.out.println(bp2.test(&quot;abc&quot;, &quot;abc&quot;));</span><br><span class="line">			</span><br><span class="line">			System.out.println(&quot;-----------------------------------------&quot;);</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			Function&lt;Employee, String&gt; fun = (e) -&gt; e.show();</span><br><span class="line">			System.out.println(fun.apply(new Employee()));</span><br><span class="line">			</span><br><span class="line">			System.out.println(&quot;-----------------------------------------&quot;);</span><br><span class="line">			</span><br><span class="line">			Function&lt;Employee, String&gt; fun2 = Employee::show;</span><br><span class="line">			System.out.println(fun2.apply(new Employee()));</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="构造器引用"><a href="#构造器引用" class="headerlink" title="构造器引用"></a>构造器引用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//构造器引用</span><br><span class="line">		@Test</span><br><span class="line">		public void test7()&#123;</span><br><span class="line">		//构造器引用，函数式接口的参数列表与构造器的参数列表一直，意思是函数式接口有几个参数，就调用有几个参数的构造器。</span><br><span class="line">			Function&lt;String, Employee&gt; fun = Employee::new;</span><br><span class="line">			BiFunction&lt;String, Integer, Employee&gt; fun2 = Employee::new;</span><br><span class="line">		&#125;</span><br><span class="line">		@Test</span><br><span class="line">		public void test6()&#123;</span><br><span class="line">			Supplier&lt;Employee&gt; sup = () -&gt; new Employee();</span><br><span class="line">			System.out.println(sup.get());</span><br><span class="line">			</span><br><span class="line">			System.out.println(&quot;------------------------------------&quot;);</span><br><span class="line">			</span><br><span class="line">			Supplier&lt;Employee&gt; sup2 = Employee::new;</span><br><span class="line">			System.out.println(sup2.get());</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="数组引用"><a href="#数组引用" class="headerlink" title="数组引用"></a>数组引用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//数组引用</span><br><span class="line">		@Test</span><br><span class="line">		public void test8()&#123;</span><br><span class="line">			Function&lt;Integer, String[]&gt; fun = (args) -&gt; new String[args];</span><br><span class="line">			//Function&lt;Integer, String[]&gt; fun = String[]::new;</span><br><span class="line">			String[] strs = fun.apply(10);</span><br><span class="line">			System.out.println(strs.length);</span><br><span class="line">			</span><br><span class="line">			System.out.println(&quot;--------------------------&quot;);</span><br><span class="line">			</span><br><span class="line">			Function&lt;Integer, Employee[]&gt; fun2 = Employee[] :: new;</span><br><span class="line">			Employee[] emps = fun2.apply(20);</span><br><span class="line">			System.out.println(emps.length);</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure> 
+
+	    
+</div>
+
+<div class="center">
+			
+
+				<span class="post-meta">		
+				<span class="iconfont icon-category"></span>
+				<a class="category-link" href="/categories/java/">java</a>
+				</span>
+		
+			
+
+		
+				
+				<span class="post-meta">
+				<span class="iconfont icon-tag"></span>
+				<a class="tag-link" href="/tags/java8/">java8</a>
+				</span>			
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		5519
+		</span>		
+</div>		
+
+		
+    <a class="article-readmore" href="/2018/03/06/方法引用/">阅读更多</a> 
+    	
+</article>     
+     	
+      	  	
+
+  		
+    	<article class="article">		
+	   
+	<div class="article-header">
+	    
 	     <a class="article-title"  href="/2018/03/06/装饰者模式/">装饰者模式</a>  
 	       
 		 
@@ -301,159 +483,12 @@
     	
 </article>     
      	
-      	  	
-
-  		
-    	<article class="article">		
-	   
-	<div class="article-header">
-	    
-	     <a class="article-title"  href="/2018/03/02/认识观察者模式/">观察者模式</a>  
-	       
-		 
-
-		 <time>2018-03-02 </time>    
-	</div>
-
-
-    <div class="post-content article-excerpt">	
-	
-  	
-
-	  
-
-	  	<h1 id="认识观察者模式"><a href="#认识观察者模式" class="headerlink" title="认识观察者模式"></a>认识观察者模式</h1><h3 id="我们看看报纸和杂志的订阅是怎么回事："><a href="#我们看看报纸和杂志的订阅是怎么回事：" class="headerlink" title="我们看看报纸和杂志的订阅是怎么回事："></a>我们看看报纸和杂志的订阅是怎么回事：</h3><p>1.报社的业务是出版报纸。</p>
-<p>2.向某家报订阅报纸，只要他有新报纸出版，就会给你送来。只要你是他们的用户，你就会一直收到新报纸。</p>
-<p>3.当你不想看报纸的时候，取消订阅，他们就不会再送新报纸来。</p>
-<p>4.只要报社还在运营，就会一直人（或单位）向他们订阅报纸或取消订阅报纸。</p>
-<h3 id="出版者-订阅者-观察者模式"><a href="#出版者-订阅者-观察者模式" class="headerlink" title="出版者+订阅者=观察者模式"></a>出版者+订阅者=观察者模式</h3><p>如果你了解报纸的订阅是怎么回事，其实就知道观察者模式是怎么回事，只是名称不太一样：出版者改称为“主题”（Subject),订阅者改称为“观察者”（Observer)。</p>
-<p>让我们来看得更仔细一点:</p>
-<p><img src="/img/观察者.png" alt="&quot;观察者模式&quot;">  </p>
-<h1 id="定义观察者模式"><a href="#定义观察者模式" class="headerlink" title="定义观察者模式"></a>定义观察者模式</h1><p>当你试图勾勒观察者模式时，可以利用报纸订阅服务，以及出版者和订阅者比拟这一切。</p>
-<p>在真实的世界中，你通常会看到观察者模式被定义成:</p>
-<p><strong>观察者模式</strong>定义了对象之间的一对多依赖，这样一来，当一个对象改变状态时，它的所有依赖者都会收到通知并自动更新。</p>
-<p><strong>难察者模式定义了一系列对象之间的一对多关系。</strong><br><strong>当一个对象改变状态，其他依赖者都会收到通知。</strong></p>
-<p>主题和观察者定义了一对多的关系。观察者依赖子此主题，只要主题状态一有变化，观察者就会被通知。根据通知的风格，观察者可能因此新值而更新。</p>
-<p>稍后你会右到，实现观察者模式的方法不只一种，但是以包含Subject与Observer接口的类设计的做法最常见。</p>
-<p><img src="/img/观察者模式类图.png" alt="&quot;观察者模式类图&quot;">  </p>
-<h1 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h1><h3 id="气象监测应用的概况"><a href="#气象监测应用的概况" class="headerlink" title="气象监测应用的概况"></a>气象监测应用的概况</h3><p>此系统中的三个部分是气象站（获取实际气象数据的物理装置），WeatherDate对象（追踪来自气象站的数据，并更新布告栏）和布告栏</p>
-<p>WeatherData对象知道如何跟物理气象站联系，以取得更新的数据。WeatherData对象会随即更新三个布告板的显示：目前状况（温度、湿度、气压）、气象统计和天气预报。</p>
-<p><strong>如果我们选择接受这个项目，我们的工作就是建立一个应用，利用WeatherData对象取得数据，并更新三个布告板：目前状况.气象统计和天气预报。</strong></p>
-<p>布告栏（观察者），WeatherData对象（主题）</p>
-<p>Observer.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface Observer &#123;</span><br><span class="line"></span><br><span class="line">	public void update(float temp, float humidity,float pressure);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>subject.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public interface subject &#123;</span><br><span class="line"></span><br><span class="line">	public void registerObserver(Observer o);</span><br><span class="line">	public void removeObserver(Observer o);</span><br><span class="line">	public void notifyObserver();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>DisplayElement.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface DisplayElement &#123;</span><br><span class="line"></span><br><span class="line">	public void display();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>CurrentConditionDisplay.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class CurrentConditionDisplay implements Observer,DisplayElement&#123;</span><br><span class="line"></span><br><span class="line">	private float temp;</span><br><span class="line">	private float humidity;</span><br><span class="line">	private float pressure;</span><br><span class="line">	private subject WeatherData;</span><br><span class="line">	</span><br><span class="line">	CurrentConditionDisplay(WeatherData a)&#123;</span><br><span class="line">		this.WeatherData=a;</span><br><span class="line">		a.registerObserver(this);</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public void display() &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		System.out.println(&quot;temp=&quot;+temp+&quot;\nhumidity=&quot;+humidity+&quot;\npressure=&quot;+pressure);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void update(float temp, float humidity, float pressure) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		this.pressure=pressure;</span><br><span class="line">		this.humidity=humidity;</span><br><span class="line">		this.temp=temp;</span><br><span class="line">		display();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Observer.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface Observer &#123;</span><br><span class="line"></span><br><span class="line">	public void update(float temp, float humidity,float pressure);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Test.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class Test &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line"></span><br><span class="line">		WeatherData w=new WeatherData();</span><br><span class="line">		CurrentConditionDisplay a=new CurrentConditionDisplay(w);</span><br><span class="line">		w.setMeasurements(80, 30, 4);</span><br><span class="line">		w.setMeasurements(8, 3, 4);</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
- 
-
-	    
-</div>
-
-<div class="center">
-			
-
-				<span class="post-meta">		
-				<span class="iconfont icon-category"></span>
-				<a class="category-link" href="/categories/设计模式/">设计模式</a>
-				</span>
-		
-			
-
-		
-				
-				<span class="post-meta">
-				<span class="iconfont icon-tag"></span>
-				<a class="tag-link" href="/tags/观察者模式/">观察者模式</a>
-				</span>			
-			
-
-
-		
-
-		<span class="post-words"><span class="iconfont icon-words"></span>
-		2292
-		</span>		
-</div>		
-
-		
-    <a class="article-readmore" href="/2018/03/02/认识观察者模式/">阅读更多</a> 
-    	
-</article>     
-     	
-      	  	
-
-  		
-    	<article class="article">		
-	   
-	<div class="article-header">
-	    
-	     <a class="article-title"  href="/2018/03/02/linux-1-1/">关于ubuntu无法使用rpm</a>  
-	       
-		 
-
-		 <time>2018-03-02 </time>    
-	</div>
-
-
-    <div class="post-content article-excerpt">	
-	
-  	
-
-	  
-
-	  	<p>昨天想在Ubuntu只带的火狐上看一下视频，发现自己安装时没有安装第三方插件，放不了视频。自己安装插件有太麻烦，便选择安装一个谷歌浏览器（自带Adobe Flash Player），便从网上找了个rpm的安装包，发现Ubuntu并不支持rpm。</p>
-<h1 id="RPM软件包"><a href="#RPM软件包" class="headerlink" title="RPM软件包"></a>RPM软件包</h1><p>英文原义：Redhat Package Manager</p>
-<p>中文释义：红帽RPM软件包管理器</p>
-<p>RPM是RedHat专用的软件包。</p>
-<h1 id="Ubuntu安装rpm包怎么办？"><a href="#Ubuntu安装rpm包怎么办？" class="headerlink" title="Ubuntu安装rpm包怎么办？"></a>Ubuntu安装rpm包怎么办？</h1><p>ubuntu需要先将其转换为deb包，然后安装。</p>
-<p>1.安装alien转换软件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ apt install alien</span><br></pre></td></tr></table></figure>
-<p>2.将RPM包转换为deb安装包</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo alien --scripts ＊.rpm</span><br></pre></td></tr></table></figure>
-<p>同一级目录下会看见相同名字的deb包</p>
-<p>3.安装</p>
-<p>对于符合要求的版本的deb包，在ubuntu中可以像windows中一样双击打开软件管理器进行视图安装</p>
-<p>对于deb，也可以在终端下通过命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -i ＊.deb</span><br></pre></td></tr></table></figure>
-<p>进行安装</p>
- 
-
-	    
-</div>
-
-<div class="center">
-			
-
-				<span class="post-meta">		
-				<span class="iconfont icon-category"></span>
-				<a class="category-link" href="/categories/Ubuntu/">Ubuntu</a>
-				</span>
-		
-			
-
-			
-
-
-		
-
-		<span class="post-words"><span class="iconfont icon-words"></span>
-		419
-		</span>		
-</div>		
-
-		
-    <a class="article-readmore" href="/2018/03/02/linux-1-1/">阅读更多</a> 
-    	
-</article>     
-     	
   
 
  
 
   <nav class="paginator">
-    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
   </nav>
   
 

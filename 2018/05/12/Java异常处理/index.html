@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport"content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+  <meta name="baidu-site-verification" content="5rJxG2T4b5"/>
+
+  
+  
+  <title>  Java异常处理 |   Brief</title>
+
+ 
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">  
+  <!-- Jquery -->
+  <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script> 
+  <!-- Add fancyBox -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script> 
+  <script src="/js/gallery.js"></script>
+  <!-- javascript --> 
+  <script src="/js/mobile.js"></script>  
+  <script src="/js/utils.js"></script>    
+  <script src="/js/script.js"></script>  
+  <script src="/js/baidu_post.js"></script>  
+</head> 
+  <body> 
+    <header class="header">
+	
+  <nav class="header-nav">       
+	
+  	<span class="iconfont icon-menu mobile-toggle"></span>  
+
+    <a class="header-logo" href="/"><span>Brief</a>  
+
+    <div class="header-menu">          
+              
+            
+
+              <a class="header-menu-link" id="header-menu-home" href="/">首页</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">归档</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-categories" href="/categories">分类</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于</a>     
+
+            
+            
+            
+
+              <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+
+            
+                
+    </div>  
+    
+  </nav>
+</header>
+
+    <div class="container">         
+      
+        
+
+          <section id="main">  
+
+        
+
+        <article class="post">
+
+	  
+	<div class="post-header slideDownMin center">
+
+	<span class="post-title">	
+		Java异常处理
+	</span>
+
+	
+	<div class="post-info">
+
+		<time class="post-time"><span class="iconfont icon-date"></span>
+		2018/05/12 	
+		</time>
+		
+					
+
+				<span class="post-meta">		
+				<span class="iconfont icon-category"></span>
+				<a class="category-link" href="/categories/java/">java</a>
+				</span>
+		
+			
+
+		
+				
+				<span class="post-meta">
+				<span class="iconfont icon-tag"></span>
+				<a class="tag-link" href="/tags/异常/">异常</a>
+				</span>			
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		2375
+		</span>		
+	
+	</div> 
+
+</div> 
+
+
+	  <div class="post-content slideDownMin">
+
+		
+
+
+
+
+	  	<h2 id="1-java中什么是异常？"><a href="#1-java中什么是异常？" class="headerlink" title="1.java中什么是异常？"></a>1.java中什么是异常？</h2><blockquote>
+<p>简单的说，异常就是Java传达给系统的程序错误的方式。在java中，异常功能是通过实现比如Throwable,Exception,RuntimeException之类的，然后还有一些处理异常时候的关键字，比如：throw,throws,try,catch,finally等。所有的异常都是通过Throwable衍生出来的。Throwable把异常进一步划分为java.lang.Exception和java.lang.Error;java.lang.Error是用来处理系统级别的错误，例如：java.lang.StackOverFlowError,java.lang.OutOfMemoryError等；而Exception用来处理程序的错误，请求资源不可用等等。</p>
+</blockquote>
+<h2 id="2-java中的检查型异常和非检查型异常有什么区别？"><a href="#2-java中的检查型异常和非检查型异常有什么区别？" class="headerlink" title="2.java中的检查型异常和非检查型异常有什么区别？"></a>2.java中的检查型异常和非检查型异常有什么区别？</h2><blockquote>
+<p>RuntimeException及其子类称为非检查型异常（Uncheckedexception），其它异常成为检查型异常（Checked Exception）。非检查型异常是运行时才会被检测出的异常，检查型异常是编译期就检测出可能会发生的异常。检查型异常需要使用try,catch和finally关键字在编译期进行处理，否则编译器会报错。对于非检查型异常则可处理可以不处理，处理了则不会停止程序的执行。</p>
+</blockquote>
+<h2 id="3-运行时异常与一般异常有何异同？"><a href="#3-运行时异常与一般异常有何异同？" class="headerlink" title="3.运行时异常与一般异常有何异同？"></a>3.运行时异常与一般异常有何异同？</h2><blockquote>
+<p>运行时异常(非检查型异常):运行时才会被检测出的异常,编译期异常(检查型异常):编译期就检测出可能会发生的异常。同上。</p>
+</blockquote>
+<h2 id="4-Error和Exception有什么区别"><a href="#4-Error和Exception有什么区别" class="headerlink" title="4.Error和Exception有什么区别?"></a>4.Error和Exception有什么区别?</h2><blockquote>
+<p>Exception可处理，就算出现异常，也可以处理来让不让程序结束。Error程序不可处理，一旦出现，程序就直接结束。</p>
+</blockquote>
+<h2 id="5-5个最常见的RuntimeException。"><a href="#5-5个最常见的RuntimeException。" class="headerlink" title="5.5个最常见的RuntimeException。"></a>5.5个最常见的RuntimeException。</h2><blockquote>
+<p>ArithmeticException IndexOutOfBoundsException NullPointException WebServiceException DateTimeException</p>
+</blockquote>
+<h2 id="6-JAVA语言如何进行异常处理，关键字：throws-throw-try-catch-finally分别代表什么意义？在try块中可以抛出异常吗？"><a href="#6-JAVA语言如何进行异常处理，关键字：throws-throw-try-catch-finally分别代表什么意义？在try块中可以抛出异常吗？" class="headerlink" title="6.JAVA语言如何进行异常处理，关键字：throws,throw,try,catch,finally分别代表什么意义？在try块中可以抛出异常吗？"></a>6.JAVA语言如何进行异常处理，关键字：throws,throw,try,catch,finally分别代表什么意义？在try块中可以抛出异常吗？</h2><blockquote>
+<p>Java通过面向对象的方法进行异常处理，把各种不同的异常进行分类，并提供了良好的接口。在Java中，每个异常都是一个对象，它是Throwable类或其它子类的实例。当一个方法出现异常后便抛出一个异常对象，该对象中包含有异常信息，调用这个对象的方法可以捕获到这个异常并进行处理。<br>try：指定一块预防所有“异常”的程序。<br>catch：紧跟在try程序后面，应包含一个catch子句来指定你想要捕捉的“异常”的类型。<br>throw：用来明确地抛出一个“异常”。<br>throws：标明一个成员函数可能抛出的各种“异常”。<br>finally：不管发生什么“异常”都会被执行的一段代码。<br>在try块中可以抛出异常</p>
+</blockquote>
+<h2 id="7-catch中接收异常时，可以实现自动强转吗？分析下面代码的执行结果"><a href="#7-catch中接收异常时，可以实现自动强转吗？分析下面代码的执行结果" class="headerlink" title="7.catch中接收异常时，可以实现自动强转吗？分析下面代码的执行结果"></a>7.catch中接收异常时，可以实现自动强转吗？分析下面代码的执行结果</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package javaDemo;</span><br><span class="line">class Annoyance extends Exception &#123;&#125;</span><br><span class="line">class Sneeze extends Annoyance &#123;&#125;</span><br><span class="line">public class Human &#123;</span><br><span class="line">    public static void main(String[] args)</span><br><span class="line">        throws Exception &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                throw new Sneeze();</span><br><span class="line">            &#125;</span><br><span class="line">            catch ( Annoyance a ) &#123;</span><br><span class="line">                System.out.println(&quot;Caught Annoyance&quot;);</span><br><span class="line">                throw a;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">         //s接收了Sneeze的父类 Annoyance a 引用的对象，但是不会报错，因为 a引用的实计对象是Sneeze的。这是自动实现了强转</span><br><span class="line">        catch ( Sneeze s ) &#123;</span><br><span class="line">            System.out.println(&quot;Caught Sneeze&quot;);</span><br><span class="line">            return ;</span><br><span class="line">        &#125;</span><br><span class="line">        finally &#123;</span><br><span class="line">            System.out.println(&quot;Hello World!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>能实现自动强转<br>运行结果为<br>Caught Annoyance<br>Caught Sneeze<br>Hello World!</p>
+<h2 id="8-final、finally、finalize的区别"><a href="#8-final、finally、finalize的区别" class="headerlink" title="8.final、finally、finalize的区别"></a>8.final、finally、finalize的区别</h2><blockquote>
+<p>final是Java中的关键字，修饰类，该类不能被继承，修饰变量，该变量必须初始化值，且不能修改，修饰方法，子类不能重写该方法。<br>finally是异常处理的一个关键字，表示finally{}中的代码一定要执行。</p>
+</blockquote>
+<h2 id="9-try-里面有一个return语句，那么后面的finally-里面的code会不会被执行，什么时候执行，是在return前还是return后？"><a href="#9-try-里面有一个return语句，那么后面的finally-里面的code会不会被执行，什么时候执行，是在return前还是return后？" class="headerlink" title="9.try()里面有一个return语句，那么后面的finally{}里面的code会不会被执行，什么时候执行，是在return前还是return后？"></a>9.try()里面有一个return语句，那么后面的finally{}里面的code会不会被执行，什么时候执行，是在return前还是return后？</h2><blockquote>
+<p>后面的语句会被执行，在执行try()中的return语句前执行。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args)&#123;</span><br><span class="line">    int i = getInt();</span><br><span class="line">    System.out,print(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static int getInt()&#123;</span><br><span class="line"></span><br><span class="line">    try&#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;catch(Exception e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;finally&#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果为1</p>
+  	
+
+	  </div>     
+	  
+
+	<div class="post-footer">    
+
+  
+
+
+
+
+<span class="donate-btn iconfont icon-donate "></span>
+
+
+<div id="donate-box" class="sildeUpMin">
+
+	<span class="donate-cancel iconfont icon-cancel"></span>
+
+	<div class="donate-img-box">
+		<img id="donate-qr-wechat" class="donate-img no-gallery" src="/img/donate1.png"  alt="Lost">	
+		<img id="donate-qr-alipay" class="donate-img no-gallery" src="/img/donate2.png"  alt="Lost">	
+	</div>
+
+	<span class="donate-word">世界美好 你也是</span>
+
+	<div class="donate-list">
+		<span class="iconfont icon-donate-wechat"></span>
+		<span class="iconfont icon-donate-alipay"></span>
+	</div>
+
+</div>
+
+ 
+  
+	
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+	
+	<span class="share-btn iconfont icon-share">
+	</span>
+
+
+	<div class="-mob-share sildeUpMin">
+		                  
+            <span class="iconfont  icon-share-qq -mob-share-qq" title="qq"></span>
+     	                  
+            <span class="iconfont  icon-share-weixin -mob-share-weixin" title="weixin"></span>
+     	                  
+            <span class="iconfont  icon-share-weibo -mob-share-weibo" title="weibo"></span>
+     	                  
+            <span class="iconfont  icon-share-facebook -mob-share-facebook" title="facebook"></span>
+     	                  
+            <span class="iconfont  icon-share-twitter -mob-share-twitter" title="twitter"></span>
+     	                  
+            <span class="iconfont  icon-share-google -mob-share-google" title="google"></span>
+     	   
+	</div>
+	
+
+
+
+   <nav class="post-nav">
+
+      
+       
+    
+      
+
+         
+
+          <a href="/2018/05/05/回调/">         
+
+           <span title="回调">下一篇 </span>  
+
+          </a>
+
+      
+
+  </nav>  
+</div> 
+	
+
+
+    <div id="comment">   
+    </div>
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+
+    <script src='//unpkg.com/valine@v1.1.8-beta/dist/Valine.min.js'></script>
+
+    <script>
+        new Valine({
+        el: '#comment',
+        notify:false, 
+        verify:false, 
+        app_id: 'gMnC8EJDk8V8fNmt2Nj2sEgP-gzGzoHsz',
+        app_key: 'G5ajxDPkoDOjtN6WfSRtpme8',  
+        path:window.location.pathname, 
+        avatar:'mm' ,
+        guest_info:['nick','mail']
+        });
+    </script>
+
+
+    <script>
+    //set the placeholder
+    $(function(){    
+
+        $('.vnick').attr('placeholder','昵称');
+        $('.veditor').attr('placeholder','说点什么吧');
+        $('.vmail').attr('placeholder','邮箱');   
+        $('.vsubmit').html('回复');   
+       
+    })  
+    </script>
+
+	
+
+</article>
+
+
+
+<div id="toc" >		
+
+	<div class="toc-container">	
+
+	<span class="toc-contents iconfont icon-open"" onclick="change()"> 
+	<span>目录</span>
+	</span>
+
+	<ul class="toc-list"></ul>
+
+	</div>
+
+</div>
+
+
+<script src="/js/toc.js"></script>
+<script src="/js/post.js"></script></section> 
+
+    </div>        
+
+    
+    <div class="mask"> </div>
+    <div class="back-to-top iconfont icon-backtotop fadeIn"></div> 
+
+    
+
+
+<script src="/js/search.js"></script>     
+          
+          <div class="search-container sildeUpMin">
+            <input type="text" placeholder="输入你想搜索的" id="search-input" class="search-input">  
+              <span class="search-cancel iconfont icon-cancel"></span>
+              <div id="search-result" class="search-result"></div>
+          </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+      <img class="mobile-menu-icon no-gallery" src= /img/favicon.png >   
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/categories">分类
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+</div>     
+    
+
+<footer id="footer">
+	   
+   	 
+
+	  	
+   	
+      	 
+	 <div>
+	 	&copy;
+		2018
+		YQG	 
+             <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+	 </div>
+
+
+   
+   	 <div>
+	
+	 <a href="http://hexo.io/" target="_blank">Hexo</a>
+
+	 Theme
+
+	 <a href="https://github.com/YYYQG/YYYQG.github.io" target="_blank">Brief</a> 
+
+	 </div>	
+
+
+	
+	
+</footer> 
+    
+
+
+ 
+  </body>   
+  <script src="/js/animation.js"></script>   
+</html>
