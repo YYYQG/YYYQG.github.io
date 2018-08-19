@@ -132,6 +132,252 @@
 	   
 	<div class="article-header">
 	    
+	     <a class="article-title"  href="/2018/03/06/方法引用/">方法引用与构造器引用</a>  
+	       
+		 
+
+		 <time>2018-03-06 </time>    
+	</div>
+
+
+    <div class="post-content article-excerpt">	
+	
+  	
+
+	  
+
+	  	<h2 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h2><p>当传递给Lambda体的操作，已经有实现的方法了，就可以使用方法引用！</p>
+<p>方法引用：使用操作符“::”将方法名和对象或类的名字分隔开来。<br>只要使用情况：</p>
+<ul>
+<li>对象的引用 :: 实例方法名</li>
+<li>类名 :: 静态方法名</li>
+<li>类名 :: 实例方法名</li>
+</ul>
+<p>注意：<br> ①方法引用所引用的方法的参数列表与返回值类型，需要与函数式接口中抽象方法的参数列表和返回值类型保持一致！<br> ②若Lambda 的参数列表的第一个参数，是实例方法的调用者，第二个参数(或无参)是实例方法的参数时，格式： ClassName::MethodName</p>
+<p>Employee.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line">public class Employee &#123;</span><br><span class="line"></span><br><span class="line">	private int id;</span><br><span class="line">	private String name;</span><br><span class="line">	private int age;</span><br><span class="line">	private double salary;</span><br><span class="line"></span><br><span class="line">	public Employee() &#123;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Employee(String name) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Employee(String name, int age) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">		this.age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Employee(int id, String name, int age, double salary) &#123;</span><br><span class="line">		this.id = id;</span><br><span class="line">		this.name = name;</span><br><span class="line">		this.age = age;</span><br><span class="line">		this.salary = salary;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public int getId() &#123;</span><br><span class="line">		return id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void setId(int id) &#123;</span><br><span class="line">		this.id = id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public String getName() &#123;</span><br><span class="line">		return name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void setName(String name) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public int getAge() &#123;</span><br><span class="line">		return age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void setAge(int age) &#123;</span><br><span class="line">		this.age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public double getSalary() &#123;</span><br><span class="line">		return salary;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void setSalary(double salary) &#123;</span><br><span class="line">		this.salary = salary;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public String show() &#123;</span><br><span class="line">		return &quot;this is a Employee&quot;;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public int hashCode() &#123;</span><br><span class="line">		final int prime = 31;</span><br><span class="line">		int result = 1;</span><br><span class="line">		result = prime * result + age;</span><br><span class="line">		result = prime * result + id;</span><br><span class="line">		result = prime * result + ((name == null) ? 0 : name.hashCode());</span><br><span class="line">		long temp;</span><br><span class="line">		temp = Double.doubleToLongBits(salary);</span><br><span class="line">		result = prime * result + (int) (temp ^ (temp &gt;&gt;&gt; 32));</span><br><span class="line">		return result;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public boolean equals(Object obj) &#123;</span><br><span class="line">		if (this == obj)</span><br><span class="line">			return true;</span><br><span class="line">		if (obj == null)</span><br><span class="line">			return false;</span><br><span class="line">		if (getClass() != obj.getClass())</span><br><span class="line">			return false;</span><br><span class="line">		Employee other = (Employee) obj;</span><br><span class="line">		if (age != other.age)</span><br><span class="line">			return false;</span><br><span class="line">		if (id != other.id)</span><br><span class="line">			return false;</span><br><span class="line">		if (name == null) &#123;</span><br><span class="line">			if (other.name != null)</span><br><span class="line">				return false;</span><br><span class="line">		&#125; else if (!name.equals(other.name))</span><br><span class="line">			return false;</span><br><span class="line">		if (Double.doubleToLongBits(salary) != Double.doubleToLongBits(other.salary))</span><br><span class="line">			return false;</span><br><span class="line">		return true;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public String toString() &#123;</span><br><span class="line">		return &quot;Employee [id=&quot; + id + &quot;, name=&quot; + name + &quot;, age=&quot; + age + &quot;, salary=&quot; + salary + &quot;]&quot;;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>###　对象的引用 :: 实例方法名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">      @Test</span><br><span class="line">public void test2()&#123;</span><br><span class="line">	Employee emp = new Employee(101, &quot;张三&quot;, 18, 9999.99);</span><br><span class="line">	//一般Lambda表达式</span><br><span class="line">	Supplier&lt;String&gt; sup = () -&gt; emp.getName();</span><br><span class="line">	System.out.println(sup.get());</span><br><span class="line">	</span><br><span class="line">	System.out.println(&quot;----------------------------------&quot;);</span><br><span class="line">	</span><br><span class="line">	//方法引用</span><br><span class="line">	Supplier&lt;String&gt; sup2 = emp::getName;</span><br><span class="line">	System.out.println(sup2.get());</span><br><span class="line">&#125;</span><br><span class="line">@Test</span><br><span class="line">public void test1()&#123;</span><br><span class="line">	PrintStream ps = System.out;</span><br><span class="line">	Consumer&lt;String&gt; con = (str) -&gt; ps.println(str);</span><br><span class="line">	con.accept(&quot;Hello World！&quot;);</span><br><span class="line">	</span><br><span class="line">	System.out.println(&quot;--------------------------------&quot;);</span><br><span class="line">	</span><br><span class="line">	Consumer&lt;String&gt; con2 = ps::println;</span><br><span class="line">	con2.accept(&quot;Hello Java8！&quot;);</span><br><span class="line">	Consumer&lt;String&gt; con3 = System.out::println;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="类名-静态方法名"><a href="#类名-静态方法名" class="headerlink" title="类名 :: 静态方法名"></a>类名 :: 静态方法名</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//类名 :: 静态方法名</span><br><span class="line">		@Test</span><br><span class="line">		public void test4()&#123;</span><br><span class="line">			Comparator&lt;Integer&gt; com = (x, y) -&gt; Integer.compare(x, y);</span><br><span class="line">			</span><br><span class="line">			System.out.println(&quot;-------------------------------------&quot;);</span><br><span class="line">			</span><br><span class="line">			Comparator&lt;Integer&gt; com2 = Integer::compare;</span><br><span class="line">		&#125;</span><br><span class="line">		@Test</span><br><span class="line">		public void test3()&#123;</span><br><span class="line">			BiFunction&lt;Double, Double, Double&gt; fun = (x, y) -&gt; Math.max(x, y);</span><br><span class="line">			System.out.println(fun.apply(1.5, 22.2));</span><br><span class="line">			</span><br><span class="line">			System.out.println(&quot;--------------------------------------------------&quot;);</span><br><span class="line">			</span><br><span class="line">			BiFunction&lt;Double, Double, Double&gt; fun2 = Math::max;</span><br><span class="line">			System.out.println(fun2.apply(1.2, 1.5));</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="类名-实例方法名"><a href="#类名-实例方法名" class="headerlink" title="类名 :: 实例方法名"></a>类名 :: 实例方法名</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//类名 :: 实例方法名</span><br><span class="line">//若Lambda 的参数列表的第一个参数，是实例方法的调用者，第二个参数(或无参)是实例方法的参数时，格式： ClassName::MethodName</span><br><span class="line">		@Test</span><br><span class="line">		public void test5()&#123;</span><br><span class="line">			BiPredicate&lt;String, String&gt; bp = (x, y) -&gt; x.equals(y);</span><br><span class="line">			System.out.println(bp.test(&quot;abcde&quot;, &quot;abcde&quot;));</span><br><span class="line">			</span><br><span class="line">			System.out.println(&quot;-----------------------------------------&quot;);</span><br><span class="line">			</span><br><span class="line">			BiPredicate&lt;String, String&gt; bp2 = String::equals;</span><br><span class="line">			System.out.println(bp2.test(&quot;abc&quot;, &quot;abc&quot;));</span><br><span class="line">			</span><br><span class="line">			System.out.println(&quot;-----------------------------------------&quot;);</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			Function&lt;Employee, String&gt; fun = (e) -&gt; e.show();</span><br><span class="line">			System.out.println(fun.apply(new Employee()));</span><br><span class="line">			</span><br><span class="line">			System.out.println(&quot;-----------------------------------------&quot;);</span><br><span class="line">			</span><br><span class="line">			Function&lt;Employee, String&gt; fun2 = Employee::show;</span><br><span class="line">			System.out.println(fun2.apply(new Employee()));</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="构造器引用"><a href="#构造器引用" class="headerlink" title="构造器引用"></a>构造器引用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//构造器引用</span><br><span class="line">		@Test</span><br><span class="line">		public void test7()&#123;</span><br><span class="line">		//构造器引用，函数式接口的参数列表与构造器的参数列表一直，意思是函数式接口有几个参数，就调用有几个参数的构造器。</span><br><span class="line">			Function&lt;String, Employee&gt; fun = Employee::new;</span><br><span class="line">			BiFunction&lt;String, Integer, Employee&gt; fun2 = Employee::new;</span><br><span class="line">		&#125;</span><br><span class="line">		@Test</span><br><span class="line">		public void test6()&#123;</span><br><span class="line">			Supplier&lt;Employee&gt; sup = () -&gt; new Employee();</span><br><span class="line">			System.out.println(sup.get());</span><br><span class="line">			</span><br><span class="line">			System.out.println(&quot;------------------------------------&quot;);</span><br><span class="line">			</span><br><span class="line">			Supplier&lt;Employee&gt; sup2 = Employee::new;</span><br><span class="line">			System.out.println(sup2.get());</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="数组引用"><a href="#数组引用" class="headerlink" title="数组引用"></a>数组引用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//数组引用</span><br><span class="line">		@Test</span><br><span class="line">		public void test8()&#123;</span><br><span class="line">			Function&lt;Integer, String[]&gt; fun = (args) -&gt; new String[args];</span><br><span class="line">			//Function&lt;Integer, String[]&gt; fun = String[]::new;</span><br><span class="line">			String[] strs = fun.apply(10);</span><br><span class="line">			System.out.println(strs.length);</span><br><span class="line">			</span><br><span class="line">			System.out.println(&quot;--------------------------&quot;);</span><br><span class="line">			</span><br><span class="line">			Function&lt;Integer, Employee[]&gt; fun2 = Employee[] :: new;</span><br><span class="line">			Employee[] emps = fun2.apply(20);</span><br><span class="line">			System.out.println(emps.length);</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure> 
+
+	    
+</div>
+
+<div class="center">
+			
+
+				<span class="post-meta">		
+				<span class="iconfont icon-category"></span>
+				<a class="category-link" href="/categories/java/">java</a>
+				</span>
+		
+			
+
+		
+				
+				<span class="post-meta">
+				<span class="iconfont icon-tag"></span>
+				<a class="tag-link" href="/tags/java8/">java8</a>
+				</span>			
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		5519
+		</span>		
+</div>		
+
+		
+    <a class="article-readmore" href="/2018/03/06/方法引用/">阅读更多</a> 
+    	
+</article>     
+     	
+      	  	
+
+  		
+    	<article class="article">		
+	   
+	<div class="article-header">
+	    
+	     <a class="article-title"  href="/2018/03/06/装饰者模式/">装饰者模式</a>  
+	       
+		 
+
+		 <time>2018-03-06 </time>    
+	</div>
+
+
+    <div class="post-content article-excerpt">	
+	
+  	
+
+	  
+
+	  	<h1 id="装饰者模式"><a href="#装饰者模式" class="headerlink" title="装饰者模式"></a>装饰者模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>给爱用继承的人一个全新的设计眼界。</p>
+<blockquote>
+<p>所谓装饰者就是动态的将责任附加到对象上，若要扩展功能，装饰者提供了比继承更有弹性的替代方法。</p>
+</blockquote>
+<p>虽然这说明了装饰者模式的“角色”，但是没说明怎么在我们的实现中实际“应用”它。我们来看看类图。</p>
+<p><img src="/img/装饰者模式.png" alt=""></p>
+<p>现在我们通过一个实例来讲解现实中如何使用装饰者模式。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>现在有一个咖啡店，店内有各种各样的咖啡，购买咖啡时，也可以要求在其中加入各种调料，例如蒸奶（SteamedMilk）、豆浆（Soy）、摩卡（Mocha）或者覆盖奶泡。同时需要收不同的费用。<br>首先我们看看第一种方式，设计一个超类Beverage类，所有调料作为它的成员变量，所有种类咖啡必须继承它。</p>
+<p><img src="/img/装饰者模式1.png" alt=""></p>
+<p>显然这种方法不是那么的好，为什么呢？因为如果调料的价钱改变，我们得更改现有代码。一旦出现新的调料，我们就需要加上新的方法，并改变超类中的cost()方法。万一顾客需要双倍摩卡怎么办。</p>
+<p>现在我们的目标是允许类容易扩展，在不修改现有代码的情况下，就可搭配新的行为。如能实现这样的目标，有什么好处？这样的设计具有弹性可以应对改变，可以接受新的功能来应对改变的需求。</p>
+<p>现在我们采用不一样的方法，我们以饮料为主体，然后运行时用调料来“装饰”(decorate)饮料。<br>比如说：</p>
+<ul>
+<li>拿一深焙咖啡(DarkRoast)对象</li>
+<li>以摩卡(Mocha)对象装饰它</li>
+<li>以奶泡(Whip)装饰它</li>
+<li>调用cost()方法，并依赖委托(delegate)将调料的价钱加上去</li>
+</ul>
+<p>有如何装饰一个对象，委托有如何实现呐？</p>
+<ul>
+<li>装饰者和被装饰者对象有相同的超类型。</li>
+<li>你可以用一个或多个装饰者包装一个对象。</li>
+<li>既然装饰者和被装饰者有相同的超类型，所以在任何需要原始对象（被包装的）的场合，可以用装饰过的对象代替它。</li>
+<li>装饰者可以在所委托被装饰者的行为之前或之后，加上自己的行为，以达到特定的目的。</li>
+<li>对象可以在任何时候被装饰，所以可以运行时动态地，不限量地用你喜欢的装饰者来装饰对象。<h2 id="装饰我们的饮料"><a href="#装饰我们的饮料" class="headerlink" title="装饰我们的饮料"></a>装饰我们的饮料</h2></li>
+</ul>
+<p><img src="/img/装饰者模式2.png" alt=""></p>
+<p>下面我看看如何用代码实现<br>Beverage.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public abstract class Beverage &#123;</span><br><span class="line"></span><br><span class="line">	private String description = &quot;unknown&quot;;</span><br><span class="line">	</span><br><span class="line">	public String getDescription() &#123;</span><br><span class="line">		return description;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setDescription(String des) &#123;</span><br><span class="line">		this.description = des;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public abstract double cost();</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>CondimentDecorator.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> //调料的父类</span><br><span class="line">public abstract class CondimentDecorator extends Beverage&#123;</span><br><span class="line"></span><br><span class="line">	//所有调料必须重写getDescription()方法，返回调料和饮料的相关描述</span><br><span class="line">	public abstract String getDescription();</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Espresso.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//浓咖啡</span><br><span class="line">public class Espresso extends Beverage&#123;</span><br><span class="line"></span><br><span class="line">	public Espresso() &#123;</span><br><span class="line">		//设置描述</span><br><span class="line">		setDescription(&quot;Espresso&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Override</span><br><span class="line">	public double cost() &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		return 2;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Mocha.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//摩卡</span><br><span class="line">public class Mocha extends CondimentDecorator&#123;</span><br><span class="line"></span><br><span class="line">	//记录被装饰者</span><br><span class="line">	private Beverage beverage ;</span><br><span class="line">	</span><br><span class="line">	//创建实例是必须传入被装饰者</span><br><span class="line">	public Mocha(Beverage beverage) &#123;</span><br><span class="line">		this.beverage = beverage;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Override</span><br><span class="line">	public String getDescription() &#123;</span><br><span class="line">		// 返回调料以及饮料的描述</span><br><span class="line">		return beverage.getDescription()+&quot;,Mocha&quot;;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public double cost() &#123;</span><br><span class="line">		// 返回调料(被装饰者)以及饮料的价格</span><br><span class="line">		return 0.2 + beverage.cost();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Test.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class Test &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		Beverage beverage = new Espresso();</span><br><span class="line">		Mocha  m = new Mocha(beverage);</span><br><span class="line">		System.out.println(m.getDescription());</span><br><span class="line">		System.out.println(m.cost());</span><br><span class="line">		//输出</span><br><span class="line">		//Espresso,Mocha</span><br><span class="line">        //2.2</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Java中的装饰者模式"><a href="#Java中的装饰者模式" class="headerlink" title="Java中的装饰者模式"></a>Java中的装饰者模式</h2><p>Java I/O便是用了装饰者模式</p>
+<p><img src="/img/装饰者模式3.png" alt=""></p>
+<p>我们可以发现java.io和咖啡店的设计没多大的差别，我们缩小java.io API的范围，可以更容易地查看它的文件。但是java.io的设计方式也暴露了装饰者模式的一个缺点，会形成很多小类，可能造成用此API的程序员感到困扰。</p>
+ 
+
+	    
+</div>
+
+<div class="center">
+			
+
+				<span class="post-meta">		
+				<span class="iconfont icon-category"></span>
+				<a class="category-link" href="/categories/设计模式/">设计模式</a>
+				</span>
+		
+			
+
+		
+				
+				<span class="post-meta">
+				<span class="iconfont icon-tag"></span>
+				<a class="tag-link" href="/tags/装饰者模式/">装饰者模式</a>
+				</span>			
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		2432
+		</span>		
+</div>		
+
+		
+    <a class="article-readmore" href="/2018/03/06/装饰者模式/">阅读更多</a> 
+    	
+</article>     
+     	
+      	  	
+
+  		
+    	<article class="article">		
+	   
+	<div class="article-header">
+	    
+	     <a class="article-title"  href="/2018/03/04/策略模式/">策略模式</a>  
+	       
+		 
+
+		 <time>2018-03-04 </time>    
+	</div>
+
+
+    <div class="post-content article-excerpt">	
+	
+  	
+
+	  
+
+	  	<h1 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h1><p>定义了算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用算法的客户。</p>
+<h2 id="先从简单的模拟鸭子应用做起"><a href="#先从简单的模拟鸭子应用做起" class="headerlink" title="先从简单的模拟鸭子应用做起"></a>先从简单的模拟鸭子应用做起</h2><p>假如公司做了一个相当成功的模拟鸭子的游戏：SimUDuck。游戏中鸭子会出现各种鸭子，一边游泳，一边呱呱叫，此系统设计了一个鸭子超类，并让各种鸭子继承此超类。</p>
+<p><img src="/img/策略模式.png" alt="&quot;观察者模式&quot;">  </p>
+<h2 id="现在我们得让鸭子能飞"><a href="#现在我们得让鸭子能飞" class="headerlink" title="现在我们得让鸭子能飞"></a>现在我们得让鸭子能飞</h2><p>现在只需要在Duck类中加上fly()方法，然后所有鸭子都会继承fly()方法。</p>
+<p><img src="/img/策略模式1.png" alt="&quot;观察者模式&quot;">  </p>
+<p>那么问题来了，如果有一只橡皮鸭，它不会飞怎么办，如果在超类添加fly()方法，使得不该具备fly()方法的子类也无法免除。只有通过子类覆盖超类的fly()方法，如果又有一只木头鸭，不会飞不会叫怎么办，那太麻烦了。</p>
+<h2 id="利用接口如何？"><a href="#利用接口如何？" class="headerlink" title="利用接口如何？"></a>利用接口如何？</h2><p>我们可以把fiy()从超类中取出，放进一个Flyable接口中。这样一来会飞的鸭子才实现此接口。</p>
+<p><img src="/img/策略模式2.png" alt="&quot;观察者模式&quot;">  </p>
+<p>这是一个超笨的办法，这样一来你会发现重复的代码会变多。虽然可以解决一部分问题(不会再会有会飞的橡皮鸭)，但是却造成了代码无法复用，这只能算是从一个噩梦，跳进了另一个噩梦。</p>
+<h2 id="把问题归零"><a href="#把问题归零" class="headerlink" title="把问题归零"></a>把问题归零</h2><p>现在我们知道使用继承并不能很好地解决问题，因为鸭户的行为在子类里不断地改变，并且让所有的子类都杆这些行为是不恰当的。Flyable一开始似乎还挺不错，解决了问题（只有会飞的鸭子才继承Flyab丨e),但是Java接口不具有实现代码，所以继承接口无法达到代码的复用。这意味着：无论何时你需要修改某个行为，你必须得往下追踪并在每一个定义此行为的类中修改它，一不小心，可能会造成新的错误！幸运的是，有一个设计原恰好适用干此状况。</p>
+<h3 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h3><p>找出应用中可能需要改变之处，把它们独立出来，不需要和那些不需要变化的代码混在一起。另一种思考方式：“把会变化的部分取出来并封装起来，以便以后可以轻易地改变或扩充此部分，而不影响不需要变化的其他部分”。</p>
+<h2 id="分开变化和不变化的部分"><a href="#分开变化和不变化的部分" class="headerlink" title="分开变化和不变化的部分"></a>分开变化和不变化的部分</h2><p>我们知道Duck类内的fly()会随着鸭子的不同而变化。</p>
+<p>为了要把这两个行为从Duck类中分开，我们将把他们从Duck类中取出来，建立一组新类来代表每个行为。</p>
+<h2 id="设计鸭子的行为"><a href="#设计鸭子的行为" class="headerlink" title="设计鸭子的行为"></a>设计鸭子的行为</h2><p>如何设计分出来的行为类呢？</p>
+<h3 id="设计原则-1"><a href="#设计原则-1" class="headerlink" title="设计原则"></a>设计原则</h3><p>针对接口编程，而不是针对实现编程。</p>
+<p>我们利用接口代表毎个行为，比方说，FlyBehavior,而行为的每个实现都将实现其中的一个接门，</p>
+<p>所以这次鸭子类不会负责实现Flying接口，反而是由我们制造一组其他类专门实现FlyBehavior,这就称为“行为”类。由行为类而不是Duck类来实现行为接口。</p>
+<p>这样的做法迥异于以往，以前的做法是：行为来自Duck超类的具体实现，或是继承某个接口并由子类自行实现而来。这两种做法都是依赖于“实现”，我们被实现绑得死死的，没办法更改行为（除写写更多代码）。</p>
+<p>在我们的新设计中，鸭子的子类将使用接口（FlyBehavior)所表示的行为，所以实际的“实现”不会被绑死在鸭了的子类中。（换句话说，特定的具体行为编写在实现了FlyBehavior的类中）。</p>
+<h2 id="实现鸭子行为"><a href="#实现鸭子行为" class="headerlink" title="实现鸭子行为"></a>实现鸭子行为</h2><p><img src="/img/策略模式3.png" alt="&quot;观察者模式&quot;">  </p>
+<h2 id="整合鸭子的行为"><a href="#整合鸭子的行为" class="headerlink" title="整合鸭子的行为"></a>整合鸭子的行为</h2><p><img src="/img/策略模式4.png" alt="&quot;观察者模式&quot;">  </p>
+<h3 id="具体代码"><a href="#具体代码" class="headerlink" title="具体代码"></a>具体代码</h3><p>flyBehavior.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//所有会飞的类必须实现接口</span><br><span class="line">public interface flyBehavior &#123;</span><br><span class="line">    </span><br><span class="line">	void fly();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>FlyNoWay.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//飞行行为的实现给不会飞的鸭子</span><br><span class="line">public class FlyNoWay implements flyBehavior &#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void fly() &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		System.out.println(&quot;I Can Not Fly!&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>FlyWithWings.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//飞行行为的实现给会飞的鸭子</span><br><span class="line">public class FlyWithWings implements flyBehavior&#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void fly() &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		System.out.println(&quot;Fly With Wings&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Duck.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public abstract class Duck &#123;</span><br><span class="line"></span><br><span class="line">    //飞行行为接口类型声明一个引用变量，所有鸭子子类必须继承它</span><br><span class="line">	protected flyBehavior fly;</span><br><span class="line">	</span><br><span class="line">	public Duck() &#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public abstract void display();</span><br><span class="line">	</span><br><span class="line">	public void performfly() &#123;</span><br><span class="line">	    //委托给行为类</span><br><span class="line">		fly.fly();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void swim() &#123;</span><br><span class="line">		System.out.println(&quot;All Duck Can Swim!&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void changefly(flyBehavior fly) &#123;</span><br><span class="line">	    //用于动态更改行为</span><br><span class="line">		this.fly=fly;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>GoodDuck.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class GoodDuck extends Duck&#123;</span><br><span class="line"></span><br><span class="line">	public GoodDuck() &#123;</span><br><span class="line">		fly=new FlyWithWings();</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public void display() &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		System.out.println(&quot;I&apos;m Good!&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Main.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		Duck D=new GoodDuck();</span><br><span class="line">		D.performfly();</span><br><span class="line">		//更改行为</span><br><span class="line">		D.changefly(new FlyNoWay());</span><br><span class="line">		D.performfly();</span><br><span class="line">		//Fly With Wings</span><br><span class="line">        //I Can Not Fly!</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+ 
+
+	    
+</div>
+
+<div class="center">
+			
+
+				<span class="post-meta">		
+				<span class="iconfont icon-category"></span>
+				<a class="category-link" href="/categories/设计模式/">设计模式</a>
+				</span>
+		
+			
+
+		
+				
+				<span class="post-meta">
+				<span class="iconfont icon-tag"></span>
+				<a class="tag-link" href="/tags/策略模式/">策略模式</a>
+				</span>			
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		2686
+		</span>		
+</div>		
+
+		
+    <a class="article-readmore" href="/2018/03/04/策略模式/">阅读更多</a> 
+    	
+</article>     
+     	
+      	  	
+
+  		
+    	<article class="article">		
+	   
+	<div class="article-header">
+	    
 	     <a class="article-title"  href="/2018/03/02/认识观察者模式/">观察者模式</a>  
 	       
 		 
