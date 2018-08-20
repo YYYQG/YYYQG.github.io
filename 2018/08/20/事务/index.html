@@ -7,7 +7,7 @@
 
   
   
-  <title>  Lambda表达式 |   Brief</title>
+  <title>  事务 |   Brief</title>
 
  
   
@@ -95,25 +95,38 @@
 	<div class="post-header slideDownMin center">
 
 	<span class="post-title">	
-		Lambda表达式
+		事务
 	</span>
 
 	
 	<div class="post-info">
 
 		<time class="post-time"><span class="iconfont icon-date"></span>
-		2018/03/06 	
+		2018/08/20 	
 		</time>
 		
-						
+					
 
+				<span class="post-meta">		
+				<span class="iconfont icon-category"></span>
+				<a class="category-link" href="/categories/数据库/">数据库</a>
+				</span>
+		
+			
+
+		
+				
+				<span class="post-meta">
+				<span class="iconfont icon-tag"></span>
+				<a class="tag-link" href="/tags/事务/">事务</a>
+				</span>			
 			
 
 
 		
 
 		<span class="post-words"><span class="iconfont icon-words"></span>
-		0
+		1143
 		</span>		
 	
 	</div> 
@@ -128,7 +141,21 @@
 
 
 
-	  	  	
+	  	<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
+<p>什么是事务？比如你网上购物的时候，你点击购买物品并付钱，你的账户金额将会减少，同时物品数量也需要减少，这就是事务。事务要么全部成功，要么全部失败。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="事务的4大特性"><a href="#事务的4大特性" class="headerlink" title="事务的4大特性"></a>事务的4大特性</h2><h3 id="原子性-atomicity"><a href="#原子性-atomicity" class="headerlink" title="原子性(atomicity)"></a>原子性(atomicity)</h3><p>一个事务是一个不可分割的工作单位，事务中包括的诸操作要么都做，要么都不做。</p>
+<h3 id="一致性-consistency"><a href="#一致性-consistency" class="headerlink" title="一致性(consistency)"></a>一致性(consistency)</h3><p>事务必须是使数据库从一个一致性状态变到另一个一致性状态。一致性与原子性是密切相关的。<br>拿转账来说，假设用户A和用户B两者的钱加起来一共是5000，那么不管A和B之间如何转账，转几次账，事务结束后两个用户的钱相加起来应该还得是5000，这就是事务的一致性。</p>
+<h3 id="隔离性-isolation"><a href="#隔离性-isolation" class="headerlink" title="隔离性(isolation)"></a>隔离性(isolation)</h3><p>一个事务的执行不能被其他事务干扰。即一个事务内部的操作及使用的数据对并发的其他事务是隔离的，并发执行的各个事务之间不能互相干扰。</p>
+<h3 id="持久性-durability"><a href="#持久性-durability" class="headerlink" title="持久性(durability)"></a>持久性(durability)</h3><p>持久性也称永久性(permanence)，指一个事务一旦提交，它对数据库中数据的改变就应该是永久性的。接下来的其他操作或故障不应该对其有任何影响。</p>
+<h2 id="忽略事务的隔离性遇见的问题："><a href="#忽略事务的隔离性遇见的问题：" class="headerlink" title="忽略事务的隔离性遇见的问题："></a>忽略事务的隔离性遇见的问题：</h2><h3 id="1-脏读："><a href="#1-脏读：" class="headerlink" title="1.脏读："></a>1.脏读：</h3><p>脏读是指在一个事务处理过程里读取了另一个未提交的事务中的数据。</p>
+<h3 id="2-不可重复读"><a href="#2-不可重复读" class="headerlink" title="2.不可重复读"></a>2.不可重复读</h3><p>不可重复读是指在对于数据库中的某个数据，一个事务范围内多次查询却返回了不同的数据值，这是由于在查询间隔，被另一个事务修改并提交了。一般不可重复读不会出现太大问题，就依最后一次读取的为准，但是如何A,B同时查询一个数据出现这种情况，就出问题了。</p>
+<h3 id="3-虚读（幻读）"><a href="#3-虚读（幻读）" class="headerlink" title="3.虚读（幻读）"></a>3.虚读（幻读）</h3><p>幻读是事务非独立执行时发生的一种现象。假设事务A在修改表中的所有行的某个字段的值改为0，这时事务B插入一行数据，字段值为1，事务A的结果集中会发现有一条数据没有更改，产生了幻觉一样。</p>
+<h2 id="MySql事务隔离级别："><a href="#MySql事务隔离级别：" class="headerlink" title="MySql事务隔离级别："></a>MySql事务隔离级别：</h2><p>1.Serializable(串行化)：可避免脏读，不重复读，幻读的发生<br>2.Repeatable read(不可重复读)，可避免脏读，不重复读的发生<br>3.Read committed(读已提交) 可避免脏读的发生<br>4.Read uncommitted(读未提交) 最低级别，任何情况无法保证</p>
+<h2 id="查看Mysql数据库事务隔离级别："><a href="#查看Mysql数据库事务隔离级别：" class="headerlink" title="查看Mysql数据库事务隔离级别："></a>查看Mysql数据库事务隔离级别：</h2><p>select @@tx_isolation;</p>
+<p>MySQL数据库中设置事务的隔离级别：<br>set  [glogal | session]  transaction isolation level 隔离级别名称;<br>set tx_isolation=’隔离级别名称’;<br>如果是使用JDBC对数据库的事务设置隔离级别的话，也应该是在调用Connection对象的setAutoCommit(false)方法之前。调用Connection对象的setTransactionIsolation(level)即可设置当前链接的隔离级别</p>
+  	
 
 	  </div>     
 	  
@@ -169,25 +196,14 @@
 
       
        
-
-         
-
-      
-          <a href="/2018/04/11/单件模式/">          
-
-            <span class="hover-item" title="单件模式">  上一篇 </span>  
-
-          </a>
-    
-      
     
       
 
          
 
-          <a href="/2018/03/06/方法引用/">         
+          <a href="/2018/08/16/Bean生命周期/">         
 
-           <span title="方法引用与构造器引用">下一篇 </span>  
+           <span title="Bean生命周期">下一篇 </span>  
 
           </a>
 
