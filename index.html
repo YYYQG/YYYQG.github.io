@@ -191,7 +191,7 @@
 	   
 	<div class="article-header">
 	    
-	     <a class="article-title"  href="/2018/08/16/Bean生命周期/">Bean��������</a>  
+	     <a class="article-title"  href="/2018/08/16/Bean生命周期/">Bean生命周期</a>  
 	       
 		 
 
@@ -205,7 +205,7 @@
 
 	  
 
-	  	<h2 id="����"><a href="#����" class="headerlink" title="����"></a>����</h2><p>Spring�ṩ��BeanFactory��ΪSpring������ƽʱ���ǳ�ʹ�����ӽӿ�ApplicationContext��<br>ͼ�����ǱȽϳ��õ�ClassPathXmlApplicationContext��XmlWebApplicationContext����ApplicationContext�����ࡣ<br>��ȻBeanFactory��ApplicationContext������ע�᷽ʽ����һ����ʹ��BeanFactoryҪ��ʾ�ĵ�����addBeanPostProcessor()��������ע�ᣩ�Լ�����bean��ʱ����һ����BeanFactoryĬ�ϲ����ӳټ��أ��ȣ�������bean���������ڹܿػ���һ�¡�<br>Bean�������������ڿ��Դ������ĳ�ʼ��Bean��ʼ��ֱ��Spring�����رա�<br>
+	  	<h2 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h2><p>Spring提供了BeanFactory作为Spring容器，平时我们常使用其子接口ApplicationContext。<br>图中我们比较常用的ClassPathXmlApplicationContext和XmlWebApplicationContext都是ApplicationContext的子类。<br>虽然BeanFactory和ApplicationContext容器的注册方式不大一样（使用BeanFactory要显示的调用其addBeanPostProcessor()方法进行注册）以及加载bean的时机不一样（BeanFactory默认采用延迟加载）等，但对于bean的生命周期管控基本一致。<br>Bean的整个生命周期可以从容器的初始化Bean开始，直到Spring容器关闭。<br>
 
 	     
 </div>
@@ -232,7 +232,7 @@
 		
 
 		<span class="post-words"><span class="iconfont icon-words"></span>
-		2747
+		2313
 		</span>		
 </div>		
 
