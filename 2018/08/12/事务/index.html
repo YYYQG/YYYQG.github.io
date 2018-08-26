@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport"content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+  <meta name="baidu-site-verification" content="5rJxG2T4b5"/>
+
+  
+  
+  <title>  事务 |   Brief</title>
+
+ 
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">  
+  <!-- Jquery -->
+  <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script> 
+  <!-- Add fancyBox -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script> 
+  <script src="/js/gallery.js"></script>
+  <!-- javascript --> 
+  <script src="/js/mobile.js"></script>  
+  <script src="/js/utils.js"></script>    
+  <script src="/js/script.js"></script>  
+  <script src="/js/baidu_post.js"></script>  
+</head> 
+  <body> 
+    <header class="header">
+	
+  <nav class="header-nav">       
+	
+  	<span class="iconfont icon-menu mobile-toggle"></span>  
+
+    <a class="header-logo" href="/"><span>Brief</a>  
+
+    <div class="header-menu">          
+              
+            
+
+              <a class="header-menu-link" id="header-menu-home" href="/">首页</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">归档</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-categories" href="/categories">分类</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于</a>     
+
+            
+            
+            
+
+              <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+
+            
+                
+    </div>  
+    
+  </nav>
+</header>
+
+    <div class="container">         
+      
+        
+
+          <section id="main">  
+
+        
+
+        <article class="post">
+
+	  
+	<div class="post-header slideDownMin center">
+
+	<span class="post-title">	
+		事务
+	</span>
+
+	
+	<div class="post-info">
+
+		<time class="post-time"><span class="iconfont icon-date"></span>
+		2018/08/12 	
+		</time>
+		
+					
+
+				<span class="post-meta">		
+				<span class="iconfont icon-category"></span>
+				<a class="category-link" href="/categories/数据库/">数据库</a>
+				</span>
+		
+			
+
+		
+				
+				<span class="post-meta">
+				<span class="iconfont icon-tag"></span>
+				<a class="tag-link" href="/tags/事务/">事务</a>
+				</span>			
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		1926
+		</span>		
+	
+	</div> 
+
+</div> 
+
+
+	  <div class="post-content slideDownMin">
+
+		
+
+
+
+
+	  	<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
+<p>什么是事务？比如你网上购物的时候，你点击购买物品并付钱，你的账户金额将会减少，同时物品数量也需要减少，这就是事务。事务要么全部成功，要么全部失败。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="事务的4大特性"><a href="#事务的4大特性" class="headerlink" title="事务的4大特性"></a>事务的4大特性</h2><h3 id="原子性-atomicity"><a href="#原子性-atomicity" class="headerlink" title="原子性(atomicity)"></a>原子性(atomicity)</h3><p>一个事务是一个不可分割的工作单位，事务中包括的诸操作要么都做，要么都不做。</p>
+<h3 id="一致性-consistency"><a href="#一致性-consistency" class="headerlink" title="一致性(consistency)"></a>一致性(consistency)</h3><p>事务必须是使数据库从一个一致性状态变到另一个一致性状态。一致性与原子性是密切相关的。<br>拿转账来说，假设用户A和用户B两者的钱加起来一共是5000，那么不管A和B之间如何转账，转几次账，事务结束后两个用户的钱相加起来应该还得是5000，这就是事务的一致性。</p>
+<h3 id="隔离性-isolation"><a href="#隔离性-isolation" class="headerlink" title="隔离性(isolation)"></a>隔离性(isolation)</h3><p>一个事务的执行不能被其他事务干扰。即一个事务内部的操作及使用的数据对并发的其他事务是隔离的，并发执行的各个事务之间不能互相干扰。</p>
+<h3 id="持久性-durability"><a href="#持久性-durability" class="headerlink" title="持久性(durability)"></a>持久性(durability)</h3><p>持久性也称永久性(permanence)，指一个事务一旦提交，它对数据库中数据的改变就应该是永久性的。接下来的其他操作或故障不应该对其有任何影响。</p>
+<h2 id="忽略事务的隔离性遇见的问题："><a href="#忽略事务的隔离性遇见的问题：" class="headerlink" title="忽略事务的隔离性遇见的问题："></a>忽略事务的隔离性遇见的问题：</h2><h3 id="1-脏读："><a href="#1-脏读：" class="headerlink" title="1.脏读："></a>1.脏读：</h3><p>脏读是指在一个事务处理过程里读取了另一个未提交的事务中的数据。</p>
+<h3 id="2-不可重复读"><a href="#2-不可重复读" class="headerlink" title="2.不可重复读"></a>2.不可重复读</h3><p>不可重复读是指在对于数据库中的某个数据，一个事务范围内多次查询却返回了不同的数据值，这是由于在查询间隔，被另一个事务修改并提交了。一般不可重复读不会出现太大问题，就依最后一次读取的为准，但是如何A,B同时查询一个数据出现这种情况，就出问题了。</p>
+<h3 id="3-虚读（幻读）"><a href="#3-虚读（幻读）" class="headerlink" title="3.虚读（幻读）"></a>3.虚读（幻读）</h3><p>幻读是事务非独立执行时发生的一种现象。假设事务A在修改表中的所有行的某个字段的值改为0，这时事务B插入一行数据，字段值为1，事务A的结果集中会发现有一条数据没有更改，产生了幻觉一样。</p>
+<h2 id="MySql事务隔离级别："><a href="#MySql事务隔离级别：" class="headerlink" title="MySql事务隔离级别："></a>MySql事务隔离级别：</h2><p>1.Serializable(串行化)：可避免脏读，不重复读，幻读的发生<br>2.Repeatable read(不可重复读)，可避免脏读，不重复读的发生<br>3.Read committed(读已提交) 可避免脏读的发生<br>4.Read uncommitted(读未提交) 最低级别，任何情况无法保证</p>
+<h2 id="查看Mysql数据库事务隔离级别："><a href="#查看Mysql数据库事务隔离级别：" class="headerlink" title="查看Mysql数据库事务隔离级别："></a>查看Mysql数据库事务隔离级别：</h2><p>select @@tx_isolation;</p>
+<p>MySQL数据库中设置事务的隔离级别：<br>set  [glogal | session]  transaction isolation level 隔离级别名称;<br>set tx_isolation=’隔离级别名称’;<br>如果是使用JDBC对数据库的事务设置隔离级别的话，也应该是在调用Connection对象的setAutoCommit(false)方法之前。调用Connection对象的setTransactionIsolation(level)即可设置当前链接的隔离级别</p>
+<h2 id="事务的传播性"><a href="#事务的传播性" class="headerlink" title="事务的传播性"></a>事务的传播性</h2><h3 id="什么是事务传播性"><a href="#什么是事务传播性" class="headerlink" title="什么是事务传播性"></a>什么是事务传播性</h3><blockquote>
+<p>在Spring中当service层中的事务相互调用时，事务的表现特性，比如事务X，调用了事务Y，那么这两个事务是应该一起提交事务，还是各自独立提交事务，这是事务传播要确定的问题。</p>
+</blockquote>
+<h3 id="事务传播种类"><a href="#事务传播种类" class="headerlink" title="事务传播种类"></a>事务传播种类</h3><ul>
+<li>PROPAGATION_REQUIRED</li>
+<li>PROPAGATION_REQUIRES_NEW</li>
+<li>PROPAGATION_SUPPORTS</li>
+<li>PROPAGATION_NOT_SUPPORTED</li>
+<li>PROPAGATION_NEVER</li>
+<li>PROPAGATION_MANDATORY</li>
+<li>PROPAGATION_NESTED</li>
+</ul>
+<h3 id="PROPAGATION-REQUIRED"><a href="#PROPAGATION-REQUIRED" class="headerlink" title="PROPAGATION_REQUIRED"></a>PROPAGATION_REQUIRED</h3><p>Spring默认的事务传播机制，如果外层有事务则当前事务加入到外层事务，一块提交一块回滚，如果外层没有事务则当前开启一个新事务。这个机制可以满足大多数业务场景。</p>
+<h3 id="PROPAGATION-REQUIRES-NEW"><a href="#PROPAGATION-REQUIRES-NEW" class="headerlink" title="PROPAGATION_REQUIRES_NEW"></a>PROPAGATION_REQUIRES_NEW</h3><p>该传播机制是每次新开启一个事务，同时把外层的事务挂起，当前新事务执行完毕后在恢复上层事务的执行。</p>
+<h3 id="PROPAGATION-SUPPORTS"><a href="#PROPAGATION-SUPPORTS" class="headerlink" title="PROPAGATION_SUPPORTS"></a>PROPAGATION_SUPPORTS</h3><p>该传播机制如果外层有事务则加入该事务，如果不存在也不会创建新事务，直接使用非事务方式执行。</p>
+<h3 id="PROPAGATION-NOT-SUPPORTED"><a href="#PROPAGATION-NOT-SUPPORTED" class="headerlink" title="PROPAGATION_NOT_SUPPORTED"></a>PROPAGATION_NOT_SUPPORTED</h3><p>该传播机制不支持事务，如果外层存在事务则挂起外层事务，然后执行当前逻辑，执行完毕后，恢复外层事务。</p>
+<h3 id="PROPAGATION-NEVER"><a href="#PROPAGATION-NEVER" class="headerlink" title="PROPAGATION_NEVER"></a>PROPAGATION_NEVER</h3><p>表示事务传播特性定义为PROPAGATION_NEVER的方法不应该运行在一个事务环境中</p>
+<h3 id="PROPAGATION-MANDATORY"><a href="#PROPAGATION-MANDATORY" class="headerlink" title="PROPAGATION_MANDATORY"></a>PROPAGATION_MANDATORY</h3><p>配置了该传播性的方法只能在已经存在事务的方法中被调用，如果在不存在事务的方法中被调用，会抛出异常。</p>
+<h3 id="PROPAGATION-NESTED"><a href="#PROPAGATION-NESTED" class="headerlink" title="PROPAGATION_NESTED"></a>PROPAGATION_NESTED</h3><p>该传播机制特点是可以保存状态保存点，当事务回滚后会回滚到某一个保存点上，从而避免所有嵌套事务都回滚。</p>
+  	
+
+	  </div>     
+	  
+
+	<div class="post-footer">    
+
+  
+
+
+
+
+<span class="donate-btn iconfont icon-donate "></span>
+
+
+<div id="donate-box" class="sildeUpMin">
+
+	<span class="donate-cancel iconfont icon-cancel"></span>
+
+	<div class="donate-img-box">
+		<img id="donate-qr-wechat" class="donate-img no-gallery" src="/img/donate1.png"  alt="Lost">	
+		<img id="donate-qr-alipay" class="donate-img no-gallery" src="/img/donate2.png"  alt="Lost">	
+	</div>
+
+	<span class="donate-word">世界美好 你也是</span>
+
+	<div class="donate-list">
+		<span class="iconfont icon-donate-wechat"></span>
+		<span class="iconfont icon-donate-alipay"></span>
+	</div>
+
+</div>
+
+ 
+  
+
+
+   <nav class="post-nav">
+
+      
+       
+
+         
+
+      
+          <a href="/2018/08/13/docker常用命令/">          
+
+            <span class="hover-item" title="docker常用命令">  上一篇 </span>  
+
+          </a>
+    
+      
+    
+      
+
+         
+
+          <a href="/2018/07/11/动态代理/">         
+
+           <span title="动态代理">下一篇 </span>  
+
+          </a>
+
+      
+
+  </nav>  
+</div> 
+	
+
+
+    <div id="comment">   
+    </div>
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+
+    <script src='//unpkg.com/valine@v1.1.8-beta/dist/Valine.min.js'></script>
+
+    <script>
+        new Valine({
+        el: '#comment',
+        notify:false, 
+        verify:false, 
+        app_id: 'gMnC8EJDk8V8fNmt2Nj2sEgP-gzGzoHsz',
+        app_key: 'G5ajxDPkoDOjtN6WfSRtpme8',  
+        path:window.location.pathname, 
+        avatar:'mm' ,
+        guest_info:['nick','mail']
+        });
+    </script>
+
+
+    <script>
+    //set the placeholder
+    $(function(){    
+
+        $('.vnick').attr('placeholder','昵称');
+        $('.veditor').attr('placeholder','说点什么吧');
+        $('.vmail').attr('placeholder','邮箱');   
+        $('.vsubmit').html('回复');   
+       
+    })  
+    </script>
+
+	
+
+</article>
+
+
+
+<div id="toc" >		
+
+	<div class="toc-container">	
+
+	<span class="toc-contents iconfont icon-open"" onclick="change()"> 
+	<span>目录</span>
+	</span>
+
+	<ul class="toc-list"></ul>
+
+	</div>
+
+</div>
+
+
+<script src="/js/toc.js"></script>
+<script src="/js/post.js"></script></section> 
+
+    </div>        
+
+    
+    <div class="mask"> </div>
+    <div class="back-to-top iconfont icon-backtotop fadeIn"></div> 
+
+    
+
+
+<script src="/js/search.js"></script>     
+          
+          <div class="search-container sildeUpMin">
+            <input type="text" placeholder="输入你想搜索的" id="search-input" class="search-input">  
+              <span class="search-cancel iconfont icon-cancel"></span>
+              <div id="search-result" class="search-result"></div>
+          </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+      <img class="mobile-menu-icon no-gallery" src= /img/favicon.png >   
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/categories">分类
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+</div>     
+    
+
+<footer id="footer">
+	   
+   	 
+
+	  	
+   	
+      	 
+	 <div>
+	 	&copy;
+		2018
+		YQG	 
+             <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+	 </div>
+
+
+   
+   	 <div>
+	
+	 <a href="http://hexo.io/" target="_blank">Hexo</a>
+
+	 Theme
+
+	 <a href="https://github.com/YYYQG/YYYQG.github.io" target="_blank">Brief</a> 
+
+	 </div>	
+
+
+	
+	
+</footer> 
+    
+
+
+ 
+  </body>   
+  <script src="/js/animation.js"></script>   
+</html>

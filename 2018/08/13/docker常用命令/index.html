@@ -7,7 +7,7 @@
 
   
   
-  <title>  事务 |   Brief</title>
+  <title>  Docker常用命令 |   Brief</title>
 
  
   
@@ -95,21 +95,21 @@
 	<div class="post-header slideDownMin center">
 
 	<span class="post-title">	
-		事务
+		docker常用命令
 	</span>
 
 	
 	<div class="post-info">
 
 		<time class="post-time"><span class="iconfont icon-date"></span>
-		2018/08/20 	
+		2018/08/13 	
 		</time>
 		
 					
 
 				<span class="post-meta">		
 				<span class="iconfont icon-category"></span>
-				<a class="category-link" href="/categories/数据库/">数据库</a>
+				<a class="category-link" href="/categories/docker/">docker</a>
 				</span>
 		
 			
@@ -118,7 +118,7 @@
 				
 				<span class="post-meta">
 				<span class="iconfont icon-tag"></span>
-				<a class="tag-link" href="/tags/事务/">事务</a>
+				<a class="tag-link" href="/tags/常用命令/">常用命令</a>
 				</span>			
 			
 
@@ -126,7 +126,7 @@
 		
 
 		<span class="post-words"><span class="iconfont icon-words"></span>
-		1143
+		1988
 		</span>		
 	
 	</div> 
@@ -141,20 +141,39 @@
 
 
 
-	  	<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
-<p>什么是事务？比如你网上购物的时候，你点击购买物品并付钱，你的账户金额将会减少，同时物品数量也需要减少，这就是事务。事务要么全部成功，要么全部失败。</p>
+	  	<h2 id="关于docker"><a href="#关于docker" class="headerlink" title="关于docker"></a>关于docker</h2><blockquote>
+<p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。它是一种容器虚拟化技术。下面是我学习过程中使用的一些常用命令。</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="事务的4大特性"><a href="#事务的4大特性" class="headerlink" title="事务的4大特性"></a>事务的4大特性</h2><h3 id="原子性-atomicity"><a href="#原子性-atomicity" class="headerlink" title="原子性(atomicity)"></a>原子性(atomicity)</h3><p>一个事务是一个不可分割的工作单位，事务中包括的诸操作要么都做，要么都不做。</p>
-<h3 id="一致性-consistency"><a href="#一致性-consistency" class="headerlink" title="一致性(consistency)"></a>一致性(consistency)</h3><p>事务必须是使数据库从一个一致性状态变到另一个一致性状态。一致性与原子性是密切相关的。<br>拿转账来说，假设用户A和用户B两者的钱加起来一共是5000，那么不管A和B之间如何转账，转几次账，事务结束后两个用户的钱相加起来应该还得是5000，这就是事务的一致性。</p>
-<h3 id="隔离性-isolation"><a href="#隔离性-isolation" class="headerlink" title="隔离性(isolation)"></a>隔离性(isolation)</h3><p>一个事务的执行不能被其他事务干扰。即一个事务内部的操作及使用的数据对并发的其他事务是隔离的，并发执行的各个事务之间不能互相干扰。</p>
-<h3 id="持久性-durability"><a href="#持久性-durability" class="headerlink" title="持久性(durability)"></a>持久性(durability)</h3><p>持久性也称永久性(permanence)，指一个事务一旦提交，它对数据库中数据的改变就应该是永久性的。接下来的其他操作或故障不应该对其有任何影响。</p>
-<h2 id="忽略事务的隔离性遇见的问题："><a href="#忽略事务的隔离性遇见的问题：" class="headerlink" title="忽略事务的隔离性遇见的问题："></a>忽略事务的隔离性遇见的问题：</h2><h3 id="1-脏读："><a href="#1-脏读：" class="headerlink" title="1.脏读："></a>1.脏读：</h3><p>脏读是指在一个事务处理过程里读取了另一个未提交的事务中的数据。</p>
-<h3 id="2-不可重复读"><a href="#2-不可重复读" class="headerlink" title="2.不可重复读"></a>2.不可重复读</h3><p>不可重复读是指在对于数据库中的某个数据，一个事务范围内多次查询却返回了不同的数据值，这是由于在查询间隔，被另一个事务修改并提交了。一般不可重复读不会出现太大问题，就依最后一次读取的为准，但是如何A,B同时查询一个数据出现这种情况，就出问题了。</p>
-<h3 id="3-虚读（幻读）"><a href="#3-虚读（幻读）" class="headerlink" title="3.虚读（幻读）"></a>3.虚读（幻读）</h3><p>幻读是事务非独立执行时发生的一种现象。假设事务A在修改表中的所有行的某个字段的值改为0，这时事务B插入一行数据，字段值为1，事务A的结果集中会发现有一条数据没有更改，产生了幻觉一样。</p>
-<h2 id="MySql事务隔离级别："><a href="#MySql事务隔离级别：" class="headerlink" title="MySql事务隔离级别："></a>MySql事务隔离级别：</h2><p>1.Serializable(串行化)：可避免脏读，不重复读，幻读的发生<br>2.Repeatable read(不可重复读)，可避免脏读，不重复读的发生<br>3.Read committed(读已提交) 可避免脏读的发生<br>4.Read uncommitted(读未提交) 最低级别，任何情况无法保证</p>
-<h2 id="查看Mysql数据库事务隔离级别："><a href="#查看Mysql数据库事务隔离级别：" class="headerlink" title="查看Mysql数据库事务隔离级别："></a>查看Mysql数据库事务隔离级别：</h2><p>select @@tx_isolation;</p>
-<p>MySQL数据库中设置事务的隔离级别：<br>set  [glogal | session]  transaction isolation level 隔离级别名称;<br>set tx_isolation=’隔离级别名称’;<br>如果是使用JDBC对数据库的事务设置隔离级别的话，也应该是在调用Connection对象的setAutoCommit(false)方法之前。调用Connection对象的setTransactionIsolation(level)即可设置当前链接的隔离级别</p>
+<h2 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h2><p>docker info<br>docker –help</p>
+<h2 id="镜像命令"><a href="#镜像命令" class="headerlink" title="镜像命令"></a>镜像命令</h2><p>docker images [options]<br>列出本地镜像<br>参数：<br>-a 列出所有的镜像（含中间镜像层 ）<br>-q 只显示镜像ID<br>-qa<br>–digests 显示镜像的摘要信息<br>–no-trunc 显示完整的镜像信息</p>
+<p>docker search [options] 镜像名字<br>查找镜像（如Tomcat）<br>参数：<br>-s [数字] 如 -s 30 表示Stars超过30的<br>–no-trunc 显示完整的镜像描述<br>–automated 只列出automated build类型的镜像 </p>
+<p>docker history 镜像ID</p>
+<p>docker pull 镜像名:Tag<br>下载镜像</p>
+<p>docker rmi 某个镜像ID<br>删除镜像<br>参数：<br>-f 强制删除<br>docker rmi -f 镜像名1:Tag 镜像名2:Tag<br>删多个镜像<br>docker rmi -f $(docker images -qa)<br>删除所有镜像</p>
+<h2 id="容器命令"><a href="#容器命令" class="headerlink" title="容器命令"></a>容器命令</h2><p>docker images [options]<br>列出本地镜像<br>参数：<br>-a 列出所有的镜像（含中间镜像层 ）<br>-q 只显示镜像ID<br>-qa<br>–digests 显示镜像的摘要信息<br>–no-trunc 显示完整的镜像信息</p>
+<p>docker search [options] 镜像名字<br>查找镜像（如Tomcat）<br>参数：<br>-s [数字] 如 -s 30 表示Stars超过30的<br>–no-trunc 显示完整的镜像描述<br>–automated 只列出automated build类型的镜像 </p>
+<p>docker history 镜像ID<br>查看指定镜像的创建历史<br>参数：<br>-H :以可读的格式打印镜像大小和日期，默认为true；<br>–no-trunc :显示完整的提交记录；<br>-q :仅列出提交记录ID。</p>
+<p>docker pull 镜像名:Tag<br>下载镜像</p>
+<p>docker rmi 某个镜像ID<br>删除镜像<br>参数：<br>-f 强制删除<br>docker rmi -f 镜像名1:Tag 镜像名2:Tag<br>删多个镜像<br>docker rmi -f $(docker images -qa)<br>删除所有镜像</p>
+<p>//容器命令——————————————-<br>docker run [options] image [command][arg…]<br>新建并启动容器<br>options说明<br>–name “容器新名字”:为容器指定一个名称<br>-d:后台运行容器，并返回容器ID，也即启动守护式容器<br>-i:以交互模式运行容器，通常与-t同时使用<br>-t:为容器重新分配一个伪终端<br>-P:随机端口映射<br>-p:指定端口映射，有以下四种格式<br>   ip:hostPort:containerPort<br>   ip::containerPort<br>   hostPort:containerPort<br>   containerPort</p>
+<p>docker ps [options]<br>列出当前运行的所有容器<br>参数：<br>-a:列出当前所有运行的容器+历史上运行过的<br>-l:显示最近创建的容器<br>-n:显示最近n个创建的容器<br>如 docker ps -n 2<br>-q:静默模式，只显示容器编号<br>–no-trunc:不截断输出</p>
+<p>docker commit<br>提交容器副本使成为一个新的镜像<br>docker commit -m=”提交的描述信息” -a”作者” 容器ID 要创建的目标镜像名:[标签名]</p>
+<p>exit<br>容器停止退出</p>
+<p>ctrl+P+Q<br>容器不停止退出</p>
+<p>docker start 容器名或ID<br>启动容器</p>
+<p>docker restart 容器名或ID<br>重启容器</p>
+<p>docker stop 容器名或ID<br>温柔停止容器</p>
+<p>docker kill 容器名或ID<br>强制停止</p>
+<p>docker rm 容器ID<br>删除未运行容器</p>
+<p>docker rm -f $(docker ps -aq)<br>docker ps -aq | xargs docker rm<br>删除所有容器</p>
+<h2 id="重要"><a href="#重要" class="headerlink" title="重要"></a>重要</h2><p>docker -d image<br>后台运行容器<br>docker ps 无法查看docker -d image 运行容器，因为它会自动退出，<br>docker ps -a能看见容器已经退出<br>docker容器后台运行，就必须有一个前台进程</p>
+<p>docker logs -f -t –tail 容器ID<br>查看容器日志<br>参数：<br>-t 是加入时间戳<br>-f 跟随最新的日志打印<br>–tail [num] 如–tail 3  数字显示最后多少条日志</p>
+<p>docker top 容器ID<br>查看容器内进程</p>
+<p>docker inspect 容器ID<br>查看容器内部细节</p>
+<p>docker exec -it 容器ID bashShell<br>在容器中运行某个命令，并显示结果<br>是在容器中打开新的终端，并且可以启动新的进程<br>docker exec -it 容器ID /bin/bash<br>进入正在运行的容器</p>
+<p>docker attach 容器ID<br>进入正在运行的容器</p>
+<p>docker cp 容器ID:容器内路径 目的主机路径<br>拷贝文件到主机</p>
   	
 
 	  </div>     
@@ -196,14 +215,25 @@
 
       
        
+
+         
+
+      
+          <a href="/2018/08/15/docker自定义tomcat/">          
+
+            <span class="hover-item" title="docker自定义tomcat">  上一篇 </span>  
+
+          </a>
+    
+      
     
       
 
          
 
-          <a href="/2018/08/16/Bean生命周期/">         
+          <a href="/2018/08/12/事务/">         
 
-           <span title="Bean生命周期">下一篇 </span>  
+           <span title="事务">下一篇 </span>  
 
           </a>
 

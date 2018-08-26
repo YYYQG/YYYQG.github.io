@@ -7,7 +7,7 @@
 
   
   
-  <title>  Bean�������� |   Brief</title>
+  <title>  索引 |   Brief</title>
 
  
   
@@ -95,21 +95,21 @@
 	<div class="post-header slideDownMin center">
 
 	<span class="post-title">	
-		Bean��������
+		索引
 	</span>
 
 	
 	<div class="post-info">
 
 		<time class="post-time"><span class="iconfont icon-date"></span>
-		2018/08/16 	
+		2018/08/17 	
 		</time>
 		
 					
 
 				<span class="post-meta">		
 				<span class="iconfont icon-category"></span>
-				<a class="category-link" href="/categories/Spring/">Spring</a>
+				<a class="category-link" href="/categories/数据库/">数据库</a>
 				</span>
 		
 			
@@ -118,7 +118,7 @@
 				
 				<span class="post-meta">
 				<span class="iconfont icon-tag"></span>
-				<a class="tag-link" href="/tags/Bean/">Bean</a>
+				<a class="tag-link" href="/tags/索引/">索引</a>
 				</span>			
 			
 
@@ -126,7 +126,7 @@
 		
 
 		<span class="post-words"><span class="iconfont icon-words"></span>
-		2747
+		1153
 		</span>		
 	
 	</div> 
@@ -141,12 +141,28 @@
 
 
 
-	  	<h2 id="����"><a href="#����" class="headerlink" title="����"></a>����</h2><p>Spring�ṩ��BeanFactory��ΪSpring������ƽʱ���ǳ�ʹ�����ӽӿ�ApplicationContext��<br>ͼ�����ǱȽϳ��õ�ClassPathXmlApplicationContext��XmlWebApplicationContext����ApplicationContext�����ࡣ<br>��ȻBeanFactory��ApplicationContext������ע�᷽ʽ����һ����ʹ��BeanFactoryҪ��ʾ�ĵ�����addBeanPostProcessor()��������ע�ᣩ�Լ�����bean��ʱ����һ����BeanFactoryĬ�ϲ����ӳټ��أ��ȣ�������bean���������ڹܿػ���һ�¡�<br>Bean�������������ڿ��Դ������ĳ�ʼ��Bean��ʼ��ֱ��Spring�����رա�<br><a id="more"></a><br><img src="/img/Bean.png" alt="&quot;Bean&quot;">  </p>
-<h2 id="Bean�������ڼ�ʽ"><a href="#Bean�������ڼ�ʽ" class="headerlink" title="Bean�������ڼ�ʽ"></a>Bean�������ڼ�ʽ</h2><p>-&gt;��ʼ��Bean(����Bean�Ĺ�����)<br>-&gt;ע������<br>-&gt;postProcessBeforeInitialization()<br>-&gt;init-method()<br>-&gt;postProcessAfterInitialization()<br>-&gt;destory-method()</p>
-<h2 id="Bean������������ʽ"><a href="#Bean������������ʽ" class="headerlink" title="Bean������������ʽ"></a>Bean������������ʽ</h2><p>-&gt;postProcessBeanFactory()<br>-&gt;postProcessBeforInstantiation<br>-&gt;��ʼ��Bean(����Bean�Ĺ�����)<br>-&gt;postProcessPropertyValues()<br>-&gt;ע������<br>-&gt;setBeanName()<br>-&gt;setApplicationContext()<br>-&gt;postProcessBeforeInitialization()<br>-&gt;afterpropertiesSet()<br>-&gt;init-method()<br>-&gt;postProcessAfterInitialization()<br>-&gt;postProcessAfterInstantiation()<br>����Bean<br>-&gt;destory()<br>-&gt;destory-method()</p>
-<h2 id="���̼��"><a href="#���̼��" class="headerlink" title="���̼��"></a>���̼��</h2><p>1��[������]BeanFactoryPostProcessor�ӿڣ����spring�����ļ�ע���˸ýӿڵ�ʵ���࣬������spring��bean����֮ǰ���޸�bean�Ķ������ԡ�������԰�bean��scope��singleton��Ϊprototype��<br>2��[������]InstantiationAwareBeanPostProcessor�ӿڣ���ʼ��Bean֮ǰ��Ԥ����<br>3����ʼ��Bean<br>4��[������]InstantiationAwareBeanPostProcessor�ӿ�:���spring�����ļ�ע���˸ýӿڵ�ʵ���࣬Spring���������ǵ�postProcessPropertyValues������<br>5��ע�룺Spring���ݶ�����Ϣ��beanDifinition����ֵ������beanע�뵽bean��Ӧ�������У�<br>6��[Bean��]��֪���������beanʵ����BeanNameAware�ӿڣ�Spring��bean��ID���ݸ�setBeanName()������<br>7��[Bean��]��֪���������beanʵ����ApplicationContextAware�ӿڣ�Spring������setApplicationContext()��������bean���ڵ�Ӧ�������ĵ����ô��������ע��BeanFactory��������ʵ����BeanFactoryAware�ӿڣ�Spring������setBeanFactory()��������BeanFactory����ʵ������.<br>8��[������]BeanPostProcessor�� ���beanʵ����BeanPostProcessor�ӿڣ�Spring���������ǵ�postProcessBeforeInitialization()������<br>9��[Bean��]InitializingBean�����beanʵ����InitializingBean�ӿڣ�Spring���������ǵ�after-PropertiesSet()������<br>10��[Bean������]init-method�����bean������ʹ��ָ����init-method��ʼ���������÷���Ҳ�ᱻ���ã�<br>11��[������]BeanPostProcessor�����beanʵ����BeanPostProcessor�ӿڣ�Spring���������ǵ�postProcessAfterInitialization()������<br>12��[������/������]InstantiationAwareBeanPostProcessor �����beanʵ����InstantiationAwareBeanPostProcessor �ӿڣ�Spring���������ǵ�postProcessAfterInitialization()������<br>��ʱ��bean�Ѿ�׼�����������Ա�Ӧ�ó���ʹ���ˣ����ǽ�һֱפ����Ӧ���������У�ֱ����Ӧ�������ı����٣�<br>13��[Bean��]DisposableBean�����beanʵ����DisposableBean�ӿڣ�Spring����������destroy()�ӿڷ�����<br>14��[Bean������]destroy-method�� ���bean������ʹ��destroy-method���������ٷ������÷���Ҳ�ᱻ���á�</p>
-<h2 id="�ܽ�"><a href="#�ܽ�" class="headerlink" title="�ܽ�"></a>�ܽ�</h2><p>Bean�������ڻ����Ͱ�����Щ��Bean�������ڶ���Spring������ʹ�ö��ǳ���Ҫ</p>
-<p>���Ľ����ַ<a href="https://blog.csdn.net/soonfly/article/details/69480058" target="_blank" rel="noopener">https://blog.csdn.net/soonfly/article/details/69480058</a></p>
+	  	<h2 id="什么是索引"><a href="#什么是索引" class="headerlink" title="什么是索引"></a>什么是索引</h2><blockquote>
+<p>索引是一种单独的、物理的对数据库表中一列或多列的值进行排序的一种存储结构，可以加快从表或视图中检索行的速度。索引包含由表或视图中的一列或多列生成的键。这些键存储在一个结构（B树，顺序上下文件，散列，位图）中。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="如何创建索引"><a href="#如何创建索引" class="headerlink" title="如何创建索引"></a>如何创建索引</h2><p>1)</p>
+<ol>
+<li>ALERT TABLE tablename ADD INDEX index_name(cloumnlist)</li>
+<li>ALTER TABLE tablename ADD UNIQUE (columnlist)</li>
+<li>ALTER TABLE tablename ADD PRIMARY KEY (columnlist)</li>
+</ol>
+<p>2)<br>1.CREATE INDEX indexname ON tablename (columnlist)<br>2.CREATE UNIQUE INDEX indexname ON tablename (columnlist)</p>
+<h2 id="索引种类"><a href="#索引种类" class="headerlink" title="索引种类"></a>索引种类</h2><ul>
+<li>普通索引<br>是最基本的索引，它没有任何限制</li>
+<li>唯一索引<br>索引列的值必须唯一，但允许有空值。如果是组合索引，则列值的组合必须唯一</li>
+<li>主键索引<br>一种特殊的唯一索引</li>
+<li>联合索引<br>指多个字段上创建的索引，如果你经常要用到多个字段的多条件查询，可以考虑建立联合索引，一般是除第一  个字段外的其它字段不经常用于条件筛选情况，比如说a,b两个字段，如果你经常用a条件或者a+b条件去查询，而很少单独用b条件查询，那么可以建立a,b的联合索引。如果a和b都要分别经常独立的被用作查询条件，那  还是建立多个单列索引，因为如果是联合索引，单独用b条件查询不会使用索引。</li>
+<li>全文索引</li>
+</ul>
+<h2 id="索引使用时机"><a href="#索引使用时机" class="headerlink" title="索引使用时机"></a>索引使用时机</h2><h3 id="使用："><a href="#使用：" class="headerlink" title="使用："></a>使用：</h3><p>表的主关键字，表的字段唯一约束，直接条件查询的字段，查询中与其它表关联的字段，查询中排序的字段，查询中统计或分组统计的字段</p>
+<h3 id="不使用："><a href="#不使用：" class="headerlink" title="不使用："></a>不使用：</h3><p>表记录太少，经常插入、删除、修改的表，数据重复且分布平均的表字段，经常和主字段一块查询但主字段索引值比较多的表字段</p>
+<h2 id="索引优点"><a href="#索引优点" class="headerlink" title="索引优点"></a>索引优点</h2><p>第一 、通过创建唯一性索引，可以保证数据库表中每一行数据的唯一性。<br>第二、 可以大大加快数据的检索速度，这也是创建索引的最主要的原因。<br>第三、 可以加速表和表之间的连接，特别是在实现数据的参考完整性方面特别有意义。<br>第四、  在使用分组和排序子句进行数据检索时，同样可以显著减少查询中分组和排序的时间。<br>第五、通过使用索引，可以在查询的过程中，使用优化隐藏器，提高系统的性能。</p>
+<h2 id="索引的缺点"><a href="#索引的缺点" class="headerlink" title="索引的缺点"></a>索引的缺点</h2><p>第一、创建索引和维护索引要耗费时间，这种时间随着数据量的增加而增加。第<br>第二、索引需要占物理空间，除了数据表占数据空间之外，每一个索引还要占一定的物理空间，如果要建立聚簇索引，那么需要的空间就会更大。<br>第三、当对表中的数据进行增加、删除和修改的时候，索引也要动态的维护，这样就降低了数据的维护速度。因为更新表时，MySQL不仅要保存数据，还要保存一下索引文件。建立索引会占用磁盘空间的索引文件。</p>
   	
 
 	  </div>     
@@ -188,25 +204,14 @@
 
       
        
-
-         
-
-      
-          <a href="/2018/08/17/索引/">          
-
-            <span class="hover-item" title="索引">  上一篇 </span>  
-
-          </a>
-    
-      
     
       
 
          
 
-          <a href="/2018/08/15/docker自定义tomcat/">         
+          <a href="/2018/08/16/Bean生命周期/">         
 
-           <span title="docker自定义tomcat">下一篇 </span>  
+           <span title="Bean��������">下一篇 </span>  
 
           </a>
 

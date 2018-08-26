@@ -132,6 +132,184 @@
 	   
 	<div class="article-header">
 	    
+	     <a class="article-title"  href="/2018/04/18/工厂模式/">工厂模式</a>  
+	       
+		 
+
+		 <time>2018-04-18 </time>    
+	</div>
+
+
+    <div class="post-content article-excerpt">	
+	
+  	
+
+	  
+
+	  	<h2 id="比萨店"><a href="#比萨店" class="headerlink" title="比萨店"></a>比萨店</h2><p>假设你有一个比萨店，点比萨的代码你可能是这样写的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Pizza orderPizza()&#123;</span><br><span class="line"></span><br><span class="line">    pizza pizza = new Pizza();</span><br><span class="line">    pizza.prepare();</span><br><span class="line">    pizza.bake();</span><br><span class="line">    pizza.cut();</span><br><span class="line">    pizza.box();</span><br><span class="line">    return pizza;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>但是如果你需要更多的比萨类型怎么办？<br>所以必须增加一些代码来决定适合的比萨类型，然后制造这个比萨：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Pizza orderPizza(String type)&#123;</span><br><span class="line"></span><br><span class="line">    pizza pizza;</span><br><span class="line">    if(type.equals(&quot;cheese&quot;))&#123;</span><br><span class="line">        pizza = new CheesePizza();</span><br><span class="line">    &#125; else if(type.equals(&quot;greek&quot;))&#123;</span><br><span class="line">        pizza = new GreekPizza():</span><br><span class="line">    &#125;</span><br><span class="line">    pizza.prepare();</span><br><span class="line">    pizza.bake();</span><br><span class="line">    pizza.cut();</span><br><span class="line">    pizza.box();</span><br><span class="line">    return pizza;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过传入的参数type来判定点的什么比萨，从而返回什么比萨类的实例，可是到了后来如果你的比萨店会有越来越多的比萨怎么办，只有修改你的orderPizza(String type)中的方法，如果某些比萨过时了，你同样需要修改该方法，这个方法就没有对修改封闭。</p>
+<h3 id="封装创建对象代码"><a href="#封装创建对象代码" class="headerlink" title="封装创建对象代码"></a>封装创建对象代码</h3><p>我们需要将orderPizza(String type)方法中创建对象的代码移到orderPizza(String type)方法外，并创建另一个对象专门创建比萨。</p>
+<h2 id="新对象“工厂”"><a href="#新对象“工厂”" class="headerlink" title="新对象“工厂”"></a>新对象“工厂”</h2><p>工厂用来处理创建对象的细节，一旦有了工厂，orderPizza(String type)方法就成为工厂的客户，只要需要比萨就叫要比萨工厂做一个，新的orderPizza(String type)方法只需要关心从工厂得到一个比萨，并调用比萨的prepare()，bake()，cut()等方法。<br>还有一些细节，我会补充，比如原来的orderPizza(String type)方法中的创建代码，该怎么写？</p>
+<h2 id="创建一个简单比萨工厂"><a href="#创建一个简单比萨工厂" class="headerlink" title="创建一个简单比萨工厂"></a>创建一个简单比萨工厂</h2><p>首先我们创建一个工厂类，封装所有比萨的创建。<br>SimplePizzaFactory.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class SimplePizzaFactory&#123;</span><br><span class="line">    piblic Pizza createPizza(String type)&#123;</span><br><span class="line">        Pizza pizza = null;</span><br><span class="line">        if(type.equals(&quot;cheese&quot;))&#123;</span><br><span class="line">        pizza = new CheesePizza();</span><br><span class="line">        .&#125; else if(type.equals(&quot;greek&quot;))&#123;</span><br><span class="line">        pizza = new GreekPizza():</span><br><span class="line">        &#125;</span><br><span class="line">    return pizza;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+ 
+
+	    
+</div>
+
+<div class="center">
+			
+
+				<span class="post-meta">		
+				<span class="iconfont icon-category"></span>
+				<a class="category-link" href="/categories/设计模式/">设计模式</a>
+				</span>
+		
+			
+
+		
+				
+				<span class="post-meta">
+				<span class="iconfont icon-tag"></span>
+				<a class="tag-link" href="/tags/工厂模式/">工厂模式</a>
+				</span>			
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		1231
+		</span>		
+</div>		
+
+		
+    <a class="article-readmore" href="/2018/04/18/工厂模式/">阅读更多</a> 
+    	
+</article>     
+     	
+      	  	
+
+  		
+    	<article class="article">		
+	   
+	<div class="article-header">
+	    
+	     <a class="article-title"  href="/2018/04/11/单件模式/">单件模式</a>  
+	       
+		 
+
+		 <time>2018-04-11 </time>    
+	</div>
+
+
+    <div class="post-content article-excerpt">	
+	
+  	
+
+	  
+
+	  	<h1 id="单件模式"><a href="#单件模式" class="headerlink" title="单件模式"></a>单件模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>用来创建独一无二的，只能有一个实例的对象入场券。确保一个类只有一个实例，并提供一个全局访问点，单件模式可以说是所有模式中最简单的。</p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>有一些对象我们只需要一个，比如说：线程池、缓存、对话框等的对象。事实上，这些对象只能有一个实例，如果制造出多个，将会导致许多问题。</p>
+<h2 id="经典单件模式实现"><a href="#经典单件模式实现" class="headerlink" title="经典单件模式实现"></a>经典单件模式实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton &#123;</span><br><span class="line">	</span><br><span class="line">	//利用静态变量记录Singleton的唯一实例</span><br><span class="line">	private static  Singleton uniqueInstance;</span><br><span class="line">	</span><br><span class="line">	//私有构造器，只有Singleton类内才能使用</span><br><span class="line">	private Singleton() &#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	//用getInstance方法实例化一个对象，并返回一个实例(延迟实例化)</span><br><span class="line">	public static Singleton getInstance() &#123;</span><br><span class="line">		//如果没创建实例，就通过new Singleton()创造一个实例</span><br><span class="line">		if(uniqueInstance==null)</span><br><span class="line">			uniqueInstance = new Singleton();</span><br><span class="line">			//如果实例存在则返回实例</span><br><span class="line">			return uniqueInstance;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	//其他有用方法</span><br><span class="line">	public void full() &#123;</span><br><span class="line">		System.out.println(&quot;full&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void pull() &#123;</span><br><span class="line">		System.out.println(&quot;pull&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们看看类图<br><img src="/img/单件模式.png" alt="">  </p>
+<p>但是，这样就真的安全了吗？我们看看下面的代码。<br>Singleton.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//将上面的getInstance()方法添加一句话System.out.println(&quot;Singleton被创建&quot;);</span><br><span class="line">public static Singleton getInstance() &#123;</span><br><span class="line">		// 如果没创建实例，就通过new Singleton()创造一个实例</span><br><span class="line">		if (uniqueInstance == null) &#123;</span><br><span class="line">			System.out.println(&quot;Singleton被创建&quot;);</span><br><span class="line">			uniqueInstance = new Singleton();</span><br><span class="line">		&#125; </span><br><span class="line">			// 如果实例存在则返回实例</span><br><span class="line">			return uniqueInstance;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Main.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line"></span><br><span class="line">        //Lambda表达式创建线程</span><br><span class="line">		Thread t = new Thread(() -&gt; &#123;</span><br><span class="line">			Singleton s = Singleton.getInstance();</span><br><span class="line">			&#125;);</span><br><span class="line">		t.start();</span><br><span class="line">		Singleton s = Singleton.getInstance();</span><br><span class="line">		//Singleton被创建</span><br><span class="line">        // Singleton被创建</span><br><span class="line">        </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在多线程中，有可能两个线程(几乎)同时进入创建Singleton的代码，导致产生两个Singleton实例。</p>
+<h2 id="处理多线程"><a href="#处理多线程" class="headerlink" title="处理多线程"></a>处理多线程</h2><p>只需要把getInstance()变成同步(sychronized)方法，几乎就可以轻易地解决了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 用getInstance方法实例化一个对象，并返回一个实例</span><br><span class="line">	public static synchronized Singleton getInstance() &#123;</span><br><span class="line">		</span><br><span class="line">		// 如果没创建实例，就通过new Singleton()创造一个实例</span><br><span class="line">		if (uniqueInstance == null) &#123;</span><br><span class="line">			System.out.println(&quot;Singleton被创建&quot;);</span><br><span class="line">			uniqueInstance = new Singleton();</span><br><span class="line">		&#125;</span><br><span class="line">		// 如果实例存在则返回实例</span><br><span class="line">		return uniqueInstance;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样问题是解决了，但是降低了性能。因为只有第一次执行此方法才需要真正的同步，一旦设置好了uniqueInstance变量，就不需要同步这个方法了。</p>
+<h2 id="如何改善多线程"><a href="#如何改善多线程" class="headerlink" title="如何改善多线程"></a>如何改善多线程</h2><p>方法一：如果getInstance()对应用程序不是很关键，就什么也别做。但是你必须知道同步一个方法可能造成程序执行效率下降100倍。</p>
+<p>方法二：使用急切创建实例，而不是用延迟实例化的做法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton &#123;</span><br><span class="line">	private static  Singleton uniqueInstance = new Singleton();</span><br><span class="line">	</span><br><span class="line">	private Singleton() &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	public static Singleton getInstance() &#123;</span><br><span class="line">		return uniqueInstance;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>利用这个方法，我们依赖JVM在加载这个类的时候马上创建此唯一实例。</p>
+<p>方法三：用“双重检查加锁”，在getInstance()中减少使用同步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton &#123;</span><br><span class="line">	private volatile static Singleton uniqueInstance;</span><br><span class="line">	</span><br><span class="line">	private Singleton() &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	public static Singleton getInstance() &#123;</span><br><span class="line">	if(uniqueInstance == null)&#123;</span><br><span class="line">	    synchronized (Singleton.class)&#123;</span><br><span class="line">	    if(uniqueInstance == null)</span><br><span class="line">	        uniqueInstance = new Singleton();</span><br><span class="line">	        &#125;</span><br><span class="line">	    &#125;</span><br><span class="line">	    return uniqueInstance;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>volatile关键词确保，当uniqueInstance变量被初始化成实例时，多线程正确的处理uniqueInstance变量。</p>
+ 
+
+	    
+</div>
+
+<div class="center">
+			
+
+				<span class="post-meta">		
+				<span class="iconfont icon-category"></span>
+				<a class="category-link" href="/categories/设计模式/">设计模式</a>
+				</span>
+		
+			
+
+		
+				
+				<span class="post-meta">
+				<span class="iconfont icon-tag"></span>
+				<a class="tag-link" href="/tags/策略模式/">策略模式</a>
+				</span>			
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		2680
+		</span>		
+</div>		
+
+		
+    <a class="article-readmore" href="/2018/04/11/单件模式/">阅读更多</a> 
+    	
+</article>     
+     	
+      	  	
+
+  		
+    	<article class="article">		
+	   
+	<div class="article-header">
+	    
+	     <a class="article-title"  href="/2018/03/06/Lambda表达式/">Lambda表达式</a>  
+	       
+		 
+
+		 <time>2018-03-06 </time>    
+	</div>
+
+
+    <div class="post-content article-excerpt">	
+	
+  	
+
+	  
+
+	  	 
+
+	    
+</div>
+
+<div class="center">
+				
+
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		0
+		</span>		
+</div>		
+
+		
+    <a class="article-readmore" href="/2018/03/06/Lambda表达式/">阅读更多</a> 
+    	
+</article>     
+     	
+      	  	
+
+  		
+    	<article class="article">		
+	   
+	<div class="article-header">
+	    
 	     <a class="article-title"  href="/2018/03/06/方法引用/">方法引用与构造器引用</a>  
 	       
 		 
@@ -260,263 +438,6 @@
 
 		
     <a class="article-readmore" href="/2018/03/06/Java8四大函数式接口/">阅读更多</a> 
-    	
-</article>     
-     	
-      	  	
-
-  		
-    	<article class="article">		
-	   
-	<div class="article-header">
-	    
-	     <a class="article-title"  href="/2018/03/06/装饰者模式/">装饰者模式</a>  
-	       
-		 
-
-		 <time>2018-03-06 </time>    
-	</div>
-
-
-    <div class="post-content article-excerpt">	
-	
-  	
-
-	  
-
-	  	<h1 id="装饰者模式"><a href="#装饰者模式" class="headerlink" title="装饰者模式"></a>装饰者模式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>给爱用继承的人一个全新的设计眼界。</p>
-<blockquote>
-<p>所谓装饰者就是动态的将责任附加到对象上，若要扩展功能，装饰者提供了比继承更有弹性的替代方法。</p>
-</blockquote>
-<p>虽然这说明了装饰者模式的“角色”，但是没说明怎么在我们的实现中实际“应用”它。我们来看看类图。</p>
-<p><img src="/img/装饰者模式.png" alt=""></p>
-<p>现在我们通过一个实例来讲解现实中如何使用装饰者模式。</p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>现在有一个咖啡店，店内有各种各样的咖啡，购买咖啡时，也可以要求在其中加入各种调料，例如蒸奶（SteamedMilk）、豆浆（Soy）、摩卡（Mocha）或者覆盖奶泡。同时需要收不同的费用。<br>首先我们看看第一种方式，设计一个超类Beverage类，所有调料作为它的成员变量，所有种类咖啡必须继承它。</p>
-<p><img src="/img/装饰者模式1.png" alt=""></p>
-<p>显然这种方法不是那么的好，为什么呢？因为如果调料的价钱改变，我们得更改现有代码。一旦出现新的调料，我们就需要加上新的方法，并改变超类中的cost()方法。万一顾客需要双倍摩卡怎么办。</p>
-<p>现在我们的目标是允许类容易扩展，在不修改现有代码的情况下，就可搭配新的行为。如能实现这样的目标，有什么好处？这样的设计具有弹性可以应对改变，可以接受新的功能来应对改变的需求。</p>
-<p>现在我们采用不一样的方法，我们以饮料为主体，然后运行时用调料来“装饰”(decorate)饮料。<br>比如说：</p>
-<ul>
-<li>拿一深焙咖啡(DarkRoast)对象</li>
-<li>以摩卡(Mocha)对象装饰它</li>
-<li>以奶泡(Whip)装饰它</li>
-<li>调用cost()方法，并依赖委托(delegate)将调料的价钱加上去</li>
-</ul>
-<p>有如何装饰一个对象，委托有如何实现呐？</p>
-<ul>
-<li>装饰者和被装饰者对象有相同的超类型。</li>
-<li>你可以用一个或多个装饰者包装一个对象。</li>
-<li>既然装饰者和被装饰者有相同的超类型，所以在任何需要原始对象（被包装的）的场合，可以用装饰过的对象代替它。</li>
-<li>装饰者可以在所委托被装饰者的行为之前或之后，加上自己的行为，以达到特定的目的。</li>
-<li>对象可以在任何时候被装饰，所以可以运行时动态地，不限量地用你喜欢的装饰者来装饰对象。<h2 id="装饰我们的饮料"><a href="#装饰我们的饮料" class="headerlink" title="装饰我们的饮料"></a>装饰我们的饮料</h2></li>
-</ul>
-<p><img src="/img/装饰者模式2.png" alt=""></p>
-<p>下面我看看如何用代码实现<br>Beverage.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public abstract class Beverage &#123;</span><br><span class="line"></span><br><span class="line">	private String description = &quot;unknown&quot;;</span><br><span class="line">	</span><br><span class="line">	public String getDescription() &#123;</span><br><span class="line">		return description;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setDescription(String des) &#123;</span><br><span class="line">		this.description = des;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public abstract double cost();</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>CondimentDecorator.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> //调料的父类</span><br><span class="line">public abstract class CondimentDecorator extends Beverage&#123;</span><br><span class="line"></span><br><span class="line">	//所有调料必须重写getDescription()方法，返回调料和饮料的相关描述</span><br><span class="line">	public abstract String getDescription();</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Espresso.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//浓咖啡</span><br><span class="line">public class Espresso extends Beverage&#123;</span><br><span class="line"></span><br><span class="line">	public Espresso() &#123;</span><br><span class="line">		//设置描述</span><br><span class="line">		setDescription(&quot;Espresso&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Override</span><br><span class="line">	public double cost() &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		return 2;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Mocha.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//摩卡</span><br><span class="line">public class Mocha extends CondimentDecorator&#123;</span><br><span class="line"></span><br><span class="line">	//记录被装饰者</span><br><span class="line">	private Beverage beverage ;</span><br><span class="line">	</span><br><span class="line">	//创建实例是必须传入被装饰者</span><br><span class="line">	public Mocha(Beverage beverage) &#123;</span><br><span class="line">		this.beverage = beverage;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Override</span><br><span class="line">	public String getDescription() &#123;</span><br><span class="line">		// 返回调料以及饮料的描述</span><br><span class="line">		return beverage.getDescription()+&quot;,Mocha&quot;;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public double cost() &#123;</span><br><span class="line">		// 返回调料(被装饰者)以及饮料的价格</span><br><span class="line">		return 0.2 + beverage.cost();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Test.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class Test &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		Beverage beverage = new Espresso();</span><br><span class="line">		Mocha  m = new Mocha(beverage);</span><br><span class="line">		System.out.println(m.getDescription());</span><br><span class="line">		System.out.println(m.cost());</span><br><span class="line">		//输出</span><br><span class="line">		//Espresso,Mocha</span><br><span class="line">        //2.2</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Java中的装饰者模式"><a href="#Java中的装饰者模式" class="headerlink" title="Java中的装饰者模式"></a>Java中的装饰者模式</h2><p>Java I/O便是用了装饰者模式</p>
-<p><img src="/img/装饰者模式3.png" alt=""></p>
-<p>我们可以发现java.io和咖啡店的设计没多大的差别，我们缩小java.io API的范围，可以更容易地查看它的文件。但是java.io的设计方式也暴露了装饰者模式的一个缺点，会形成很多小类，可能造成用此API的程序员感到困扰。</p>
- 
-
-	    
-</div>
-
-<div class="center">
-			
-
-				<span class="post-meta">		
-				<span class="iconfont icon-category"></span>
-				<a class="category-link" href="/categories/设计模式/">设计模式</a>
-				</span>
-		
-			
-
-		
-				
-				<span class="post-meta">
-				<span class="iconfont icon-tag"></span>
-				<a class="tag-link" href="/tags/装饰者模式/">装饰者模式</a>
-				</span>			
-			
-
-
-		
-
-		<span class="post-words"><span class="iconfont icon-words"></span>
-		2432
-		</span>		
-</div>		
-
-		
-    <a class="article-readmore" href="/2018/03/06/装饰者模式/">阅读更多</a> 
-    	
-</article>     
-     	
-      	  	
-
-  		
-    	<article class="article">		
-	   
-	<div class="article-header">
-	    
-	     <a class="article-title"  href="/2018/03/04/策略模式/">策略模式</a>  
-	       
-		 
-
-		 <time>2018-03-04 </time>    
-	</div>
-
-
-    <div class="post-content article-excerpt">	
-	
-  	
-
-	  
-
-	  	<h1 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h1><p>定义了算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用算法的客户。</p>
-<h2 id="先从简单的模拟鸭子应用做起"><a href="#先从简单的模拟鸭子应用做起" class="headerlink" title="先从简单的模拟鸭子应用做起"></a>先从简单的模拟鸭子应用做起</h2><p>假如公司做了一个相当成功的模拟鸭子的游戏：SimUDuck。游戏中鸭子会出现各种鸭子，一边游泳，一边呱呱叫，此系统设计了一个鸭子超类，并让各种鸭子继承此超类。</p>
-<p><img src="/img/策略模式.png" alt="&quot;观察者模式&quot;">  </p>
-<h2 id="现在我们得让鸭子能飞"><a href="#现在我们得让鸭子能飞" class="headerlink" title="现在我们得让鸭子能飞"></a>现在我们得让鸭子能飞</h2><p>现在只需要在Duck类中加上fly()方法，然后所有鸭子都会继承fly()方法。</p>
-<p><img src="/img/策略模式1.png" alt="&quot;观察者模式&quot;">  </p>
-<p>那么问题来了，如果有一只橡皮鸭，它不会飞怎么办，如果在超类添加fly()方法，使得不该具备fly()方法的子类也无法免除。只有通过子类覆盖超类的fly()方法，如果又有一只木头鸭，不会飞不会叫怎么办，那太麻烦了。</p>
-<h2 id="利用接口如何？"><a href="#利用接口如何？" class="headerlink" title="利用接口如何？"></a>利用接口如何？</h2><p>我们可以把fiy()从超类中取出，放进一个Flyable接口中。这样一来会飞的鸭子才实现此接口。</p>
-<p><img src="/img/策略模式2.png" alt="&quot;观察者模式&quot;">  </p>
-<p>这是一个超笨的办法，这样一来你会发现重复的代码会变多。虽然可以解决一部分问题(不会再会有会飞的橡皮鸭)，但是却造成了代码无法复用，这只能算是从一个噩梦，跳进了另一个噩梦。</p>
-<h2 id="把问题归零"><a href="#把问题归零" class="headerlink" title="把问题归零"></a>把问题归零</h2><p>现在我们知道使用继承并不能很好地解决问题，因为鸭户的行为在子类里不断地改变，并且让所有的子类都杆这些行为是不恰当的。Flyable一开始似乎还挺不错，解决了问题（只有会飞的鸭子才继承Flyab丨e),但是Java接口不具有实现代码，所以继承接口无法达到代码的复用。这意味着：无论何时你需要修改某个行为，你必须得往下追踪并在每一个定义此行为的类中修改它，一不小心，可能会造成新的错误！幸运的是，有一个设计原恰好适用干此状况。</p>
-<h3 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h3><p>找出应用中可能需要改变之处，把它们独立出来，不需要和那些不需要变化的代码混在一起。另一种思考方式：“把会变化的部分取出来并封装起来，以便以后可以轻易地改变或扩充此部分，而不影响不需要变化的其他部分”。</p>
-<h2 id="分开变化和不变化的部分"><a href="#分开变化和不变化的部分" class="headerlink" title="分开变化和不变化的部分"></a>分开变化和不变化的部分</h2><p>我们知道Duck类内的fly()会随着鸭子的不同而变化。</p>
-<p>为了要把这两个行为从Duck类中分开，我们将把他们从Duck类中取出来，建立一组新类来代表每个行为。</p>
-<h2 id="设计鸭子的行为"><a href="#设计鸭子的行为" class="headerlink" title="设计鸭子的行为"></a>设计鸭子的行为</h2><p>如何设计分出来的行为类呢？</p>
-<h3 id="设计原则-1"><a href="#设计原则-1" class="headerlink" title="设计原则"></a>设计原则</h3><p>针对接口编程，而不是针对实现编程。</p>
-<p>我们利用接口代表毎个行为，比方说，FlyBehavior,而行为的每个实现都将实现其中的一个接门，</p>
-<p>所以这次鸭子类不会负责实现Flying接口，反而是由我们制造一组其他类专门实现FlyBehavior,这就称为“行为”类。由行为类而不是Duck类来实现行为接口。</p>
-<p>这样的做法迥异于以往，以前的做法是：行为来自Duck超类的具体实现，或是继承某个接口并由子类自行实现而来。这两种做法都是依赖于“实现”，我们被实现绑得死死的，没办法更改行为（除写写更多代码）。</p>
-<p>在我们的新设计中，鸭子的子类将使用接口（FlyBehavior)所表示的行为，所以实际的“实现”不会被绑死在鸭了的子类中。（换句话说，特定的具体行为编写在实现了FlyBehavior的类中）。</p>
-<h2 id="实现鸭子行为"><a href="#实现鸭子行为" class="headerlink" title="实现鸭子行为"></a>实现鸭子行为</h2><p><img src="/img/策略模式3.png" alt="&quot;观察者模式&quot;">  </p>
-<h2 id="整合鸭子的行为"><a href="#整合鸭子的行为" class="headerlink" title="整合鸭子的行为"></a>整合鸭子的行为</h2><p><img src="/img/策略模式4.png" alt="&quot;观察者模式&quot;">  </p>
-<h3 id="具体代码"><a href="#具体代码" class="headerlink" title="具体代码"></a>具体代码</h3><p>flyBehavior.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//所有会飞的类必须实现接口</span><br><span class="line">public interface flyBehavior &#123;</span><br><span class="line">    </span><br><span class="line">	void fly();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>FlyNoWay.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//飞行行为的实现给不会飞的鸭子</span><br><span class="line">public class FlyNoWay implements flyBehavior &#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void fly() &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		System.out.println(&quot;I Can Not Fly!&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>FlyWithWings.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//飞行行为的实现给会飞的鸭子</span><br><span class="line">public class FlyWithWings implements flyBehavior&#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void fly() &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		System.out.println(&quot;Fly With Wings&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Duck.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public abstract class Duck &#123;</span><br><span class="line"></span><br><span class="line">    //飞行行为接口类型声明一个引用变量，所有鸭子子类必须继承它</span><br><span class="line">	protected flyBehavior fly;</span><br><span class="line">	</span><br><span class="line">	public Duck() &#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public abstract void display();</span><br><span class="line">	</span><br><span class="line">	public void performfly() &#123;</span><br><span class="line">	    //委托给行为类</span><br><span class="line">		fly.fly();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void swim() &#123;</span><br><span class="line">		System.out.println(&quot;All Duck Can Swim!&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void changefly(flyBehavior fly) &#123;</span><br><span class="line">	    //用于动态更改行为</span><br><span class="line">		this.fly=fly;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>GoodDuck.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class GoodDuck extends Duck&#123;</span><br><span class="line"></span><br><span class="line">	public GoodDuck() &#123;</span><br><span class="line">		fly=new FlyWithWings();</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public void display() &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		System.out.println(&quot;I&apos;m Good!&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Main.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		Duck D=new GoodDuck();</span><br><span class="line">		D.performfly();</span><br><span class="line">		//更改行为</span><br><span class="line">		D.changefly(new FlyNoWay());</span><br><span class="line">		D.performfly();</span><br><span class="line">		//Fly With Wings</span><br><span class="line">        //I Can Not Fly!</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
- 
-
-	    
-</div>
-
-<div class="center">
-			
-
-				<span class="post-meta">		
-				<span class="iconfont icon-category"></span>
-				<a class="category-link" href="/categories/设计模式/">设计模式</a>
-				</span>
-		
-			
-
-		
-				
-				<span class="post-meta">
-				<span class="iconfont icon-tag"></span>
-				<a class="tag-link" href="/tags/策略模式/">策略模式</a>
-				</span>			
-			
-
-
-		
-
-		<span class="post-words"><span class="iconfont icon-words"></span>
-		2686
-		</span>		
-</div>		
-
-		
-    <a class="article-readmore" href="/2018/03/04/策略模式/">阅读更多</a> 
-    	
-</article>     
-     	
-      	  	
-
-  		
-    	<article class="article">		
-	   
-	<div class="article-header">
-	    
-	     <a class="article-title"  href="/2018/03/02/认识观察者模式/">观察者模式</a>  
-	       
-		 
-
-		 <time>2018-03-02 </time>    
-	</div>
-
-
-    <div class="post-content article-excerpt">	
-	
-  	
-
-	  
-
-	  	<h1 id="认识观察者模式"><a href="#认识观察者模式" class="headerlink" title="认识观察者模式"></a>认识观察者模式</h1><h3 id="我们看看报纸和杂志的订阅是怎么回事："><a href="#我们看看报纸和杂志的订阅是怎么回事：" class="headerlink" title="我们看看报纸和杂志的订阅是怎么回事："></a>我们看看报纸和杂志的订阅是怎么回事：</h3><p>1.报社的业务是出版报纸。</p>
-<p>2.向某家报订阅报纸，只要他有新报纸出版，就会给你送来。只要你是他们的用户，你就会一直收到新报纸。</p>
-<p>3.当你不想看报纸的时候，取消订阅，他们就不会再送新报纸来。</p>
-<p>4.只要报社还在运营，就会一直人（或单位）向他们订阅报纸或取消订阅报纸。</p>
-<h3 id="出版者-订阅者-观察者模式"><a href="#出版者-订阅者-观察者模式" class="headerlink" title="出版者+订阅者=观察者模式"></a>出版者+订阅者=观察者模式</h3><p>如果你了解报纸的订阅是怎么回事，其实就知道观察者模式是怎么回事，只是名称不太一样：出版者改称为“主题”（Subject),订阅者改称为“观察者”（Observer)。</p>
-<p>让我们来看得更仔细一点:</p>
-<p><img src="/img/观察者.png" alt="&quot;观察者模式&quot;">  </p>
-<h1 id="定义观察者模式"><a href="#定义观察者模式" class="headerlink" title="定义观察者模式"></a>定义观察者模式</h1><p>当你试图勾勒观察者模式时，可以利用报纸订阅服务，以及出版者和订阅者比拟这一切。</p>
-<p>在真实的世界中，你通常会看到观察者模式被定义成:</p>
-<p><strong>观察者模式</strong>定义了对象之间的一对多依赖，这样一来，当一个对象改变状态时，它的所有依赖者都会收到通知并自动更新。</p>
-<p><strong>难察者模式定义了一系列对象之间的一对多关系。</strong><br><strong>当一个对象改变状态，其他依赖者都会收到通知。</strong></p>
-<p>主题和观察者定义了一对多的关系。观察者依赖子此主题，只要主题状态一有变化，观察者就会被通知。根据通知的风格，观察者可能因此新值而更新。</p>
-<p>稍后你会右到，实现观察者模式的方法不只一种，但是以包含Subject与Observer接口的类设计的做法最常见。</p>
-<p><img src="/img/观察者模式类图.png" alt="&quot;观察者模式类图&quot;">  </p>
-<h1 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h1><h3 id="气象监测应用的概况"><a href="#气象监测应用的概况" class="headerlink" title="气象监测应用的概况"></a>气象监测应用的概况</h3><p>此系统中的三个部分是气象站（获取实际气象数据的物理装置），WeatherDate对象（追踪来自气象站的数据，并更新布告栏）和布告栏</p>
-<p>WeatherData对象知道如何跟物理气象站联系，以取得更新的数据。WeatherData对象会随即更新三个布告板的显示：目前状况（温度、湿度、气压）、气象统计和天气预报。</p>
-<p><strong>如果我们选择接受这个项目，我们的工作就是建立一个应用，利用WeatherData对象取得数据，并更新三个布告板：目前状况.气象统计和天气预报。</strong></p>
-<p>布告栏（观察者），WeatherData对象（主题）</p>
-<p>Observer.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface Observer &#123;</span><br><span class="line"></span><br><span class="line">	public void update(float temp, float humidity,float pressure);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>subject.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public interface subject &#123;</span><br><span class="line"></span><br><span class="line">	public void registerObserver(Observer o);</span><br><span class="line">	public void removeObserver(Observer o);</span><br><span class="line">	public void notifyObserver();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>DisplayElement.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface DisplayElement &#123;</span><br><span class="line"></span><br><span class="line">	public void display();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>CurrentConditionDisplay.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class CurrentConditionDisplay implements Observer,DisplayElement&#123;</span><br><span class="line"></span><br><span class="line">	private float temp;</span><br><span class="line">	private float humidity;</span><br><span class="line">	private float pressure;</span><br><span class="line">	private subject WeatherData;</span><br><span class="line">	</span><br><span class="line">	CurrentConditionDisplay(WeatherData a)&#123;</span><br><span class="line">		this.WeatherData=a;</span><br><span class="line">		a.registerObserver(this);</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public void display() &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		System.out.println(&quot;temp=&quot;+temp+&quot;\nhumidity=&quot;+humidity+&quot;\npressure=&quot;+pressure);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void update(float temp, float humidity, float pressure) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">		this.pressure=pressure;</span><br><span class="line">		this.humidity=humidity;</span><br><span class="line">		this.temp=temp;</span><br><span class="line">		display();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Observer.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface Observer &#123;</span><br><span class="line"></span><br><span class="line">	public void update(float temp, float humidity,float pressure);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Test.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class Test &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line"></span><br><span class="line">		WeatherData w=new WeatherData();</span><br><span class="line">		CurrentConditionDisplay a=new CurrentConditionDisplay(w);</span><br><span class="line">		w.setMeasurements(80, 30, 4);</span><br><span class="line">		w.setMeasurements(8, 3, 4);</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
- 
-
-	    
-</div>
-
-<div class="center">
-			
-
-				<span class="post-meta">		
-				<span class="iconfont icon-category"></span>
-				<a class="category-link" href="/categories/设计模式/">设计模式</a>
-				</span>
-		
-			
-
-		
-				
-				<span class="post-meta">
-				<span class="iconfont icon-tag"></span>
-				<a class="tag-link" href="/tags/观察者模式/">观察者模式</a>
-				</span>			
-			
-
-
-		
-
-		<span class="post-words"><span class="iconfont icon-words"></span>
-		2292
-		</span>		
-</div>		
-
-		
-    <a class="article-readmore" href="/2018/03/02/认识观察者模式/">阅读更多</a> 
     	
 </article>     
      	

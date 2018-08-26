@@ -1,0 +1,376 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport"content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+  <meta name="baidu-site-verification" content="5rJxG2T4b5"/>
+
+  
+  
+  <title>  Docker自定义tomcat |   Brief</title>
+
+ 
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">  
+  <!-- Jquery -->
+  <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script> 
+  <!-- Add fancyBox -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script> 
+  <script src="/js/gallery.js"></script>
+  <!-- javascript --> 
+  <script src="/js/mobile.js"></script>  
+  <script src="/js/utils.js"></script>    
+  <script src="/js/script.js"></script>  
+  <script src="/js/baidu_post.js"></script>  
+</head> 
+  <body> 
+    <header class="header">
+	
+  <nav class="header-nav">       
+	
+  	<span class="iconfont icon-menu mobile-toggle"></span>  
+
+    <a class="header-logo" href="/"><span>Brief</a>  
+
+    <div class="header-menu">          
+              
+            
+
+              <a class="header-menu-link" id="header-menu-home" href="/">首页</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">归档</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-categories" href="/categories">分类</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于</a>     
+
+            
+            
+            
+
+              <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+
+            
+                
+    </div>  
+    
+  </nav>
+</header>
+
+    <div class="container">         
+      
+        
+
+          <section id="main">  
+
+        
+
+        <article class="post">
+
+	  
+	<div class="post-header slideDownMin center">
+
+	<span class="post-title">	
+		docker自定义tomcat
+	</span>
+
+	
+	<div class="post-info">
+
+		<time class="post-time"><span class="iconfont icon-date"></span>
+		2018/08/15 	
+		</time>
+		
+					
+
+				<span class="post-meta">		
+				<span class="iconfont icon-category"></span>
+				<a class="category-link" href="/categories/docker/">docker</a>
+				</span>
+		
+			
+
+		
+				
+				<span class="post-meta">
+				<span class="iconfont icon-tag"></span>
+				<a class="tag-link" href="/tags/tomcat/">tomcat</a>
+				</span>			
+			
+
+
+		
+
+		<span class="post-words"><span class="iconfont icon-words"></span>
+		2096
+		</span>		
+	
+	</div> 
+
+</div> 
+
+
+	  <div class="post-content slideDownMin">
+
+		
+
+
+
+
+	  	<h2 id="前情概要"><a href="#前情概要" class="headerlink" title="前情概要"></a>前情概要</h2><p>本篇博客是我学习docker后的一次实际的运用，因为感受到了docker的神奇所以记录一下，这次的实践中运用了如何用dockerfile构建镜像，如何将容器数据卷运用到tomcat中，如何部署自己的项目到docker里面的tomcat。<br><a id="more"></a></p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>1.首先进入根目录<br><img src="/img/docker1.png" alt="&quot;docker&quot;"><br>2.创建一个文件夹，并进入文件夹<br><img src="/img/docker2.png" alt="&quot;docker&quot;"><br>3.下载tomcat和JDK的压缩文件放入这个文件夹，创建一个dockerfile文件，和c.txt文件，这个文件为了演示一个dockerfile保留指令<br><img src="/img/docker10.png" alt="&quot;docker&quot;"><br><img src="/img/docker11.png" alt="&quot;docker&quot;"><br>4.dockerfile文件内容为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">FROM centos</span><br><span class="line">#作者的姓名和邮箱</span><br><span class="line">MAINTAINER yqg&lt;2529719324@qq.com&gt;</span><br><span class="line">#将宿主机当前上下文的c.txt拷贝到容器/usr/local/路径下</span><br><span class="line">COPY c.txt /usr/local/cincontainer.txt</span><br><span class="line">#把java与tomcat添加到容器中(如果tomcat和JDK和我版本不一样请修改为自己的，后面一样)</span><br><span class="line">ADD jdk-8u181-linux-x64.tar.gz /usr/local</span><br><span class="line">ADD apache-tomcat-8.5.33.tar.gz /usr/local</span><br><span class="line">#安装vim编辑器</span><br><span class="line">RUN yum -y install vim</span><br><span class="line">#设置工作访问时候的WORKDIR路径，登录落脚点</span><br><span class="line">ENV MYPATH /usr/local</span><br><span class="line">WORKDIR $MYPATH</span><br><span class="line">#配置java与tomcat环境变量</span><br><span class="line">ENV JAVA_HOME /usr/local/jdk1.8.0_181</span><br><span class="line">ENV CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line">ENV CATALINA_HOME /usr/local/apache-tomcat-8.5.33</span><br><span class="line">ENV CATALINA_BASE /usr/local/apache-tomcat-8.5.33</span><br><span class="line">ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/lib:$CATALINA_HOME/bin</span><br><span class="line">#容器运行时监听的端口</span><br><span class="line">EXPOSE 8080</span><br><span class="line">#启动tomcat</span><br><span class="line"># ENTRYPOINT [&quot;/usr/local/apache....../bin/startup.sh&quot;]</span><br><span class="line"># CMD [&quot;/usr/local/apache...../bin/catalina.sh&quot;,&quot;run&quot;]</span><br><span class="line">CMD /usr/local/apache-tomcat-8.5.33/bin/startup.sh &amp;&amp; tail -F /usr/local/apache-tomcat-8.5.33/bin/logs/catalina.out</span><br></pre></td></tr></table></figure></p>
+<h2 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h2><p>1.运用docker builld命令构建镜像<br><img src="/img/docker4.png" alt="&quot;docker&quot;"><br>因为docker build默认会去所在路径找Dockerfile命名的文件，所以如果你的dockerfile文件名为Dockerfile,就不用加-f命令指定文件,构建过程需要一点时间，如果最后看见这个，说明成功了<br><img src="/img/docker5.png" alt="&quot;docker&quot;">  </p>
+<h2 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h2><p>1.查看生成的镜像<br><img src="/img/docker6.png" alt="&quot;docker&quot;"><br>2.运用docker run命令运行容器<br><img src="/img/docker7.png" alt="&quot;docker&quot;"><br>命令为docker run -d -p 8080:8080 –name mytomcat -v /YQG/dockerfile/tomcat9/webapps:/usr/local/apache-tomcat-8.5.33/webapps -v /YQG/dockerfile/tomcat9/logs:/usr/local/apache-tomcat-8.5.33/logs –privileged=true mytomcat<br>-p表示将主机端口8080映射到容器内的8080端口，可以通过主机的8080端口访问容器内8080端口<br>–name为容器命名<br>-v表示生成容器数据卷将主机的/YQG/dockerfile/tomcat9/webapps文件夹映射到容器内/usr/local/apache-tomcat-8.5.33/webapps文件夹实现数据共享，主机没有这个文件夹会自己生成<br>3.查看容器信息<br><img src="/img/docker8.png" alt="&quot;docker&quot;"><br>apache-tomcat-8.5.33和jdk1.8.0_181便是Dockerfile中ADD指令添加的，ADD命令会自动解压。<br>cincontainer.txt便是COPY指令复制的<br>4.查看主机信息<br><img src="/img/docker9.png" alt="&quot;docker&quot;"><br>文件夹下面多了logs和webapps两个文件夹，说明容器数据卷挂载成功<br>5.打开浏览器输入localhost:8080看成果<br><img src="/img/tomcat.png" alt="&quot;docker&quot;"></p>
+<h2 id="部署项目"><a href="#部署项目" class="headerlink" title="部署项目"></a>部署项目</h2><p>1.将自己一个项目打包成war包，放在主机刚才那个webapps下，它会自动同步到容器内tomcat的webapps下，它会自动解压<br><img src="/img/tomcat3.png" alt="&quot;docker&quot;"><br>2.浏览器输入网址查看是否部署成功<br><img src="/img/tomcat2.png" alt="&quot;docker&quot;"><br>结果当然是成功了</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>docker这门技术，降低了开发与部署的难度，使开发和部署更加简单，开发人员只需要提交一个镜像给运维人员，运行环境已经在镜像中，而避免像以前出现开发与运行环境版本不一致造成的一系列问题。</p>
+  	
+
+	  </div>     
+	  
+
+	<div class="post-footer">    
+
+  
+
+
+
+
+<span class="donate-btn iconfont icon-donate "></span>
+
+
+<div id="donate-box" class="sildeUpMin">
+
+	<span class="donate-cancel iconfont icon-cancel"></span>
+
+	<div class="donate-img-box">
+		<img id="donate-qr-wechat" class="donate-img no-gallery" src="/img/donate1.png"  alt="Lost">	
+		<img id="donate-qr-alipay" class="donate-img no-gallery" src="/img/donate2.png"  alt="Lost">	
+	</div>
+
+	<span class="donate-word">世界美好 你也是</span>
+
+	<div class="donate-list">
+		<span class="iconfont icon-donate-wechat"></span>
+		<span class="iconfont icon-donate-alipay"></span>
+	</div>
+
+</div>
+
+ 
+  
+
+
+   <nav class="post-nav">
+
+      
+       
+
+         
+
+      
+          <a href="/2018/08/16/Bean生命周期/">          
+
+            <span class="hover-item" title="Bean��������">  上一篇 </span>  
+
+          </a>
+    
+      
+    
+      
+
+         
+
+          <a href="/2018/08/13/docker常用命令/">         
+
+           <span title="docker常用命令">下一篇 </span>  
+
+          </a>
+
+      
+
+  </nav>  
+</div> 
+	
+
+
+    <div id="comment">   
+    </div>
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+
+    <script src='//unpkg.com/valine@v1.1.8-beta/dist/Valine.min.js'></script>
+
+    <script>
+        new Valine({
+        el: '#comment',
+        notify:false, 
+        verify:false, 
+        app_id: 'gMnC8EJDk8V8fNmt2Nj2sEgP-gzGzoHsz',
+        app_key: 'G5ajxDPkoDOjtN6WfSRtpme8',  
+        path:window.location.pathname, 
+        avatar:'mm' ,
+        guest_info:['nick','mail']
+        });
+    </script>
+
+
+    <script>
+    //set the placeholder
+    $(function(){    
+
+        $('.vnick').attr('placeholder','昵称');
+        $('.veditor').attr('placeholder','说点什么吧');
+        $('.vmail').attr('placeholder','邮箱');   
+        $('.vsubmit').html('回复');   
+       
+    })  
+    </script>
+
+	
+
+</article>
+
+
+
+<div id="toc" >		
+
+	<div class="toc-container">	
+
+	<span class="toc-contents iconfont icon-open"" onclick="change()"> 
+	<span>目录</span>
+	</span>
+
+	<ul class="toc-list"></ul>
+
+	</div>
+
+</div>
+
+
+<script src="/js/toc.js"></script>
+<script src="/js/post.js"></script></section> 
+
+    </div>        
+
+    
+    <div class="mask"> </div>
+    <div class="back-to-top iconfont icon-backtotop fadeIn"></div> 
+
+    
+
+
+<script src="/js/search.js"></script>     
+          
+          <div class="search-container sildeUpMin">
+            <input type="text" placeholder="输入你想搜索的" id="search-input" class="search-input">  
+              <span class="search-cancel iconfont icon-cancel"></span>
+              <div id="search-result" class="search-result"></div>
+          </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+      <img class="mobile-menu-icon no-gallery" src= /img/favicon.png >   
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/categories">分类
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+</div>     
+    
+
+<footer id="footer">
+	   
+   	 
+
+	  	
+   	
+      	 
+	 <div>
+	 	&copy;
+		2018
+		YQG	 
+             <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+	 </div>
+
+
+   
+   	 <div>
+	
+	 <a href="http://hexo.io/" target="_blank">Hexo</a>
+
+	 Theme
+
+	 <a href="https://github.com/YYYQG/YYYQG.github.io" target="_blank">Brief</a> 
+
+	 </div>	
+
+
+	
+	
+</footer> 
+    
+
+
+ 
+  </body>   
+  <script src="/js/animation.js"></script>   
+</html>
